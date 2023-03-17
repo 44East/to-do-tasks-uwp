@@ -1,0 +1,12 @@
+D:\C#\Git\ToDoList\ConnectorToSQL\bin\Debug\net7.0\ConnectorToSQL.deps.json
+D:\C#\Git\ToDoList\ConnectorToSQL\bin\Debug\net7.0\ConnectorToSQL.dll
+D:\C#\Git\ToDoList\ConnectorToSQL\bin\Debug\net7.0\ConnectorToSQL.pdb
+D:\C#\Git\ToDoList\ConnectorToSQL\obj\Debug\net7.0\ConnectorToSQL.csproj.AssemblyReference.cache
+D:\C#\Git\ToDoList\ConnectorToSQL\obj\Debug\net7.0\ConnectorToSQL.GeneratedMSBuildEditorConfig.editorconfig
+D:\C#\Git\ToDoList\ConnectorToSQL\obj\Debug\net7.0\ConnectorToSQL.AssemblyInfoInputs.cache
+D:\C#\Git\ToDoList\ConnectorToSQL\obj\Debug\net7.0\ConnectorToSQL.AssemblyInfo.cs
+D:\C#\Git\ToDoList\ConnectorToSQL\obj\Debug\net7.0\ConnectorToSQL.csproj.CoreCompileInputs.cache
+D:\C#\Git\ToDoList\ConnectorToSQL\obj\Debug\net7.0\ConnectorToSQL.dll
+D:\C#\Git\ToDoList\ConnectorToSQL\obj\Debug\net7.0\refint\ConnectorToSQL.dll
+D:\C#\Git\ToDoList\ConnectorToSQL\obj\Debug\net7.0\ConnectorToSQL.pdb
+D:\C#\Git\ToDoList\ConnectorToSQL\obj\Debug\net7.0\ref\ConnectorToSQL.dll
