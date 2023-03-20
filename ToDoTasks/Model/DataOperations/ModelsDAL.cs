@@ -49,10 +49,10 @@ namespace ToDoTasks.Model.DataOperations
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-        public ObservableCollection<ToDoTask> GetToDoTasksList()
+        public ObservableCollection<ToDoTaskModel> GetToDoTasksList()
         {
             OpenConnection();
-            var toDoList = new ObservableCollection<ToDoTask>();
+            var toDoList = new ObservableCollection<ToDoTaskModel>();
             var sql = $@"SELECT 
                         i.ID, 
                         i.Description, 
@@ -69,16 +69,13 @@ namespace ToDoTasks.Model.DataOperations
                 {
                     while (reader.Read())
                     {
-                        toDoList.Add(new ToDoTask(
+                        toDoList.Add(new ToDoTaskModel(
                             (int)reader["ID"],
                             (string)reader["Description"],
                             (int)reader["Assigned_Person"],
                             (string)reader["Name"],
-                            new Person(
-                                (string)reader["First_Name"],
-                                (string)reader["Last_Name"])
-
-
+                            (string)reader["First_Name"],
+                            (string)reader["Last_Name"]
                         ));
                     }
                 }

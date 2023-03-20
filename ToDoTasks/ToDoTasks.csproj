@@ -127,8 +127,9 @@
     <Compile Include="Model\Connection\MSSQLStringModel.cs" />
     <Compile Include="Model\DataOperations\ModelsDAL.cs" />
     <Compile Include="Model\Models\Person.cs" />
-    <Compile Include="Model\Models\Task.cs" />
+    <Compile Include="Model\Models\ToDoTaskModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ToDoTaskModel.cs" />
     <Compile Include="ViewModel\TasksViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

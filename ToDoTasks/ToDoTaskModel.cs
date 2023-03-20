@@ -4,22 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ToDoTasks.Model.Models
+namespace ToDoTasks
 {
-    public class ToDoTask
+    public class ToDoTaskModel
     {
         public int ID { get; set; }
         public string Description { get; set; }
         public int AssignedPersonID { get; set; }
         public string Name { get; set; }
-        public Person AssignedPerson { get; set; }
-        public ToDoTask(int id, string description, int personId, string name, Person person)
+        public string PersonFirstName { get; set; }
+        public string PersonLastName { get; set; }
+        
+        public ToDoTaskModel()
+        {
+            
+        }
+        public ToDoTaskModel(int id, string description, int personId, string name, string personFirstName, string personLastName)
         {
             ID = id;
             Description = description;
-            AssignedPerson = person;
             AssignedPersonID = personId;
             Name = name;
+            PersonFirstName = personFirstName;
+            PersonLastName = personLastName;
         }
     }
 }

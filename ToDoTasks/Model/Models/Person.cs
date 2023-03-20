@@ -11,6 +11,10 @@ namespace ToDoTasks.Model.Models
         public int ID { get; set; }  = default(int);
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public Person()
+        {
+            
+        }
         public Person(string firstName, string lastName)
         {
             FirstName = firstName;

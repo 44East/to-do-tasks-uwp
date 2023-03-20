@@ -3,15 +3,16 @@ using ToDoTasks.Model.Models;
 using ToDoTasks.Model.DataOperations;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Linq;
 
 namespace ToDoTasks.ViewModel
 {
     public class TasksViewModel : INotifyPropertyChanged
     {
         private ModelsDAL _modelDAL;
-        private ToDoTask _toDoTask;
-        private ObservableCollection<ToDoTask> _toDoTasks;
-        public ToDoTask ToDoTask
+        private ToDoTaskModel _toDoTask;
+        private ObservableCollection<ToDoTaskModel> _toDoTasks;
+        public ToDoTaskModel ToDoTask
         {
             get => _toDoTask;
             set
@@ -22,7 +23,7 @@ namespace ToDoTasks.ViewModel
 
         }
 
-        public ObservableCollection<ToDoTask> ToDoTasks
+        public ObservableCollection<ToDoTaskModel> ToDoTasks
         {
             get => _toDoTasks;
             set
@@ -37,6 +38,7 @@ namespace ToDoTasks.ViewModel
         {
             _modelDAL = new ModelsDAL();
             _toDoTasks = _modelDAL.GetToDoTasksList();
+            _toDoTask = _toDoTasks?.First() ?? new ToDoTaskModel();
         }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
