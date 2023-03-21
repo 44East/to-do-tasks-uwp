@@ -36,7 +36,7 @@ namespace ToDoTasks
             ToDoTasks = this._taskViewModel.ToDoTasks;
             Persons = this._taskViewModel.Persons;
             TasksList.ItemsSource = this.ToDoTasks;
-            PersonsList.ItemsSource = this.Persons;
+            PersonsList.ItemsSource = this.Persons;            
         }
         private void ToDoTasks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -44,6 +44,23 @@ namespace ToDoTasks
             TaskInfoData.Visibility = Visibility.Visible;
             TextBlock_FName.Text = taskModel.PersonFirstName + " " + taskModel.PersonLastName;
             TextBlock_Description.Text = taskModel.Description;
+        }
+        private void Persons_SelectionChanged(object sender, SelectionChangedEventArgs e) 
+        {
+            TaskDescription.Visibility = Visibility.Visible;
+            TaskName.Visibility = Visibility.Visible;
+            SaveTask.Visibility = Visibility.Visible;
+        }
+        private void SaveButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            var person = (Person)PersonsList.SelectedItem;
+            var taskName = TaskName.Text;
+            var Description  = TaskDescription.Text;            
+            _taskViewModel.AddNewTask(person, taskName, Description);
+            TaskName.Text = string.Empty;
+            TaskDescription.Text = string.Empty;  
+            
+
         }
        
 

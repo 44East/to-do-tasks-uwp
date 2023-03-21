@@ -76,9 +76,12 @@
         </Grid>
         <Grid HorizontalAlignment="Right" VerticalAlignment="Top">
             <StackPanel Orientation="Vertical" Grid.Row="2">
-                <ComboBox x:Name="PersonsList" DisplayMemberPath="FullName" >
+                <ComboBox x:Name="PersonsList" Header="Add the new Task by Person" Height="60" Width="296" DisplayMemberPath="FullName" SelectionChanged="Persons_SelectionChanged">
                 </ComboBox>
-            </StackPanel>            
+                <TextBox x:Name="TaskName" Visibility="Collapsed"  MaxLength="30" Height="40" Width="296" PlaceholderText="Enter the task name"/>
+                <TextBox x:Name="TaskDescription" Visibility="Collapsed" TextWrapping="Wrap" MaxLength="200" Height="60" Width="296" PlaceholderText="Enter the task descripton..." />
+                <Button x:Name="SaveTask" Visibility="Collapsed" Content="Save" Click="SaveButton_Click"  />
+            </StackPanel>           
         </Grid>
     </Grid>
 </Page>

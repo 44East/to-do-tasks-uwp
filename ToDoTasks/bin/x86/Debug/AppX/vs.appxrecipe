@@ -30,13 +30,13 @@
     <AppXManifest Include="D:\C#\Git\ToDoList\ToDoTasks\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2023-03-21T11:10:32.826</Modified>
+      <Modified>2023-03-21T17:37:42.798</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="D:\C#\Git\ToDoList\ToDoTasks\bin\x86\Debug\ToDoTasks.exe">
       <PackagePath>entrypoint\ToDoTasks.exe</PackagePath>
-      <Modified>2023-03-21T11:10:32.125</Modified>
+      <Modified>2023-03-21T17:37:42.117</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\User\.nuget\packages\microsoft.bcl.asyncinterfaces\1.1.0\lib\netstandard2.0\Microsoft.Bcl.AsyncInterfaces.dll">
       <PackagePath>Microsoft.Bcl.AsyncInterfaces.dll</PackagePath>
@@ -74,9 +74,9 @@
       <PackagePath>Microsoft.UI.Xaml.Markup.winmd</PackagePath>
       <Modified>2020-12-02T00:52:00.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\C#\Git\ToDoList\ToDoTasks\Properties\Default.rd.xml">
-      <PackagePath>Properties\Default.rd.xml</PackagePath>
-      <Modified>2023-03-19T10:37:11.887</Modified>
+    <AppxPackagedFile Include="D:\C#\Git\ToDoList\ToDoTasks\Assets\bin.png">
+      <PackagePath>Assets\bin.png</PackagePath>
+      <Modified>2023-03-21T09:03:20.929</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\C#\Git\ToDoList\ToDoTasks\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
@@ -112,17 +112,21 @@
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2023-03-19T08:28:21.796</Modified>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\C#\Git\ToDoList\ToDoTasks\Properties\Default.rd.xml">
+      <PackagePath>Properties\Default.rd.xml</PackagePath>
+      <Modified>2023-03-19T10:37:11.887</Modified>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="D:\C#\Git\ToDoList\ToDoTasks\bin\x86\Debug\ToDoTasks.xr.xml">
       <PackagePath>ToDoTasks.xr.xml</PackagePath>
-      <Modified>2023-03-21T11:10:31.989</Modified>
+      <Modified>2023-03-21T17:01:06.329</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\C#\Git\ToDoList\ToDoTasks\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2023-03-21T11:10:32.006</Modified>
+      <Modified>2023-03-21T17:37:41.972</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\C#\Git\ToDoList\ToDoTasks\bin\x86\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
-      <Modified>2023-03-21T11:10:32.006</Modified>
+      <Modified>2023-03-21T17:37:41.972</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.19041.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -130,11 +134,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\C#\Git\ToDoList\ToDoTasks\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2023-03-21T11:10:32.456</Modified>
+      <Modified>2023-03-21T17:37:42.440</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\C#\Git\ToDoList\ToDoTasks\bin\x86\Debug\Core\ToDoTasks.exe">
       <PackagePath>ToDoTasks.exe</PackagePath>
-      <Modified>2023-03-21T11:10:32.819</Modified>
+      <Modified>2023-03-21T17:37:42.792</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

@@ -55,8 +55,8 @@
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\bin\10.0.19041.0\XamlCompiler\Microsoft.UI.Xaml.Markup.winmd">
       <PackagePath>Microsoft.UI.Xaml.Markup.winmd</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="D:\C#\Git\ToDoList\ToDoTasks\Properties\Default.rd.xml">
-      <PackagePath>Properties\Default.rd.xml</PackagePath>
+    <AppxPackagedFile Include="D:\C#\Git\ToDoList\ToDoTasks\Assets\bin.png">
+      <PackagePath>Assets\bin.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\C#\Git\ToDoList\ToDoTasks\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
@@ -84,6 +84,9 @@
     <AppxPackagedFile Include="D:\C#\Git\ToDoList\ToDoTasks\Assets\Wide310x150Logo.scale-200.png">
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="D:\C#\Git\ToDoList\ToDoTasks\Properties\Default.rd.xml">
+      <PackagePath>Properties\Default.rd.xml</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\C#\Git\ToDoList\ToDoTasks\bin\x86\Debug\ToDoTasks.xr.xml">
       <PackagePath>ToDoTasks.xr.xml</PackagePath>

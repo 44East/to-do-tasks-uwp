@@ -11,7 +11,7 @@
 
     <Grid>
         <StackPanel>
-            <ListView x:ConnectionId='6' x:Name="TasksList"                                                                                IsItemClickEnabled="True">
+            <ListView x:ConnectionId='9' x:Name="TasksList"                                                                                IsItemClickEnabled="True">
                 <ListView.HeaderTemplate>
                     <DataTemplate>
                         <Grid>
@@ -27,13 +27,13 @@
                 </ListView.HeaderTemplate>
                 <ListView.ItemTemplate>
                     <DataTemplate                                 >
-                        <Grid x:ConnectionId='9'>
+                        <Grid x:ConnectionId='12'>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="70" />
                                 <ColumnDefinition Width="250" />
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                                <TextBlock x:ConnectionId='11'                      FontSize="15" Margin="0,0,5,0"/>
+                                <TextBlock x:ConnectionId='14'                      FontSize="15" Margin="0,0,5,0"/>
                             </StackPanel>
                             <Grid>
                                 <Button x:Name="Button_RemoveTask" Grid.Column="0" Background="LightGray"
@@ -53,7 +53,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <StackPanel x:ConnectionId='3' x:Name="TaskInfoData" Visibility="Collapsed" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <StackPanel x:ConnectionId='6' x:Name="TaskInfoData" Visibility="Collapsed" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                 <Border Grid.Row="0">
                     <TextBlock Text="***" Margin="5" Foreground="DarkRed" Grid.Row="0"/>
                 </Border>
@@ -67,18 +67,21 @@
                     <TextBlock Text="Selected task:" FontWeight="Bold" Margin="5" Grid.Row="1"/>
                 </Border>
                 <Border BorderBrush="Black" BorderThickness="1" Grid.Row="1">
-                    <TextBlock x:ConnectionId='5' x:Name="TextBlock_FName" Margin="5" Grid.Row="1"/>
+                    <TextBlock x:ConnectionId='8' x:Name="TextBlock_FName" Margin="5" Grid.Row="1"/>
                 </Border>
                 <Border BorderBrush="Black" BorderThickness="1" Grid.Row="1">
-                    <TextBlock x:ConnectionId='4' x:Name="TextBlock_Description" Margin="5" Grid.Row="1"/>
+                    <TextBlock x:ConnectionId='7' x:Name="TextBlock_Description" Margin="5" Grid.Row="1"/>
                 </Border>
             </StackPanel>
         </Grid>
         <Grid HorizontalAlignment="Right" VerticalAlignment="Top">
             <StackPanel Orientation="Vertical" Grid.Row="2">
-                <ComboBox x:ConnectionId='2' x:Name="PersonsList" DisplayMemberPath="FullName" >
+                <ComboBox x:ConnectionId='2' x:Name="PersonsList" Header="Add the new Task by Person" Height="60" Width="296" DisplayMemberPath="FullName"                                            >
                 </ComboBox>
-            </StackPanel>            
+                <TextBox x:ConnectionId='3' x:Name="TaskName" Visibility="Collapsed"  MaxLength="30" Height="40" Width="296" PlaceholderText="Enter the task name"/>
+                <TextBox x:ConnectionId='4' x:Name="TaskDescription" Visibility="Collapsed" TextWrapping="Wrap" MaxLength="200" Height="60" Width="296" PlaceholderText="Enter the task descripton..." />
+                <Button x:ConnectionId='5' x:Name="SaveTask" Visibility="Collapsed" Content="Save"                           />
+            </StackPanel>           
         </Grid>
     </Grid>
 </Page>

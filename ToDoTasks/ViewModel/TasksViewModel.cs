@@ -75,6 +75,12 @@ namespace ToDoTasks.ViewModel
             else
                 return;
         }
+        public void AddNewTask(Person person, string taskName, string description)
+        {
+            _modelDAL.InsertToDoTask(description,taskName, person.FirstName, person.LastName);
+            ToDoTask = new ToDoTaskModel(ToDoTasks.Last().ID + 1,description, person.ID, taskName, person.FirstName, person.LastName);
+            ToDoTasks.Add(ToDoTask);
+        }
 
 
         public TasksViewModel()
