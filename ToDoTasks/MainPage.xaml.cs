@@ -41,9 +41,13 @@ namespace ToDoTasks
         private void ToDoTasks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ToDoTaskModel taskModel = (ToDoTaskModel)TasksList.SelectedItem;
-            TaskInfoData.Visibility = Visibility.Visible;
-            TextBlock_FName.Text = taskModel.PersonFirstName + " " + taskModel.PersonLastName;
-            TextBlock_Description.Text = taskModel.Description;
+            if (taskModel != null)
+            {
+                HeaderTaskInfo.Visibility = Visibility.Visible;
+                TaskInfoData.Visibility = Visibility.Visible;
+                TextBlock_FName.Text = taskModel.PersonFirstName + " " + taskModel.PersonLastName;
+                TextBlock_Description.Text = taskModel.Description;
+            }
         }
         private void Persons_SelectionChanged(object sender, SelectionChangedEventArgs e) 
         {
@@ -55,14 +59,37 @@ namespace ToDoTasks
         {
             var person = (Person)PersonsList.SelectedItem;
             var taskName = TaskName.Text;
-            var Description  = TaskDescription.Text;            
-            _taskViewModel.AddNewTask(person, taskName, Description);
+            var description  = TaskDescription.Text;
+            if (!(string.IsNullOrEmpty(taskName) && string.IsNullOrEmpty(description)))
+            {
+                _taskViewModel.AddNewTask(person, taskName, description);
+            }
             TaskName.Text = string.Empty;
-            TaskDescription.Text = string.Empty;  
-            
-
+            TaskDescription.Text = string.Empty;
+        }
+        private void SavePerson_CLick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            var firstName = InsertFirstPersonName.Text;
+            var lastName = InsertLastPersonName.Text;
+            if (!(string.IsNullOrEmpty(firstName) && string.IsNullOrEmpty(lastName)))
+            {
+                _taskViewModel.AddNewPerson(firstName, lastName);
+            }
+            InsertFirstPersonName.Text = string.Empty;
+            InsertLastPersonName.Text= string.Empty;
+        }
+        private void UpdateButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            var toDoTask = (ToDoTaskModel)TasksList.SelectedItem;
+            var description = TextBlock_Description.Text;
+            if (!string.IsNullOrEmpty(description))
+            {
+                _taskViewModel.UpdateTaskInDB(toDoTask, description);
+            }
         }
        
+
+
 
     }
 }

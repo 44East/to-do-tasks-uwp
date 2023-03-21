@@ -82,6 +82,20 @@ namespace ToDoTasks.ViewModel
             ToDoTasks.Add(ToDoTask);
         }
 
+        public void UpdateTaskInDB(ToDoTaskModel model, string description)
+        {
+            _modelDAL.UpdateTask(model.ID, description, model.Name, model.PersonFirstName, model.PersonLastName);
+            ToDoTasks.Remove(model);
+            model.Description = description;
+            ToDoTask = model;
+            ToDoTasks.Add(ToDoTask);
+        }
+        public void AddNewPerson(string firstName, string lastName)
+        {
+            Person = new Person(Persons.Last().ID + 1, firstName, lastName);
+            _modelDAL.InsertPerson(Person);
+            Persons.Add(Person);
+        }
 
         public TasksViewModel()
         {

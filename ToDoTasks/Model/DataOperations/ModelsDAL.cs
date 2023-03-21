@@ -9,6 +9,7 @@ using ToDoTasks.Model.Models;
 using System.Collections.ObjectModel;
 using ToDoTasks.Model.Connection;
 using Windows.UI.Xaml;
+using Windows.Networking;
 
 namespace ToDoTasks.Model.DataOperations
 {
@@ -134,8 +135,6 @@ namespace ToDoTasks.Model.DataOperations
                     throw ex;
                 }
                 transaction?.Commit();
-
-                CloseConnection();
             }
             CloseConnection();
         }
@@ -158,7 +157,31 @@ namespace ToDoTasks.Model.DataOperations
             }
             CloseConnection();
         }
-        public void UpdateTask(string id, string description, string taskName, string firstName, string lastName)
+        public void InsertPerson(Person person)
+        {
+            OpenConnection();
+            var sql = $@"INSERT Persons(First_Name, Last_Name) VALUES
+                         (N'{person.FirstName}', N'{person.LastName}')";
+            using (SqlCommand command = new SqlCommand(sql, _sqlConnection))
+            {
+                SqlTransaction transaction = null;
+                try
+                {
+                    transaction = _sqlConnection.BeginTransaction();
+                    command.Transaction = transaction;
+                    command.CommandType = CommandType.Text;
+                    command.ExecuteNonQuery();
+                }
+                catch (SqlException ex)
+                {
+                    transaction?.Rollback();
+                    throw ex;
+                }
+                transaction?.Commit();
+            }
+            CloseConnection();
+        }
+        public void UpdateTask(int id, string description, string taskName, string firstName, string lastName)
         {
             OpenConnection();
             var sql = $@"DECLARE @PersonID INT
