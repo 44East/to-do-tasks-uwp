@@ -14,6 +14,8 @@ namespace ToDoTasks.ViewModel
         private ModelsDAL _modelDAL;
         private ToDoTaskModel _toDoTask;
         private ObservableCollection<ToDoTaskModel> _toDoTasks;
+        private ObservableCollection<Person> _persons;
+        private Person _person;
         public ToDoTaskModel ToDoTask
         {
             get => _toDoTask;
@@ -24,14 +26,31 @@ namespace ToDoTasks.ViewModel
             }
 
         }
-
         public ObservableCollection<ToDoTaskModel> ToDoTasks
         {
             get => _toDoTasks;
             set
             {
                 _toDoTasks = value;
-                OnPropertyChanged("ToDoTasksList");
+                OnPropertyChanged("TasksList");
+            }
+        }
+        public ObservableCollection<Person> Persons
+        {
+            get => _persons;
+            set
+            {
+                _persons = value;
+                OnPropertyChanged("PersonsList");
+            }
+        }
+        public Person Person
+        {
+            get => _person;
+            set 
+            { 
+                _person = value;
+                OnPropertyChanged("SelectedPerson");
             }
         }
         private bool IsTaskExists(int id)
@@ -62,7 +81,7 @@ namespace ToDoTasks.ViewModel
         {
             _modelDAL = new ModelsDAL();
             _toDoTasks = _modelDAL.GetToDoTasksList();
-            _toDoTask = _toDoTasks?.First() ?? new ToDoTaskModel();
+            _persons = _modelDAL.GetPersons();
             this.DeleteCommand = new DelegateCommand(ExecuteDeleteCommand);
         }
         public event PropertyChangedEventHandler PropertyChanged;

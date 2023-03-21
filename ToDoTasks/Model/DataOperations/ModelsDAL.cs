@@ -84,6 +84,33 @@ namespace ToDoTasks.Model.DataOperations
             CloseConnection();
             return toDoList;
         }
+        public ObservableCollection<Person> GetPersons()
+        {
+            OpenConnection();
+            var personList = new ObservableCollection<Person>();
+            var sql = $@"SELECT TOP (1000) [ID],
+                         [First_Name],
+                         [Last_Name]
+                         FROM [ToDoList].[dbo].[Persons]";
+            using (SqlCommand command = new SqlCommand(sql, _sqlConnection))
+            {
+                command.CommandType = CommandType.Text;
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        personList.Add(new Person(
+                            (int)reader["ID"],
+                            (string)reader["First_Name"],
+                            (string)reader["Last_Name"]
+                        ));
+                    }
+                }
+            }
+            CloseConnection();
+            return personList;
+
+        }
         public void InsertToDoTask(string description, string taskName, string firstName, string lastName)
         {
             OpenConnection();

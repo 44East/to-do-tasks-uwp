@@ -11,41 +11,74 @@
 
     <Grid>
         <StackPanel>
-            <ListView x:ConnectionId='5' x:Name="TasksList"                                                                                IsItemClickEnabled="True">
-                <ListView.ItemTemplate>
-                    <DataTemplate                                 >
-                        <Grid x:ConnectionId='7'>
+            <ListView x:ConnectionId='6' x:Name="TasksList"                                                                                IsItemClickEnabled="True">
+                <ListView.HeaderTemplate>
+                    <DataTemplate>
+                        <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="70" />
                                 <ColumnDefinition Width="250" />
                             </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                                <TextBlock x:ConnectionId='9'                    FontSize="15" Margin="0,0,1,0"/>
-                                <TextBlock x:ConnectionId='10'                      FontSize="15" Margin="0,0,1,0"/>                                
+                            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="Task Name" Margin="0,0,5,0" Foreground="DarkRed" Grid.Column="1"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.HeaderTemplate>
+                <ListView.ItemTemplate>
+                    <DataTemplate                                 >
+                        <Grid x:ConnectionId='9'>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="250" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                                <TextBlock x:ConnectionId='11'                      FontSize="15" Margin="0,0,5,0"/>
                             </StackPanel>
                             <Grid>
-                                <Button x:Name="Button_RemoveTask" Content="Remove" Background="Red"
-                                        HorizontalAlignment="Right" VerticalAlignment="Top"
-                                        Height="36" Canvas.ZIndex="1"
-                                        Width="36"  Command="{Binding DataContext.DeleteCommand, ElementName=TasksList}" CommandParameter="{Binding ID}"/>
+                                <Button x:Name="Button_RemoveTask" Grid.Column="0" Background="LightGray"
+                                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                        Padding="0" BorderThickness="0" Content="Remove" 
+                                        Height="36" Canvas.ZIndex="1"  Command="{Binding DataContext.DeleteCommand, ElementName=TasksList}" CommandParameter="{Binding ID}">
+                                </Button>
                             </Grid>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </StackPanel>
-        <Grid>
+        <Grid Grid.Row="2" Grid.Column="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.Row="1" Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                <TextBlock Text="Selected task:" FontWeight="Bold" Margin="10"/>
-                <TextBlock x:ConnectionId='2' x:Name="TextBlock_FName" Margin="5" />
-                <TextBlock x:ConnectionId='3' x:Name="TextBlock_LName" Margin="5"/>
-                <TextBlock x:ConnectionId='4' x:Name="TextBlock_Description" Margin="5"/>
+            <StackPanel x:ConnectionId='3' x:Name="TaskInfoData" Visibility="Collapsed" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                <Border Grid.Row="0">
+                    <TextBlock Text="***" Margin="5" Foreground="DarkRed" Grid.Row="0"/>
+                </Border>
+                <Border Grid.Row="0">
+                    <TextBlock Text="Person Name" Margin="5" Foreground="DarkRed" Grid.Row="0"/>
+                </Border>
+                <Border Grid.Row="0">
+                    <TextBlock Text="Description" Margin="5" Foreground="DarkRed" Grid.Row="0"/>
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="1" Grid.Row="1">
+                    <TextBlock Text="Selected task:" FontWeight="Bold" Margin="5" Grid.Row="1"/>
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="1" Grid.Row="1">
+                    <TextBlock x:ConnectionId='5' x:Name="TextBlock_FName" Margin="5" Grid.Row="1"/>
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="1" Grid.Row="1">
+                    <TextBlock x:ConnectionId='4' x:Name="TextBlock_Description" Margin="5" Grid.Row="1"/>
+                </Border>
             </StackPanel>
+        </Grid>
+        <Grid HorizontalAlignment="Right" VerticalAlignment="Top">
+            <StackPanel Orientation="Vertical" Grid.Row="2">
+                <ComboBox x:ConnectionId='2' x:Name="PersonsList" DisplayMemberPath="FullName" >
+                </ComboBox>
+            </StackPanel>            
         </Grid>
     </Grid>
 </Page>

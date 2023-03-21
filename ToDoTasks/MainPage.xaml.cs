@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using ToDoTasks.ViewModel;
-using ToDoTasks.Model.Models;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -28,19 +27,22 @@ namespace ToDoTasks
     {
         private TasksViewModel _taskViewModel;
         public ObservableCollection<ToDoTaskModel> ToDoTasks { get; set; }
+        public ObservableCollection<Person> Persons { get; set; }
         public MainPage()
         {
             this.InitializeComponent();
             this._taskViewModel = new TasksViewModel();
             this.DataContext = this._taskViewModel;
             ToDoTasks = this._taskViewModel.ToDoTasks;
-            TasksList.ItemsSource = ToDoTasks;
+            Persons = this._taskViewModel.Persons;
+            TasksList.ItemsSource = this.ToDoTasks;
+            PersonsList.ItemsSource = this.Persons;
         }
         private void ToDoTasks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ToDoTaskModel taskModel = (ToDoTaskModel)TasksList.SelectedItem;
-            TextBlock_FName.Text = taskModel.PersonFirstName;
-            TextBlock_LName.Text = taskModel.PersonLastName;
+            TaskInfoData.Visibility = Visibility.Visible;
+            TextBlock_FName.Text = taskModel.PersonFirstName + " " + taskModel.PersonLastName;
             TextBlock_Description.Text = taskModel.Description;
         }
        
