@@ -1,9 +1,11 @@
 ﻿using System.Collections.ObjectModel;
-using ToDoTasks.Model.Models;
+using ToDoTasks;
 using ToDoTasks.Model.DataOperations;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Linq;
+using System.Windows.Input;
+using System;
 
 namespace ToDoTasks.ViewModel
 {
@@ -32,6 +34,28 @@ namespace ToDoTasks.ViewModel
                 OnPropertyChanged("ToDoTasksList");
             }
         }
+        private bool IsTaskExists(int id)
+        {
+            return ToDoTasks.Where(t => t.ID == id).Any() ? true : false;
+        }
+        public ICommand DeleteCommand { get; set; }
+        private void ExecuteDeleteCommand(object param)
+        {
+            if (param != null)
+            {
+                int id = (int)param;
+                if (IsTaskExists(id))
+                {
+                    _modelDAL.DeleteToDoTask(id);
+                    ToDoTask = ToDoTasks.Where(t => t.ID == id).Select(t => t).Single();
+                    ToDoTasks.Remove(ToDoTask);
+                }
+                else
+                    return;
+            }
+            else
+                return;
+        }
 
 
         public TasksViewModel()
@@ -39,6 +63,7 @@ namespace ToDoTasks.ViewModel
             _modelDAL = new ModelsDAL();
             _toDoTasks = _modelDAL.GetToDoTasksList();
             _toDoTask = _toDoTasks?.First() ?? new ToDoTaskModel();
+            this.DeleteCommand = new DelegateCommand(ExecuteDeleteCommand);
         }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")

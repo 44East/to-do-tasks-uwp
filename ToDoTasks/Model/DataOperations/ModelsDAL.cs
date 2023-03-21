@@ -112,7 +112,7 @@ namespace ToDoTasks.Model.DataOperations
             }
             CloseConnection();
         }
-        public void DeleteToDoTask(string id)
+        public void DeleteToDoTask(int id)
         {
             OpenConnection();
             var sql = $@"DELETE FROM Tasks WHERE ID = {id}";

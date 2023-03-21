@@ -16,13 +16,19 @@
                     <DataTemplate x:DataType="local:ToDoTaskModel">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="250" />
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                                <TextBlock Text="{x:Bind ID}" FontSize="25" Margin="0,0,20,0"/>
-                                <TextBlock Text="{x:Bind Name}" FontSize="25" Margin="0,0,20,0"/>
+                                <TextBlock Text="{x:Bind ID}" FontSize="15" Margin="0,0,1,0"/>
+                                <TextBlock Text="{x:Bind Name}" FontSize="15" Margin="0,0,1,0"/>                                
                             </StackPanel>
+                            <Grid>
+                                <Button x:Name="Button_RemoveTask" Content="Remove" Background="Red"
+                                        HorizontalAlignment="Right" VerticalAlignment="Top"
+                                        Height="36" Canvas.ZIndex="1"
+                                        Width="36"  Command="{Binding DataContext.DeleteCommand, ElementName=TasksList}" CommandParameter="{Binding ID}"/>
+                            </Grid>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

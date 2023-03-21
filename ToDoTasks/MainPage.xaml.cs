@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using System.Windows.Input;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -31,6 +32,7 @@ namespace ToDoTasks
         {
             this.InitializeComponent();
             this._taskViewModel = new TasksViewModel();
+            this.DataContext = this._taskViewModel;
             ToDoTasks = this._taskViewModel.ToDoTasks;
             TasksList.ItemsSource = ToDoTasks;
         }
@@ -40,9 +42,8 @@ namespace ToDoTasks
             TextBlock_FName.Text = taskModel.PersonFirstName;
             TextBlock_LName.Text = taskModel.PersonLastName;
             TextBlock_Description.Text = taskModel.Description;
-
-
-
         }
+       
+
     }
 }
