@@ -25,6 +25,18 @@ namespace ToDoTasks
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        public enum MenuStats
+        {
+            Connect_To_Sql,
+            Add_new_Task,
+            Add_new_Person
+        }
+        public List<MenuStats> MenuStatsPoints { get; } = new List<MenuStats>()
+        { 
+            MenuStats.Connect_To_Sql, 
+            MenuStats.Add_new_Task, 
+            MenuStats.Add_new_Person 
+        };
         private TasksViewModel _taskViewModel;
         public ObservableCollection<ToDoTaskModel> ToDoTasks { get; set; }
         public ObservableCollection<Person> Persons { get; set; }
@@ -36,6 +48,7 @@ namespace ToDoTasks
             ToDoTasks = this._taskViewModel.ToDoTasks;
             Persons = this._taskViewModel.Persons;
             TasksList.ItemsSource = this.ToDoTasks;
+            MenuBox.ItemsSource = this.MenuStatsPoints;
             PersonsList.ItemsSource = this.Persons;            
         }
         private void ToDoTasks_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -49,8 +62,45 @@ namespace ToDoTasks
                 TextBlock_Description.Text = taskModel.Description;
             }
         }
-        private void Persons_SelectionChanged(object sender, SelectionChangedEventArgs e) 
+        private void Menu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            switch(MenuBox.SelectedItem)
+            {
+                case MenuStats.Connect_To_Sql:
+                    MenuBoxAddSQLConnection_SelectionChanged(sender, e);
+                    break;
+                case MenuStats.Add_new_Task:
+                    MenuBoxAddTask_SelectionChanged(sender, e);
+                    break;
+                case MenuStats.Add_new_Person:
+                    MenuBoxAddPerson_SelectionChanged(sender, e);
+                    break;
+            }
+        }
+        private void MenuBoxAddSQLConnection_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UserID.Visibility = Visibility.Visible;
+            Password.Visibility = Visibility.Visible;
+            DataSource.Visibility = Visibility.Visible;
+            SaveMSSQLConnection.Visibility = Visibility.Visible;
+        }
+        private void MenuBoxAddTask_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            AddNewTask.Visibility = Visibility.Visible;
+            PersonsList.Visibility = Visibility.Visible;
+            MenuBox.Visibility = Visibility.Collapsed;
+        }
+        private void MenuBoxAddPerson_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            AddNewPerson.Visibility = Visibility.Visible;
+            InsertFirstPersonName.Visibility = Visibility.Visible;
+            InsertLastPersonName.Visibility = Visibility.Visible;
+            SavePerson.Visibility = Visibility.Visible;
+            AddPeronBlock.Visibility = Visibility.Visible;
+            MenuBox.Visibility = Visibility.Collapsed;
+        }
+        private void Persons_SelectionChanged(object sender, SelectionChangedEventArgs e) 
+        {            
             TaskDescription.Visibility = Visibility.Visible;
             TaskName.Visibility = Visibility.Visible;
             SaveTask.Visibility = Visibility.Visible;
@@ -66,6 +116,13 @@ namespace ToDoTasks
             }
             TaskName.Text = string.Empty;
             TaskDescription.Text = string.Empty;
+            AddNewTask.Visibility = Visibility.Collapsed;
+            PersonsList.Visibility = Visibility.Collapsed;
+            TaskDescription.Visibility = Visibility.Collapsed;
+            TaskName.Visibility = Visibility.Collapsed;
+            SaveTask.Visibility = Visibility.Collapsed;
+            MenuBox.Visibility = Visibility.Visible;
+
         }
         private void SavePerson_CLick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
@@ -77,6 +134,20 @@ namespace ToDoTasks
             }
             InsertFirstPersonName.Text = string.Empty;
             InsertLastPersonName.Text= string.Empty;
+            AddNewPerson.Visibility = Visibility.Collapsed;
+            InsertFirstPersonName.Visibility = Visibility.Collapsed;
+            InsertLastPersonName.Visibility = Visibility.Collapsed;
+            SavePerson.Visibility = Visibility.Collapsed;
+            AddPeronBlock.Visibility = Visibility.Collapsed;
+            MenuBox.Visibility = Visibility.Visible;
+
+        }
+        private void SaveMSSQLConnect_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            var datasource = DataSource.Text;
+            var userId = UserID.Text;
+            var password = Password.Text;
+            var mssqlModel = new MSSQLStringModel(datasource,userId,password)
         }
         private void UpdateButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {

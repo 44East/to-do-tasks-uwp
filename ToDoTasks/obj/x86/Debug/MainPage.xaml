@@ -11,37 +11,28 @@
 
     <Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" MaxHeight="400">
-            <ListView x:ConnectionId='14' x:Name="TasksList"                                                                                IsItemClickEnabled="True" MaxHeight="300">
+            <ListView x:ConnectionId='19' x:Name="TasksList"                                                                                IsItemClickEnabled="True" MaxHeight="300">
                 <ListView.HeaderTemplate>
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="70" />
-                                <ColumnDefinition Width="250" />
+                                <ColumnDefinition Width="300" />
                             </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                                <TextBlock Text="Task Name" Margin="0,0,5,0" Foreground="DarkRed" Grid.Column="1"/>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Background="LightGray" Width="300">
+                                <TextBlock Text="Task Name:" Foreground="DarkRed" Margin="10,0,0,0"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="300"/>
                             </StackPanel>
                         </Grid>
                     </DataTemplate>
                 </ListView.HeaderTemplate>
                 <ListView.ItemTemplate>
                     <DataTemplate                                 >
-                        <Grid x:ConnectionId='17'>
+                        <Grid x:ConnectionId='22'>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="70" />
                                 <ColumnDefinition Width="250" />
                             </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                                <TextBlock x:ConnectionId='19'                      FontSize="15" Margin="0,0,5,0"/>
+                            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                                <TextBlock x:ConnectionId='23'                      FontSize="15" Margin="0,0,5,0"/>
                             </StackPanel>
-                            <Grid>
-                                <Button x:Name="Button_RemoveTask" Grid.Column="0" Background="LightGray"
-                                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                                        Padding="0" BorderThickness="0" Content="Remove" 
-                                        Height="36" Canvas.ZIndex="1"  Command="{Binding DataContext.DeleteCommand, ElementName=TasksList}" CommandParameter="{Binding ID}">
-                                </Button>
-                            </Grid>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -56,8 +47,9 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <StackPanel x:ConnectionId='9' x:Name="HeaderTaskInfo" Visibility="Collapsed" Grid.Row="0" Orientation="Horizontal">
+            <StackPanel x:ConnectionId='13' x:Name="HeaderTaskInfo" Visibility="Collapsed" Grid.Row="0" Orientation="Horizontal">
                 <Border BorderBrush="Black" BorderThickness="1" Background="LightGray">
                     <TextBlock Text="Selected task:" FontWeight="Bold" Margin="5" Foreground="DarkRed" Width="120" />
                 </Border >
@@ -65,38 +57,60 @@
                     <TextBlock Text="Person Name" FontWeight="Bold" Margin="5" Foreground="DarkRed" Width="200"/>
                 </Border>
                 <Border BorderBrush="Black" BorderThickness="1" Background="LightGray">
-                    <TextBlock Text="Description (You can edit it.)" FontWeight="Bold" Margin="5" Foreground="DarkRed" Width="296"/>
+                    <TextBlock Text="Description (You can edit it)" FontWeight="Bold" Margin="5" Foreground="DarkRed" Width="296"/>
                 </Border>
+                <Border BorderBrush="Black" BorderThickness="1" Background="LightGray">
+                    <TextBlock Text="Update selected task" FontWeight="Bold" Margin="5" Foreground="DarkRed" Width="138" />
+                </Border >
             </StackPanel>
 
-            <StackPanel x:ConnectionId='10' x:Name="TaskInfoData" Grid.Row="1" Visibility="Collapsed" Orientation="Horizontal">
+            <StackPanel x:ConnectionId='14' x:Name="TaskInfoData" Grid.Row="1" Visibility="Collapsed" Orientation="Horizontal">
                 <Border BorderBrush="Black" BorderThickness="1" Width="132" >
-                    <Button x:ConnectionId='13' x:Name="UpdateButton"                            Content="Update" Margin="5" Height="36" Width="70"/>
+                    <Button x:ConnectionId='18' x:Name="Button_RemoveTask" Grid.Column="0" Background="LightGray"
+                                         Height="36" Width="70" HorizontalAlignment="Center"
+                                        Padding="0" BorderThickness="0" Content="Remove" 
+                                        Canvas.ZIndex="1"  Command="{Binding DataContext.DeleteCommand, ElementName=TasksList}" CommandParameter="{Binding ID}">
+                    </Button>
                 </Border>
                 <Border BorderBrush="Black" BorderThickness="1" >
-                    <TextBlock x:ConnectionId='12' x:Name="TextBlock_FName" Margin="5" Width="200" TextWrapping="Wrap"/>
+                    <TextBlock x:ConnectionId='17' x:Name="TextBlock_FName" Margin="5" Width="200" TextWrapping="Wrap"/>
                 </Border>
                 <Border BorderBrush="Black" BorderThickness="1" >
-                    <TextBox x:ConnectionId='11' x:Name="TextBlock_Description" Margin="5" Width="296" TextWrapping="Wrap"/>
+                    <TextBox x:ConnectionId='16' x:Name="TextBlock_Description" Margin="5" Width="296" TextWrapping="Wrap"/>
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="1" Width="150" >
+                    <Button x:ConnectionId='15' x:Name="UpdateButton"                            Content="Update" Margin="5" Height="36" Width="70"/>
                 </Border>
             </StackPanel>
         </Grid>
-        <Grid HorizontalAlignment="Right" VerticalAlignment="Top">
-            <StackPanel Orientation="Vertical" Grid.Row="2">
-                <ComboBox x:ConnectionId='5' x:Name="PersonsList" Foreground="DarkRed" Header="Add the new Task by Person" Height="60" Width="296" DisplayMemberPath="FullName"                                            >
-                </ComboBox>
-                <TextBox x:ConnectionId='6' x:Name="TaskName" Visibility="Collapsed"  MaxLength="30" Height="40" Width="296" PlaceholderText="Enter the task name" />
-                <TextBox x:ConnectionId='7' x:Name="TaskDescription" Visibility="Collapsed" TextWrapping="Wrap" MaxLength="200" Height="60" Width="296" PlaceholderText="Enter the task descripton..." />
-                <Button x:ConnectionId='8' x:Name="SaveTask" Visibility="Collapsed" Content="Save"                          Height="36" Width="70" />
-            </StackPanel>           
+        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Grid.RowSpan="3">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <ComboBox x:ConnectionId='2' x:Name="MenuBox" PlaceholderText="Select action"  PlaceholderForeground="DarkRed" Height="40" Width="296"                                         >
+            </ComboBox>
+            <Grid>
+                <StackPanel x:ConnectionId='8' x:Name="AddNewTask" HorizontalAlignment="Right" Orientation="Vertical" Grid.Row="1">
+                    <ComboBox x:ConnectionId='9' x:Name="PersonsList" Visibility="Collapsed" PlaceholderForeground="DarkRed" PlaceholderText="Add the new Task by Person" Height="40" Width="296" DisplayMemberPath="FullName"                                            >
+                    </ComboBox>
+                    <TextBox x:ConnectionId='10' x:Name="TaskName" Visibility="Collapsed"  MaxLength="30" Height="40" Width="296" PlaceholderText="Enter the task name" />
+                    <TextBox x:ConnectionId='11' x:Name="TaskDescription" Visibility="Collapsed" TextWrapping="Wrap" MaxLength="200" Height="60" Width="296" PlaceholderText="Enter the task descripton..." />
+                    <Button x:ConnectionId='12' x:Name="SaveTask" Visibility="Collapsed" Content="Save"                          Height="36" Width="70" />
+                </StackPanel>
+            </Grid>
+            <Grid>
+                <StackPanel x:ConnectionId='3' x:Name="AddNewPerson" HorizontalAlignment="Right" Orientation="Vertical" Grid.Row="2">
+                    <TextBlock x:ConnectionId='4' x:Name="AddPeronBlock" Text="Insert the new Person" Foreground="DarkRed" FontWeight="Bold" Visibility="Collapsed"/>
+                    <TextBox x:ConnectionId='5' x:Name="InsertFirstPersonName" Visibility="Collapsed"  MaxLength="30" Height="40" Width="296" PlaceholderText="Enter first Person name..." />
+                    <TextBox x:ConnectionId='6' x:Name="InsertLastPersonName" Visibility="Collapsed"  MaxLength="30" Height="40" Width="296" PlaceholderText="Enter last Person name..." />
+                    <Button x:ConnectionId='7' x:Name="SavePerson" Content="Save" Visibility="Collapsed"                          Height="36" Width="70" />
+                </StackPanel>
+            </Grid>
         </Grid>
         <Grid HorizontalAlignment="Center" VerticalAlignment="Top">
-            <StackPanel Orientation="Vertical">
-                <TextBlock Text="Inser the new Person" />
-                <TextBox x:ConnectionId='2' x:Name="InsertFirstPersonName"  MaxLength="30" Height="40" Width="296" PlaceholderText="Enter first Person name..." />
-                <TextBox x:ConnectionId='3' x:Name="InsertLastPersonName"  MaxLength="30" Height="40" Width="296" PlaceholderText="Enter last Person name..." />
-                <Button x:ConnectionId='4' x:Name="SavePerson" Content="Save"                          Height="36" Width="70" />
-            </StackPanel>            
+
         </Grid>
     </Grid>
 </Page>

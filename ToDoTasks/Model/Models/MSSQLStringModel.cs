@@ -1,4 +1,4 @@
-﻿namespace ToDoTasks.Model.Connection
+﻿namespace ToDoTasks
 {
     public class MSSQLStringModel
     {
