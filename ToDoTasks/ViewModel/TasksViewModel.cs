@@ -55,13 +55,13 @@ namespace ToDoTasks.ViewModel
             }
         }
 
-        //Checking before deleting task from DB
+        //Check for a task before deleting from DB
         private bool IsTaskExists(int id)
         {
             return ToDoTasks.Where(t => t.ID == id).Any() ? true : false;
         }
         public ICommand DeleteCommand { get; set; }
-        //Parsing erasing data by helper class DelegateCommand
+        //Parsing an erasing data by helper class DelegateCommand
         private void ExecuteDeleteCommand(object param)
         {
             if (param != null)
@@ -79,12 +79,12 @@ namespace ToDoTasks.ViewModel
             else
                 return;
         }
-        //Checking data before listing it for MainPage
+        //Check data before listing it for MainPage
         public bool IsDataExist()
         {
             return (Persons.Count > 0 && ToDoTasks.Count > 0) ? true : false;
         }
-        //Chrcking connection information and and get answer for shows the relevant script on the homepage.
+        //Checking connection information and and get answer for shows the relevant script on the homepage.
         public bool IsConnectionDataExists()
         {
             return _modelDAL.ConnectionStringExists;
@@ -105,6 +105,7 @@ namespace ToDoTasks.ViewModel
                 Persons.Add(person);
             
         }
+
         public void AddNewTask(Person person, string taskName, string description)
         {
             _modelDAL.InsertToDoTask(description,taskName, person.FirstName, person.LastName);

@@ -1,4 +1,4 @@
-For first connection to MSSQL Servr you should do some steps for preapre this process.
+For first connection to MSSQL Server you should do some steps for preapre this process.
 You should use Sytem.Data.SqlClient NuGet packages(NOT Microsoft.Data.SQLClient!)
 Information links ->
 To prepare TCP/IP:

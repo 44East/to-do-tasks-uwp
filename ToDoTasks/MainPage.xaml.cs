@@ -50,7 +50,7 @@ namespace ToDoTasks
 
             
         }
-        //Check Data in the ViewModel and get relevant menus for user
+        //Check Data in the ViewModel and get relevant menu's for user
         private void AddMenuPoints()
         {
             if(_taskViewModel.IsConnectionDataExists())
@@ -65,6 +65,7 @@ namespace ToDoTasks
                 MenuStatsPoints.Add(MenuStats.Connect_To_Sql);
             }
         }
+        //Get info from selected task
         private void ToDoTasks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ToDoTaskModel taskModel = (ToDoTaskModel)TasksList.SelectedItem;
@@ -111,6 +112,7 @@ namespace ToDoTasks
             }
             return;
         }
+        //Menu's boxes views methods
         private void MenuBoxAddSQLConnection_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             UserID.Visibility = Visibility.Visible;
@@ -134,12 +136,14 @@ namespace ToDoTasks
             AddPeronBlock.Visibility = Visibility.Visible;
             MenuBox.Visibility = Visibility.Collapsed;
         }
+        //Select actual person for create task
         private void Persons_SelectionChanged(object sender, SelectionChangedEventArgs e) 
         {            
             TaskDescription.Visibility = Visibility.Visible;
             TaskName.Visibility = Visibility.Visible;
             SaveTask.Visibility = Visibility.Visible;
         }
+        //Save created task
         private void SaveButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             var person = (Person)PersonsList.SelectedItem;
@@ -159,6 +163,7 @@ namespace ToDoTasks
             MenuBox.Visibility = Visibility.Visible;
 
         }
+        //Save created person
         private void SavePerson_CLick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             var firstName = InsertFirstPersonName.Text;
@@ -177,6 +182,7 @@ namespace ToDoTasks
             MenuBox.Visibility = Visibility.Visible;
 
         }
+        //Save data connection
         private void SaveMSSQLConnect_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             var datasource = DataSource.Text;
@@ -199,6 +205,7 @@ namespace ToDoTasks
 
 
         }
+        //Update task description in DB
         private void UpdateButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             var toDoTask = (ToDoTaskModel)TasksList.SelectedItem;
