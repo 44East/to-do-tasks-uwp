@@ -31,12 +31,7 @@ namespace ToDoTasks
             Add_new_Task,
             Add_new_Person
         }
-        public List<MenuStats> MenuStatsPoints { get; } = new List<MenuStats>()
-        { 
-            MenuStats.Connect_To_Sql, 
-            MenuStats.Add_new_Task, 
-            MenuStats.Add_new_Person 
-        };
+        public List<MenuStats> MenuStatsPoints { get; private set; } = new List<MenuStats>();
         private TasksViewModel _taskViewModel;
         public ObservableCollection<ToDoTaskModel> ToDoTasks { get; set; }
         public ObservableCollection<Person> Persons { get; set; }
@@ -49,7 +44,24 @@ namespace ToDoTasks
             Persons = this._taskViewModel.Persons;
             TasksList.ItemsSource = this.ToDoTasks;
             MenuBox.ItemsSource = this.MenuStatsPoints;
-            PersonsList.ItemsSource = this.Persons;            
+            PersonsList.ItemsSource = this.Persons;
+            AddMenuPoints();
+
+            
+        }
+        private void AddMenuPoints()
+        {
+            if(_taskViewModel.IsConctionDataExists())
+            {
+                MenuStatsPoints.Add(MenuStats.Add_new_Task);
+                MenuStatsPoints.Add(MenuStats.Add_new_Person);
+            }
+            else 
+            {
+                MenuStatsPoints.Add(MenuStats.Add_new_Task);
+                MenuStatsPoints.Add(MenuStats.Add_new_Person);
+                MenuStatsPoints.Add(MenuStats.Connect_To_Sql);
+            }
         }
         private void ToDoTasks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -64,18 +76,37 @@ namespace ToDoTasks
         }
         private void Menu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            switch(MenuBox.SelectedItem)
+            if (_taskViewModel.IsDataExist() && _taskViewModel.IsConctionDataExists())
             {
-                case MenuStats.Connect_To_Sql:
-                    MenuBoxAddSQLConnection_SelectionChanged(sender, e);
-                    break;
-                case MenuStats.Add_new_Task:
-                    MenuBoxAddTask_SelectionChanged(sender, e);
-                    break;
-                case MenuStats.Add_new_Person:
-                    MenuBoxAddPerson_SelectionChanged(sender, e);
-                    break;
+                switch (MenuBox.SelectedItem)
+                {
+                    case MenuStats.Add_new_Task:
+                        MenuBoxAddTask_SelectionChanged(sender, e);
+                        break;
+                    case MenuStats.Add_new_Person:
+                        MenuBoxAddPerson_SelectionChanged(sender, e);
+                        break;
+                }
             }
+            else if(_taskViewModel.IsConctionDataExists() && !_taskViewModel.IsDataExist())
+            {
+                switch (MenuBox.SelectedItem)
+                {
+                    case MenuStats.Add_new_Person:
+                        MenuBoxAddPerson_SelectionChanged(sender, e);
+                        break;
+                }
+            }
+            else
+            {
+                switch(MenuBox.SelectedItem)
+                {
+                    case MenuStats.Connect_To_Sql:
+                        MenuBoxAddSQLConnection_SelectionChanged(sender, e);
+                        break;
+                }
+            }
+            return;
         }
         private void MenuBoxAddSQLConnection_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -83,6 +114,7 @@ namespace ToDoTasks
             Password.Visibility = Visibility.Visible;
             DataSource.Visibility = Visibility.Visible;
             SaveMSSQLConnection.Visibility = Visibility.Visible;
+            MenuBox.Visibility = Visibility.Collapsed;
         }
         private void MenuBoxAddTask_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -147,7 +179,22 @@ namespace ToDoTasks
             var datasource = DataSource.Text;
             var userId = UserID.Text;
             var password = Password.Text;
-            var mssqlModel = new MSSQLStringModel(datasource,userId,password)
+            if (!(string.IsNullOrEmpty(userId) && string.IsNullOrEmpty(password) && string.IsNullOrEmpty(datasource)))
+            {
+                var mssqlModel = new MSSQLStringModel(datasource.Trim(), userId.Trim(), password.Trim());
+                _taskViewModel.InsertConnectionData(mssqlModel);
+
+            }
+            DataSource.Text = string.Empty;
+            UserID.Text = string.Empty;
+            Password.Text = string.Empty;
+            UserID.Visibility = Visibility.Collapsed;
+            Password.Visibility = Visibility.Collapsed;
+            DataSource.Visibility = Visibility.Collapsed;
+            SaveMSSQLConnection.Visibility = Visibility.Collapsed;
+            MenuBox.Visibility = Visibility.Visible;
+
+
         }
         private void UpdateButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {

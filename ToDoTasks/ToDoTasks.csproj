@@ -123,14 +123,12 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\Connection\FileWorker.cs" />
     <Compile Include="Model\Connection\MSSQLConnector.cs" />
     <Compile Include="Model\Models\MSSQLStringModel.cs" />
     <Compile Include="Model\DataOperations\ModelsDAL.cs" />
     <Compile Include="Model\Models\Person.cs" />
     <Compile Include="Model\Models\ToDoTaskModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ToDoTaskModel.cs" />
     <Compile Include="ViewModel\TasksViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -139,7 +137,6 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\bin.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

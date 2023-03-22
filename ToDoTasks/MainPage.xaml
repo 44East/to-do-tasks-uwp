@@ -108,6 +108,14 @@
                     <Button x:Name="SavePerson" Content="Save" Visibility="Collapsed" Click="SavePerson_CLick" Height="36" Width="70" />
                 </StackPanel>
             </Grid>
+            <Grid>
+                <StackPanel x:Name="AddSQLConnection" HorizontalAlignment="Right" Orientation="Vertical">
+                    <TextBox x:Name="DataSource" Visibility="Collapsed"  Height="40" Width="296" PlaceholderText="Enter Data Source..." />
+                    <TextBox x:Name="UserID" Visibility="Collapsed" Height="40" Width="296" PlaceholderText="Enter User ID..." />
+                    <TextBox x:Name="Password" Visibility="Collapsed" Height="40" Width="296" PlaceholderText="Enter User Password..." />
+                    <Button x:Name="SaveMSSQLConnection" Content="Save" Visibility="Collapsed" Click="SaveMSSQLConnect_Click" Height="36" Width="70" />
+                </StackPanel>
+            </Grid>
         </Grid>
         <Grid HorizontalAlignment="Center" VerticalAlignment="Top">
 

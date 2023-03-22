@@ -1,31 +1,41 @@
 ﻿using System;
 using System.Data;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ToDoTasks.Model.Models;
 using System.Collections.ObjectModel;
 using ToDoTasks.Model.Connection;
-using Windows.UI.Xaml;
-using Windows.Networking;
 
 namespace ToDoTasks.Model.DataOperations
 {
     public class ModelsDAL : IDisposable
     {
         private MSSQLConnector _connector;
-        private readonly string _connectionString;
+        private string _connectionString;
         private bool _disposed;
         private SqlConnection _sqlConnection = null;
+        public bool ConnectionStringExists { get; set; }
         public ModelsDAL()
         {
             _connector = new MSSQLConnector();
-            _connectionString = @"Data Source=DESKTOP-2J66JK5\MSSQLSERVER22;User ID=User;Password=1234567890;Integrated Security=true;Initial Catalog=ToDoList;TrustServerCertificate=true;";//_connector.GetFulConnectionString();
+            ConnectionStringExists = _connector.IsStringExists();
+            if (ConnectionStringExists)
+               _connectionString = _connector.GetFulConnectionString();
+            else
+                _connectionString = null; 
         }
+        public void InsertConnectionString(MSSQLStringModel model)
+        {
+            _connector = new MSSQLConnector(model);
+            ConnectionStringExists = _connector.IsStringExists();
+            if (ConnectionStringExists)
+               _connectionString = _connector.GetFulConnectionString();
+            else
+                _connectionString = null;
+        }
+
         private void OpenConnection()
         {
+            if (_connectionString == null)
+                return;
             _sqlConnection = new SqlConnection()
             {
                 ConnectionString = _connectionString
@@ -53,6 +63,8 @@ namespace ToDoTasks.Model.DataOperations
         public ObservableCollection<ToDoTaskModel> GetToDoTasksList()
         {
             OpenConnection();
+            if (_sqlConnection == null)
+                return new ObservableCollection<ToDoTaskModel>();
             var toDoList = new ObservableCollection<ToDoTaskModel>();
             var sql = $@"SELECT 
                         i.ID, 
@@ -88,6 +100,8 @@ namespace ToDoTasks.Model.DataOperations
         public ObservableCollection<Person> GetPersons()
         {
             OpenConnection();
+            if (_sqlConnection == null)
+                return new ObservableCollection<Person>();
             var personList = new ObservableCollection<Person>();
             var sql = $@"SELECT TOP (1000) [ID],
                          [First_Name],
@@ -115,6 +129,8 @@ namespace ToDoTasks.Model.DataOperations
         public void InsertToDoTask(string description, string taskName, string firstName, string lastName)
         {
             OpenConnection();
+            if (_sqlConnection == null)
+                return;
             var sql = $@"DECLARE @PersonID INT
                          SELECT @PersonID = i.ID FROM Persons i WHERE i.First_Name = N'{firstName}' and i.Last_Name = N'{lastName}'
                          INSERT Tasks(Description, Assigned_Person, Name) VALUES
@@ -141,6 +157,8 @@ namespace ToDoTasks.Model.DataOperations
         public void DeleteToDoTask(int id)
         {
             OpenConnection();
+            if (_sqlConnection == null)
+                return;
             var sql = $@"DELETE FROM Tasks WHERE ID = {id}";
             using (SqlCommand command = new SqlCommand(sql, _sqlConnection))
             {
@@ -160,6 +178,8 @@ namespace ToDoTasks.Model.DataOperations
         public void InsertPerson(Person person)
         {
             OpenConnection();
+            if (_sqlConnection == null)
+                return;
             var sql = $@"INSERT Persons(First_Name, Last_Name) VALUES
                          (N'{person.FirstName}', N'{person.LastName}')";
             using (SqlCommand command = new SqlCommand(sql, _sqlConnection))
@@ -184,6 +204,8 @@ namespace ToDoTasks.Model.DataOperations
         public void UpdateTask(int id, string description, string taskName, string firstName, string lastName)
         {
             OpenConnection();
+            if (_sqlConnection == null)
+                return;
             var sql = $@"DECLARE @PersonID INT
                          SELECT @PersonID = i.ID FROM Persons i WHERE i.First_Name = N'{firstName}' and i.Last_Name = N'{lastName}'
                          UPDATE Tasks SET Description = N'{description}', Assigned_Person = @PersonID, Name = N'{taskName}'  WHERE ID = {id}";

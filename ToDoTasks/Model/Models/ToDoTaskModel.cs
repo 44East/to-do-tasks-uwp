@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ToDoTasks.Model.Models
+namespace ToDoTasks
 {
     public class ToDoTaskModel
     {

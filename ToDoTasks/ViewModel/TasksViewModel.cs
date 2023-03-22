@@ -16,6 +16,7 @@ namespace ToDoTasks.ViewModel
         private ObservableCollection<ToDoTaskModel> _toDoTasks;
         private ObservableCollection<Person> _persons;
         private Person _person;
+        private MSSQLStringModel _mssqlStringModel;
         public ToDoTaskModel ToDoTask
         {
             get => _toDoTask;
@@ -75,6 +76,29 @@ namespace ToDoTasks.ViewModel
             else
                 return;
         }
+        public bool IsDataExist()
+        {
+            return (Persons.Count > 0 && ToDoTasks.Count > 0) ? true : false;
+        }
+        public bool IsConctionDataExists()
+        {
+            return _modelDAL.ConnectionStringExists;
+        }
+        public void InsertConnectionData(MSSQLStringModel model)
+        {
+            _modelDAL.InsertConnectionString(model);           
+            RecieveDataFromDB();
+        }
+        private void RecieveDataFromDB()
+        {
+            var listTasks = _modelDAL.GetToDoTasksList();
+            foreach (var task in listTasks)
+                ToDoTasks.Add(task);
+            var lisstPersons = _modelDAL.GetPersons();
+            foreach (var person in lisstPersons)
+                Persons.Add(person);
+            
+        }
         public void AddNewTask(Person person, string taskName, string description)
         {
             _modelDAL.InsertToDoTask(description,taskName, person.FirstName, person.LastName);
@@ -100,9 +124,9 @@ namespace ToDoTasks.ViewModel
         public TasksViewModel()
         {
             _modelDAL = new ModelsDAL();
-            _toDoTasks = _modelDAL.GetToDoTasksList();
-            _persons = _modelDAL.GetPersons();
             this.DeleteCommand = new DelegateCommand(ExecuteDeleteCommand);
+            Persons = new ObservableCollection<Person>();
+            ToDoTasks = new ObservableCollection<ToDoTaskModel>();
         }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
