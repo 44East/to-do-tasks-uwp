@@ -12,7 +12,7 @@ namespace ToDoTasks.Model.DataOperations
         private string _connectionString;
         private bool _disposed;
         private SqlConnection _sqlConnection = null;
-        public bool ConnectionStringExists { get; set; }
+        public bool ConnectionStringExists { get; set; }//Property to control connection string presence
         public ModelsDAL()
         {
             _connector = new MSSQLConnector();
@@ -22,7 +22,7 @@ namespace ToDoTasks.Model.DataOperations
             else
                 _connectionString = null; 
         }
-        public void InsertConnectionString(MSSQLStringModel model)
+        public void InsertConnectionString(MSSQLStringModel model) //Rebuild connection when app receives hte model of connection string
         {
             _connector = new MSSQLConnector(model);
             ConnectionStringExists = _connector.IsStringExists();
@@ -60,6 +60,7 @@ namespace ToDoTasks.Model.DataOperations
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+        //All methods for receive information use the ADO.NET connection type
         public ObservableCollection<ToDoTaskModel> GetToDoTasksList()
         {
             OpenConnection();

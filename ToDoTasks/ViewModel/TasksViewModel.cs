@@ -54,11 +54,14 @@ namespace ToDoTasks.ViewModel
                 OnPropertyChanged("SelectedPerson");
             }
         }
+
+        //Checking before deleting task from DB
         private bool IsTaskExists(int id)
         {
             return ToDoTasks.Where(t => t.ID == id).Any() ? true : false;
         }
         public ICommand DeleteCommand { get; set; }
+        //Parsing erasing data by helper class DelegateCommand
         private void ExecuteDeleteCommand(object param)
         {
             if (param != null)
@@ -76,11 +79,13 @@ namespace ToDoTasks.ViewModel
             else
                 return;
         }
+        //Checking data before listing it for MainPage
         public bool IsDataExist()
         {
             return (Persons.Count > 0 && ToDoTasks.Count > 0) ? true : false;
         }
-        public bool IsConctionDataExists()
+        //Chrcking connection information and and get answer for shows the relevant script on the homepage.
+        public bool IsConnectionDataExists()
         {
             return _modelDAL.ConnectionStringExists;
         }
@@ -89,6 +94,7 @@ namespace ToDoTasks.ViewModel
             _modelDAL.InsertConnectionString(model);           
             RecieveDataFromDB();
         }
+        //Rebuild collections after connection to DB
         private void RecieveDataFromDB()
         {
             var listTasks = _modelDAL.GetToDoTasksList();

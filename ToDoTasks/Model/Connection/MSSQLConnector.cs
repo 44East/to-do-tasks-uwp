@@ -1,11 +1,10 @@
 ﻿using System.Data.SqlClient;
-using Windows.System;
 
 namespace ToDoTasks.Model.Connection
 {
     public class MSSQLConnector
     {
-        public MSSQLConnector()
+        public MSSQLConnector() 
         {
             _connectionBuilder = new SqlConnectionStringBuilder();
             _sqlStringModel = new MSSQLStringModel();
@@ -18,11 +17,11 @@ namespace ToDoTasks.Model.Connection
         }
         private MSSQLStringModel _sqlStringModel;
         private SqlConnectionStringBuilder _connectionBuilder;
-        public bool IsStringExists()
+        public bool IsStringExists() //Validates all data for connection
         {
             return (!(string.IsNullOrEmpty(_sqlStringModel.UserID) && string.IsNullOrEmpty(_sqlStringModel.Password) && string.IsNullOrEmpty(_sqlStringModel.DataSource)));
         }
-        public string GetFulConnectionString()
+        public string GetFulConnectionString()//Build full connection string
         {
             _connectionBuilder.DataSource = $"{_sqlStringModel.DataSource}";
             _connectionBuilder.UserID = _sqlStringModel.UserID;

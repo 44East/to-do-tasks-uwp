@@ -25,6 +25,7 @@ namespace ToDoTasks
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        //Enum for showing points in the Menu
         public enum MenuStats
         {
             Connect_To_Sql,
@@ -49,9 +50,10 @@ namespace ToDoTasks
 
             
         }
+        //Check Data in the ViewModel and get relevant menus for user
         private void AddMenuPoints()
         {
-            if(_taskViewModel.IsConctionDataExists())
+            if(_taskViewModel.IsConnectionDataExists())
             {
                 MenuStatsPoints.Add(MenuStats.Add_new_Task);
                 MenuStatsPoints.Add(MenuStats.Add_new_Person);
@@ -74,9 +76,10 @@ namespace ToDoTasks
                 TextBlock_Description.Text = taskModel.Description;
             }
         }
+        //Check Data and Connection status and get relevant script
         private void Menu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (_taskViewModel.IsDataExist() && _taskViewModel.IsConctionDataExists())
+            if (_taskViewModel.IsDataExist() && _taskViewModel.IsConnectionDataExists())
             {
                 switch (MenuBox.SelectedItem)
                 {
@@ -88,7 +91,7 @@ namespace ToDoTasks
                         break;
                 }
             }
-            else if(_taskViewModel.IsConctionDataExists() && !_taskViewModel.IsDataExist())
+            else if(_taskViewModel.IsConnectionDataExists() && !_taskViewModel.IsDataExist())
             {
                 switch (MenuBox.SelectedItem)
                 {
