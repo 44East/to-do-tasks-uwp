@@ -78,11 +78,9 @@
       <RootProperty Name="Visibility" />
       <RootProperty Name="Height" />
       <RootProperty Name="Width" />
-      <RootProperty Name="Margin" />
       <RootProperty Name="Background" />
       <RootProperty Name="HorizontalAlignment" />
-      <RootProperty Name="Padding" />
-      <RootProperty Name="BorderThickness" />
+      <RootProperty Name="Margin" />
       <RootProperty Name="Command" />
       <RootProperty Name="CommandParameter" />
       <RootEvent Name="Click" />
@@ -93,13 +91,9 @@
     <RootType FullName="Windows.UI.Xaml.Controls.Border">
       <RootProperty Name="BorderBrush" />
       <RootProperty Name="BorderThickness" />
-      <RootProperty Name="Width" />
+      <RootProperty Name="CornerRadius" />
       <RootProperty Name="Child" />
       <RootProperty Name="Background" />
-    </RootType>
-    <RootType FullName="Windows.UI.Xaml.Controls.Canvas">
-      <RootMethod Name="GetZIndex" />
-      <RootMethod Name="SetZIndex" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Data.Binding">
       <RootProperty Name="ElementName" />

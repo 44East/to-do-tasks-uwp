@@ -9,8 +9,9 @@
     mc:Ignorable="d"
     Background="{ThemeResource AppBarBackgroundThemeBrush}">
 
+
     <Grid Height="720" VerticalAlignment="Top">
-    <!--To do Task view area-->
+        <!--To do Task view area-->
         <StackPanel Orientation="Vertical" 
                     HorizontalAlignment="Left" 
                     VerticalAlignment="Top" 
@@ -21,7 +22,7 @@
                       SelectionChanged="ToDoTasks_SelectionChanged" 
                       IsItemClickEnabled="True" 
                       MaxHeight="300">
-            <!--The ListView header-->
+                <!--The ListView header-->
                 <ListView.HeaderTemplate>
                     <DataTemplate>
                         <Grid>
@@ -36,7 +37,7 @@
                                         Width="300" 
                                         Background="LightGray">
                                 <TextBlock Text="Task Name:" 
-                                           Foreground="DarkRed" 
+                                           Foreground="Blue"
                                            Margin="10,0,0,0"  
                                            HorizontalAlignment="Center" 
                                            VerticalAlignment="Center" 
@@ -45,8 +46,8 @@
                         </Grid>
                     </DataTemplate>
                 </ListView.HeaderTemplate>
-            <!--The header end-->
-            <!--Show all tasks-->
+                <!--The header end-->
+                <!--Show all tasks-->
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="local:ToDoTaskModel">
                         <Grid>
@@ -71,10 +72,10 @@
 
         <!--View all info about selected task-->
         <!--Create a Table-->
-        <Grid Grid.RowSpan="2" 
-              Grid.ColumnSpan="3" 
-              HorizontalAlignment="Left" 
-              VerticalAlignment="Center">
+        <Grid Grid.RowSpan="3" 
+              Grid.ColumnSpan="2" 
+              HorizontalAlignment="Center" 
+              VerticalAlignment="Top">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="Auto" />
@@ -89,95 +90,64 @@
             <StackPanel x:Name="HeaderTaskInfo" 
                         Visibility="Collapsed" 
                         Grid.Row="0" 
-                        Orientation="Horizontal">
-                <Border BorderBrush="Black" 
-                        BorderThickness="1" 
-                        Background="LightGray">
-                    <TextBlock Text="Selected task:" 
-                               FontWeight="Bold" 
+                        Orientation="Vertical">
+                <Border BorderBrush="Gray" 
+                        BorderThickness="2" 
+                        Background="LightGray"
+                        CornerRadius="1">
+                    <TextBlock Text="Selected task by person:"
                                Margin="5" 
-                               Foreground="DarkRed" 
-                               Width="120" />
-                </Border >
-
-                <Border BorderBrush="Black" 
-                        BorderThickness="1" 
-                        Background="LightGray">
-                    <TextBlock Text="Person Name" 
-                               FontWeight="Bold" 
-                               Margin="5" 
-                               Foreground="DarkRed" 
-                               Width="200"/>
-                </Border>
-
-                <Border BorderBrush="Black" 
-                        BorderThickness="1" 
-                        Background="LightGray">
-                    <TextBlock Text="Description (You can edit it)" 
-                               FontWeight="Bold" 
-                               Margin="5" 
-                               Foreground="DarkRed" 
-                               Width="296"/>
-                </Border>
-
-                <Border BorderBrush="Black" 
-                        BorderThickness="1" 
-                        Background="LightGray">
-                    <TextBlock Text="Update selected task" 
-                               FontWeight="Bold" 
-                               Margin="5" 
-                               Foreground="DarkRed" 
-                               Width="138" />
+                               Foreground="Blue" 
+                               Width="296" />
                 </Border >
             </StackPanel>
             <!--The table header end-->
             <!--The parsed data from task with controls button (Delete/Update)-->
-            <StackPanel x:Name="TaskInfoData" Grid.Row="1" Visibility="Collapsed" Orientation="Horizontal">
-                <!--The remove button uses ICommand interface and class helper DelegateCommand-->
-                <Border BorderBrush="Black" BorderThickness="1" Width="132" >
-                    <Button x:Name="Button_RemoveTask" 
-                            Grid.Column="0" 
-                            Background="LightGray"
-                            Height="36" 
-                            Width="70" 
-                            HorizontalAlignment="Center"
-                            Padding="0" 
-                            BorderThickness="0" 
-                            Content="Remove" 
-                            Canvas.ZIndex="1"  
-                            Command="{Binding DataContext.DeleteCommand, ElementName=TasksList}" 
-                            CommandParameter="{Binding ID}">
-                    </Button>                
-                </Border>
+            <StackPanel x:Name="TaskInfoData" Grid.Row="1" Visibility="Collapsed" Orientation="Vertical">
+
 
                 <!--The General data from task-->
-                <Border BorderBrush="Black" 
-                        BorderThickness="1" >
+                <Border BorderBrush="Gray" 
+                        BorderThickness="2"
+                        CornerRadius="1">
                     <TextBlock x:Name="TextBlock_FName" 
                                Margin="5" 
-                               Width="200" 
+                               Width="296" 
                                TextWrapping="Wrap"/>
                 </Border>
                 <!--This is a TextBox not a TextBlock because it can edit the task description-->
-                <Border BorderBrush="Black" 
-                        BorderThickness="1" >
+                <Border BorderBrush="Gray" 
+                        BorderThickness="2"
+                        CornerRadius="1">
                     <TextBox x:Name="TextBlock_Description" 
                              Margin="5" 
                              Width="296" 
-                             TextWrapping="Wrap"/>
+                             TextWrapping="Wrap"
+                             PlaceholderText="Enter the task description..."/>
                 </Border>
                 <!--The end of data-->
-                <!--The updating task button it parses data from the task description TextBox-->
-                <Border BorderBrush="Black" 
-                        BorderThickness="1" 
-                        Width="150" >
+                <StackPanel Grid.Row="2" Orientation="Horizontal" >
+                    <!--The updating task button it parses data from the task description TextBox-->
                     <Button x:Name="UpdateButton" 
                             Click="UpdateButton_Click" 
                             Content="Update" 
+                            Background="LightGreen"
+                            HorizontalAlignment="Left"
                             Margin="5" 
                             Height="36" 
                             Width="70"/>
-                </Border>
+                    <!--The remove button uses ICommand interface and class helper DelegateCommand-->
+                    <Button x:Name="Button_RemoveTask"
+                            Height="36" 
+                            Width="70"
+                            Background="LightCoral"
+                            HorizontalAlignment="Right"
+                            Content="Remove"   
+                            Command="{Binding DataContext.DeleteCommand, ElementName=TasksList}" 
+                            CommandParameter="{Binding ID}">
+                    </Button>
+                </StackPanel>
+
             </StackPanel>
         </Grid>
         <!--The end of the view tasks data-->
@@ -194,7 +164,7 @@
             <!--The ComboBox binds a data from the Enum collection in a MainPage.xaml.cs-->
             <ComboBox x:Name="MenuBox" 
                       PlaceholderText="Select action"  
-                      PlaceholderForeground="DarkRed" 
+                      PlaceholderForeground="Blue"
                       Height="40" 
                       Width="296" 
                       SelectionChanged="Menu_SelectionChanged">
@@ -208,7 +178,7 @@
                     <!--The ComboBox shows all Persons and can select an individual person for appoint Task -->
                     <ComboBox x:Name="PersonsList" 
                               Visibility="Collapsed" 
-                              PlaceholderForeground="DarkRed" 
+                              PlaceholderForeground="Blue"
                               PlaceholderText="Add the new Task by Person" 
                               Height="40" 
                               Width="296" 
@@ -249,7 +219,7 @@
                     <!--The header-->
                     <TextBlock x:Name="AddPeronBlock" 
                                Text="Insert the new Person" 
-                               Foreground="DarkRed" 
+                               Foreground="Blue"
                                FontWeight="Bold" 
                                Visibility="Collapsed"/>
                     <!--Two boxes for add the Persons names (First/Last)-->
