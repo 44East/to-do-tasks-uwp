@@ -3,31 +3,36 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Collections.ObjectModel;
 using ToDoTasks.Model.Connection;
+using ToDoTasks.Model.Models;
+using System.Collections.Generic;
 
 namespace ToDoTasks.Model.DataOperations
 {
     public class ModelsDAL : IDisposable
     {
+        private LocalDbConnector _localConnector;
         private MSSQLConnector _connector;
         private string _connectionString;
         private bool _disposed;
         private SqlConnection _sqlConnection = null;
+        private bool _dbDataExists;
         public bool ConnectionStringExists { get; set; }//Property to control connection string presence
         public ModelsDAL()
         {
-            _connector = new MSSQLConnector();
-            ConnectionStringExists = _connector.IsStringExists();
-            if (ConnectionStringExists)
-               _connectionString = _connector.GetFulConnectionString();
-            else
-                _connectionString = null; 
+            _localConnector = new LocalDbConnector();
+            ConnectionStringExists = true;
+            _connectionString = _localConnector.GetLocalConnectionString();
+            _dbDataExists = IsTheLocalDBExists();
+            if (!_dbDataExists)
+                FillingDBTestContent();
+
         }
         public void InsertConnectionString(MSSQLStringModel model) //Rebuild connection when app receives the model of a connection string
         {
             _connector = new MSSQLConnector(model);
             ConnectionStringExists = _connector.IsStringExists();
             if (ConnectionStringExists)
-               _connectionString = _connector.GetFulConnectionString();
+                _connectionString = _connector.GetFulConnectionString();
             else
                 _connectionString = null;
         }
@@ -61,6 +66,58 @@ namespace ToDoTasks.Model.DataOperations
             GC.SuppressFinalize(this);
         }
         //All methods (below) for CRUD processes use the ADO.NET connection type
+        #region CRUD Operations
+        private bool IsTheLocalDBExists()
+        {
+            OpenConnection();
+            var isDBExists = false;
+            var sql = $@"USE master
+                         SELECT OBJECT_ID (N'dbo.Persons', N'U') AS 'ID'";
+            using (SqlCommand command = new SqlCommand(sql, _sqlConnection))
+            {
+                command.CommandType = CommandType.Text;
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while(reader.Read())
+                    {
+                        isDBExists = reader["ID"] is System.Int32;                        
+                    }
+                }
+            }
+            CloseConnection();
+
+            if (!isDBExists)
+                DirectoryCreator.CreateDBDirectory();
+
+            return isDBExists;
+        }
+        private void FillingDBTestContent()
+        {
+            var queriesStack = new Stack<string>();
+            queriesStack.Push(CreationLocalDBSqlQuerys.AddTestTasksInDBQuery);
+            queriesStack.Push(CreationLocalDBSqlQuerys.AddTestPersonsInDBQuery);
+            queriesStack.Push(CreationLocalDBSqlQuerys.CreationTasksTableQuery);
+            queriesStack.Push(CreationLocalDBSqlQuerys.CreationPersonsTableQuery);
+            queriesStack.Push(CreationLocalDBSqlQuerys.DBCreationQuery);
+            OpenConnection();
+            do
+            {
+                using (SqlCommand command = new SqlCommand(queriesStack.Pop(), _sqlConnection))
+                {
+                    try
+                    {
+                        command.CommandType = CommandType.Text;
+                        command.ExecuteNonQuery();
+                    }
+                    catch (SqlException ex)
+                    {
+                        Exception error = new Exception("LocalBD cann't fill!", ex);
+                        throw error;
+                    }
+                }
+            }while (queriesStack.Count > 0);
+            CloseConnection();
+        }
         public ObservableCollection<ToDoTaskModel> GetToDoTasksList()
         {
             OpenConnection();
@@ -226,4 +283,5 @@ namespace ToDoTasks.Model.DataOperations
             CloseConnection();
         }
     }
+    #endregion
 }

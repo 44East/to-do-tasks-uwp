@@ -129,9 +129,6 @@
   <data name="SQL_BulkLoadCannotConvertValue" xml:space="preserve">
     <value>The given value of type {0} from the data source cannot be converted to type {1} of the specified target column.</value>
   </data>
-  <data name="net_gssapi_ntlm_missing_plugin" xml:space="preserve">
-    <value>NTLM authentication requires the GSSAPI plugin 'gss-ntlmssp'.</value>
-  </data>
   <data name="SqlMisc_InvalidOpStreamNonSeekable" xml:space="preserve">
     <value>Invalid attempt to call {0} when the stream is non-seekable.</value>
   </data>
@@ -201,9 +198,6 @@
   <data name="SQLUDT_InvalidUdtTypeName" xml:space="preserve">
     <value>UdtTypeName property must be set for UDT parameters.</value>
   </data>
-  <data name="net_gssapi_operation_failed_detailed_majoronly" xml:space="preserve">
-    <value>GSSAPI operation failed with error - {0}.</value>
-  </data>
   <data name="SqlMetaData_SpecifyBothSortOrderAndOrdinal" xml:space="preserve">
     <value>The sort order and ordinal must either both be specified, or neither should be specified (SortOrder.Unspecified and -1).  The values given were: order = {0}, ordinal = {1}.</value>
   </data>
@@ -229,7 +223,7 @@
     <value>Must not specify SqlBulkCopyOption.UseInternalTransaction and pass an external Transaction at the same time.</value>
   </data>
   <data name="net_nego_not_supported_empty_target_with_defaultcreds" xml:space="preserve">
-    <value>Target name should be non empty if default credentials are passed.</value>
+    <value>Target name should be non-empty if default credentials are passed.</value>
   </data>
   <data name="ADP_InvalidMultipartName" xml:space="preserve">
     <value>{0} '{1}'.</value>
@@ -257,6 +251,9 @@
   </data>
   <data name="ADP_InvalidSizeValue" xml:space="preserve">
     <value>Invalid parameter Size value '{0}'. The value must be greater than or equal to 0.</value>
+  </data>
+  <data name="net_nego_channel_binding_not_supported" xml:space="preserve">
+    <value>No support for channel binding on operating systems other than Windows.</value>
   </data>
   <data name="SQL_UnsupportedSysTxVersion" xml:space="preserve">
     <value>The currently loaded System.Transactions.dll does not support Global Transactions.</value>
@@ -363,9 +360,6 @@
   <data name="ADP_ParameterValueOutOfRange" xml:space="preserve">
     <value>Parameter value '{0}' is out of range.</value>
   </data>
-  <data name="SqlFileStream_FileAlreadyInTransaction" xml:space="preserve">
-    <value>The process cannot access the file specified because it has been opened in another transaction.</value>
-  </data>
   <data name="SQL_InvalidUdt3PartNameFormat" xml:space="preserve">
     <value>Invalid 3 part name format for UdtTypeName.</value>
   </data>
@@ -374,9 +368,6 @@
   </data>
   <data name="SQL_TimeScaleValueOutOfRange" xml:space="preserve">
     <value>Scale value '{0}' is either less than 0 or greater than the maximum allowed scale of 7.</value>
-  </data>
-  <data name="SqlFileStream_InvalidPath" xml:space="preserve">
-    <value>The path name is not valid.</value>
   </data>
   <data name="ADP_TransactionPresent" xml:space="preserve">
     <value>Connection currently has transaction enlisted.  Finish current transaction and retry.</value>
@@ -404,9 +395,6 @@
   </data>
   <data name="ADP_PooledOpenTimeout" xml:space="preserve">
     <value>Timeout expired.  The timeout period elapsed prior to obtaining a connection from the pool.  This may have occurred because all pooled connections were in use and max pool size was reached.</value>
-  </data>
-  <data name="SqlFileStream_PathNotValidDiskResource" xml:space="preserve">
-    <value>The path name is invalid or does not point to a disk file.</value>
   </data>
   <data name="SQL_TypeName" xml:space="preserve">
     <value>SqlParameter.TypeName is an invalid multipart name</value>
@@ -625,10 +613,7 @@
     <value>The stored procedure '{0}' doesn't exist.</value>
   </data>
   <data name="SQL_InvalidSQLServerVersionUnknown" xml:space="preserve">
-    <value>Unsupported SQL Server version.  The .NET Framework SqlClient Data Provider can only be used with SQL Server versions 7.0 and later.</value>
-  </data>
-  <data name="SqlFileStream_InvalidParameter" xml:space="preserve">
-    <value>An invalid parameter was passed to the function.</value>
+    <value>Unsupported SQL Server version.  The .Net Framework SqlClient Data Provider can only be used with SQL Server versions 7.0 and later.</value>
   </data>
   <data name="MDF_UnableToBuildCollection" xml:space="preserve">
     <value>Unable to build schema collection '{0}';</value>
@@ -901,7 +886,7 @@
     <value>Batching updates is not supported on the context connection.</value>
   </data>
   <data name="ADP_InternalProviderError" xml:space="preserve">
-    <value>Internal .NET Framework Data Provider error {0}.</value>
+    <value>Internal .Net Framework Data Provider error {0}.</value>
   </data>
   <data name="SqlMisc_CompareDiffCollationMessage" xml:space="preserve">
     <value>Two strings to be compared have different collation.</value>
@@ -923,9 +908,6 @@
   </data>
   <data name="AZURESQL_GenericEndpoint" xml:space="preserve">
     <value>.database.windows.net</value>
-  </data>
-  <data name="SqlFileStream_NotSupported" xml:space="preserve">
-    <value>SqlFileStream is not supported on this platform.</value>
   </data>
   <data name="SqlMetaData_InvalidSqlDbTypeForConstructorFormat" xml:space="preserve">
     <value>The dbType {0} is invalid for this constructor.</value>
@@ -1021,10 +1003,7 @@
     <value>Connection open and login was successful, but then an error occurred while enabling MARS for this connection.</value>
   </data>
   <data name="SqlConvert_ConvertFailed" xml:space="preserve">
-    <value>Cannot convert object of type '{0}' to object of type '{1}'.</value>
-  </data>
-  <data name="net_gssapi_operation_failed_majoronly" xml:space="preserve">
-    <value>GSSAPI operation failed with status: {0}.</value>
+    <value> Cannot convert object of type '{0}' to object of type '{1}'.</value>
   </data>
   <data name="AZURESQL_GermanEndpoint" xml:space="preserve">
     <value>.database.cloudapi.de</value>
@@ -1054,7 +1033,7 @@
     <value>An {0} with {1} '{2}' is not contained by this {3}.</value>
   </data>
   <data name="MDF_UnsupportedVersion" xml:space="preserve">
-    <value>The requested collection ({0}) is not supported by this version of the provider.</value>
+    <value> requested collection ({0}) is not supported by this version of the provider.</value>
   </data>
   <data name="SQL_UDTTypeName" xml:space="preserve">
     <value>SqlParameter.UdtTypeName is an invalid multipart name</value>
@@ -1207,10 +1186,10 @@
     <value>Unsupported protocol specified</value>
   </data>
   <data name="net_nego_server_not_supported" xml:space="preserve">
-    <value>Server implementation is not supported</value>
+    <value>Server implementation is not supported.</value>
   </data>
   <data name="SQL_NotSupportedEnumerationValue" xml:space="preserve">
-    <value>The {0} enumeration value, {1}, is not supported by the .NET Framework SqlClient Data Provider.</value>
+    <value>The {0} enumeration value, {1}, is not supported by the .Net Framework SqlClient Data Provider.</value>
   </data>
   <data name="SQLCR_UnrecoverableClient" xml:space="preserve">
     <value>The connection is broken and recovery is not possible.  The connection is marked by the client driver as unrecoverable.  No attempt was made to restore the connection.</value>

@@ -123,7 +123,10 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Connection\LocalDbConnector.cs" />
     <Compile Include="Model\Connection\MSSQLConnector.cs" />
+    <Compile Include="Model\DataOperations\DirectoryCreator.cs" />
+    <Compile Include="Model\Models\CreationSqlQuerys.cs" />
     <Compile Include="Model\Models\MSSQLStringModel.cs" />
     <Compile Include="Model\DataOperations\ModelsDAL.cs" />
     <Compile Include="Model\Models\Person.cs" />
@@ -161,19 +164,11 @@
       <Version>6.2.14</Version>
     </PackageReference>
     <PackageReference Include="System.Data.SqlClient">
-      <Version>4.8.5</Version>
+      <Version>4.6.1</Version>
     </PackageReference>
     <PackageReference Include="System.Text.Json">
       <Version>4.7.2</Version>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="DataModel">
-      <HintPath>..\DataModel\bin\Debug\netstandard2.0\DataModel.dll</HintPath>
-    </Reference>
-    <Reference Include="ModelData">
-      <HintPath>..\ModelData\bin\Debug\netstandard2.0\ModelData.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

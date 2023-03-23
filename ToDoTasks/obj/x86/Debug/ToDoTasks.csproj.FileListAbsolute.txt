@@ -10,10 +10,7 @@ D:\C#\Git\ToDoList\ToDoTasks\bin\x86\Debug\Core\ToDoTasks.exe
 D:\C#\Git\ToDoList\ToDoTasks\bin\x86\Debug\ToDoTasks.build.appxrecipe
 D:\C#\Git\ToDoList\ToDoTasks\bin\x86\Debug\Microsoft.Bcl.AsyncInterfaces.dll
 D:\C#\Git\ToDoList\ToDoTasks\bin\x86\Debug\System.Runtime.dll
-D:\C#\Git\ToDoList\ToDoTasks\bin\x86\Debug\System.Data.SqlClient.dll
-D:\C#\Git\ToDoList\ToDoTasks\bin\x86\Debug\System.Diagnostics.DiagnosticSource.dll
 D:\C#\Git\ToDoList\ToDoTasks\bin\x86\Debug\System.Runtime.CompilerServices.Unsafe.dll
-D:\C#\Git\ToDoList\ToDoTasks\bin\x86\Debug\System.Text.Encoding.CodePages.dll
 D:\C#\Git\ToDoList\ToDoTasks\bin\x86\Debug\System.Text.Encodings.Web.dll
 D:\C#\Git\ToDoList\ToDoTasks\bin\x86\Debug\System.Text.Json.dll
 D:\C#\Git\ToDoList\ToDoTasks\bin\x86\Debug\Microsoft.UI.Xaml.Markup.winmd
@@ -33,9 +30,6 @@ D:\C#\Git\ToDoList\ToDoTasks\obj\x86\Debug\ToDoTasks.csproj.CopyComplete
 D:\C#\Git\ToDoList\ToDoTasks\obj\x86\Debug\ToDoTasks.exe
 D:\C#\Git\ToDoList\ToDoTasks\obj\x86\Debug\ToDoTasks.pdb
 D:\C#\Git\ToDoList\ToDoTasks\obj\x86\Debug\ResourceHandlingTask.state
-D:\C#\Git\ToDoList\ToDoTasks\obj\x86\Debug\FxResources.System.Data.SqlClient.SR.resw
-D:\C#\Git\ToDoList\ToDoTasks\obj\x86\Debug\FxResources.System.Diagnostics.DiagnosticSource.SR.resw
-D:\C#\Git\ToDoList\ToDoTasks\obj\x86\Debug\FxResources.System.Text.Encoding.CodePages.SR.resw
 D:\C#\Git\ToDoList\ToDoTasks\obj\x86\Debug\FxResources.System.Text.Json.SR.resw
 D:\C#\Git\ToDoList\ToDoTasks\obj\x86\Debug\priconfig.xml
 D:\C#\Git\ToDoList\ToDoTasks\obj\x86\Debug\priconfig.xml.intermediate
@@ -54,3 +48,5 @@ D:\C#\Git\ToDoList\ToDoTasks\obj\x86\Debug\qualifiers.txt.intermediate
 D:\C#\Git\ToDoList\ToDoTasks\obj\x86\Debug\MultipleQualifiersPerDimensionFound.txt
 D:\C#\Git\ToDoList\ToDoTasks\obj\x86\Debug\ProjectArchitectures.txt
 D:\C#\Git\ToDoList\ToDoTasks\obj\x86\Debug\.winmd_cache\$Microsoft.UI.Xaml.Markup.winmd_637424671200000000.json
+D:\C#\Git\ToDoList\ToDoTasks\bin\x86\Debug\System.Data.SqlClient.dll
+D:\C#\Git\ToDoList\ToDoTasks\obj\x86\Debug\FxResources.System.Data.SqlClient.SR.resw

@@ -1,11 +1,9 @@
 ﻿using System.Collections.ObjectModel;
-using ToDoTasks;
 using ToDoTasks.Model.DataOperations;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Linq;
 using System.Windows.Input;
-using System;
 
 namespace ToDoTasks.ViewModel
 {
