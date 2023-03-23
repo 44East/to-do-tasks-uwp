@@ -10,35 +10,71 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" MaxHeight="400">
-            <ListView x:Name="TasksList" ItemsSource="{x:Bind ToDoTasks}" SelectionChanged="ToDoTasks_SelectionChanged" IsItemClickEnabled="True" MaxHeight="300">
+    <!--To do Task view area-->
+        <StackPanel Orientation="Vertical" 
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Top" 
+                    MaxHeight="400">
+            <!--The ListView parse a data from the collections and users could click on the task to view all the info-->
+            <ListView x:Name="TasksList" 
+                      ItemsSource="{x:Bind ToDoTasks}" 
+                      SelectionChanged="ToDoTasks_SelectionChanged" 
+                      IsItemClickEnabled="True" 
+                      MaxHeight="300">
+            <!--The ListView header-->
                 <ListView.HeaderTemplate>
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="300" />
                             </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Height="40" Background="LightGray" Width="300">
-                                <TextBlock Text="Task Name:" Foreground="DarkRed" Margin="10,0,0,0"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="300"/>
+                            <StackPanel Grid.Column="1" 
+                                        Orientation="Horizontal" 
+                                        HorizontalAlignment="Left" 
+                                        VerticalAlignment="Top" 
+                                        Height="40" 
+                                        Width="300" 
+                                        Background="LightGray">
+                                <TextBlock Text="Task Name:" 
+                                           Foreground="DarkRed" 
+                                           Margin="10,0,0,0"  
+                                           HorizontalAlignment="Center" 
+                                           VerticalAlignment="Center" 
+                                           Width="300"/>
                             </StackPanel>
                         </Grid>
                     </DataTemplate>
                 </ListView.HeaderTemplate>
+            <!--The header end-->
+            <!--Show all tasks-->
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="local:ToDoTaskModel">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="250" />
                             </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                                <TextBlock Text="{x:Bind Name}" FontSize="15" Margin="0,0,5,0"/>
+                            <StackPanel Grid.Row="1" 
+                                        Grid.Column="0" 
+                                        Orientation="Horizontal" 
+                                        HorizontalAlignment="Center" 
+                                        VerticalAlignment="Center" >
+                                <TextBlock Text="{x:Bind Name}" 
+                                           FontSize="15" 
+                                           Margin="0,0,5,0"/>
                             </StackPanel>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </StackPanel>
-        <Grid Grid.RowSpan="2" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center">
+        <!--The end of view task window-->
+
+        <!--View all info about selected task-->
+        <!--Create a Table-->
+        <Grid Grid.RowSpan="2" 
+              Grid.ColumnSpan="3" 
+              HorizontalAlignment="Left" 
+              VerticalAlignment="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="Auto" />
@@ -49,76 +85,229 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <StackPanel x:Name="HeaderTaskInfo" Visibility="Collapsed" Grid.Row="0" Orientation="Horizontal">
-                <Border BorderBrush="Black" BorderThickness="1" Background="LightGray">
-                    <TextBlock Text="Selected task:" FontWeight="Bold" Margin="5" Foreground="DarkRed" Width="120" />
+            <!--The table header-->
+            <StackPanel x:Name="HeaderTaskInfo" 
+                        Visibility="Collapsed" 
+                        Grid.Row="0" 
+                        Orientation="Horizontal">
+                <Border BorderBrush="Black" 
+                        BorderThickness="1" 
+                        Background="LightGray">
+                    <TextBlock Text="Selected task:" 
+                               FontWeight="Bold" 
+                               Margin="5" 
+                               Foreground="DarkRed" 
+                               Width="120" />
                 </Border >
-                <Border BorderBrush="Black" BorderThickness="1" Background="LightGray">
-                    <TextBlock Text="Person Name" FontWeight="Bold" Margin="5" Foreground="DarkRed" Width="200"/>
+
+                <Border BorderBrush="Black" 
+                        BorderThickness="1" 
+                        Background="LightGray">
+                    <TextBlock Text="Person Name" 
+                               FontWeight="Bold" 
+                               Margin="5" 
+                               Foreground="DarkRed" 
+                               Width="200"/>
                 </Border>
-                <Border BorderBrush="Black" BorderThickness="1" Background="LightGray">
-                    <TextBlock Text="Description (You can edit it)" FontWeight="Bold" Margin="5" Foreground="DarkRed" Width="296"/>
+
+                <Border BorderBrush="Black" 
+                        BorderThickness="1" 
+                        Background="LightGray">
+                    <TextBlock Text="Description (You can edit it)" 
+                               FontWeight="Bold" 
+                               Margin="5" 
+                               Foreground="DarkRed" 
+                               Width="296"/>
                 </Border>
-                <Border BorderBrush="Black" BorderThickness="1" Background="LightGray">
-                    <TextBlock Text="Update selected task" FontWeight="Bold" Margin="5" Foreground="DarkRed" Width="138" />
+
+                <Border BorderBrush="Black" 
+                        BorderThickness="1" 
+                        Background="LightGray">
+                    <TextBlock Text="Update selected task" 
+                               FontWeight="Bold" 
+                               Margin="5" 
+                               Foreground="DarkRed" 
+                               Width="138" />
                 </Border >
             </StackPanel>
-
+            <!--The table header end-->
+            <!--The parsed data from task with controls button (Delete/Update)-->
             <StackPanel x:Name="TaskInfoData" Grid.Row="1" Visibility="Collapsed" Orientation="Horizontal">
+                <!--The remove button uses ICommand interface and class helper DelegateCommand-->
                 <Border BorderBrush="Black" BorderThickness="1" Width="132" >
-                    <Button x:Name="Button_RemoveTask" Grid.Column="0" Background="LightGray"
-                                         Height="36" Width="70" HorizontalAlignment="Center"
-                                        Padding="0" BorderThickness="0" Content="Remove" 
-                                        Canvas.ZIndex="1"  Command="{Binding DataContext.DeleteCommand, ElementName=TasksList}" CommandParameter="{Binding ID}">
-                    </Button>
+                    <Button x:Name="Button_RemoveTask" 
+                            Grid.Column="0" 
+                            Background="LightGray"
+                            Height="36" 
+                            Width="70" 
+                            HorizontalAlignment="Center"
+                            Padding="0" 
+                            BorderThickness="0" 
+                            Content="Remove" 
+                            Canvas.ZIndex="1"  
+                            Command="{Binding DataContext.DeleteCommand, ElementName=TasksList}" 
+                            CommandParameter="{Binding ID}">
+                    </Button>                
                 </Border>
-                <Border BorderBrush="Black" BorderThickness="1" >
-                    <TextBlock x:Name="TextBlock_FName" Margin="5" Width="200" TextWrapping="Wrap"/>
+
+                <!--The General data from task-->
+                <Border BorderBrush="Black" 
+                        BorderThickness="1" >
+                    <TextBlock x:Name="TextBlock_FName" 
+                               Margin="5" 
+                               Width="200" 
+                               TextWrapping="Wrap"/>
                 </Border>
-                <Border BorderBrush="Black" BorderThickness="1" >
-                    <TextBox x:Name="TextBlock_Description" Margin="5" Width="296" TextWrapping="Wrap"/>
+                <!--This is a TextBox not a TextBlock because it can edit the task description-->
+                <Border BorderBrush="Black" 
+                        BorderThickness="1" >
+                    <TextBox x:Name="TextBlock_Description" 
+                             Margin="5" 
+                             Width="296" 
+                             TextWrapping="Wrap"/>
                 </Border>
-                <Border BorderBrush="Black" BorderThickness="1" Width="150" >
-                    <Button x:Name="UpdateButton" Click="UpdateButton_Click" Content="Update" Margin="5" Height="36" Width="70"/>
+                <!--The end of data-->
+                <!--The updating task button it parses data from the task description TextBox-->
+                <Border BorderBrush="Black" 
+                        BorderThickness="1" 
+                        Width="150" >
+                    <Button x:Name="UpdateButton" 
+                            Click="UpdateButton_Click" 
+                            Content="Update" 
+                            Margin="5" 
+                            Height="36" 
+                            Width="70"/>
                 </Border>
             </StackPanel>
         </Grid>
-        <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Grid.RowSpan="3">
+        <!--The end of the view tasks data-->
+
+        <!--The Main menu ComboBox-->
+        <Grid HorizontalAlignment="Right" 
+              VerticalAlignment="Top" 
+              Grid.RowSpan="3">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <ComboBox x:Name="MenuBox" PlaceholderText="Select action"  PlaceholderForeground="DarkRed" Height="40" Width="296" SelectionChanged="Menu_SelectionChanged">
+            <!--The ComboBox binds a data from the Enum collection in a MainPage.xaml.cs-->
+            <ComboBox x:Name="MenuBox" 
+                      PlaceholderText="Select action"  
+                      PlaceholderForeground="DarkRed" 
+                      Height="40" 
+                      Width="296" 
+                      SelectionChanged="Menu_SelectionChanged">
             </ComboBox>
+            <!--First point in the Main Menu "Add new Task"-->
             <Grid>
-                <StackPanel x:Name="AddNewTask" HorizontalAlignment="Right" Orientation="Vertical" Grid.Row="1">
-                    <ComboBox x:Name="PersonsList" Visibility="Collapsed" PlaceholderForeground="DarkRed" PlaceholderText="Add the new Task by Person" Height="40" Width="296" DisplayMemberPath="FullName" SelectionChanged="Persons_SelectionChanged">
+                <StackPanel x:Name="AddNewTask" 
+                            HorizontalAlignment="Right" 
+                            Orientation="Vertical" 
+                            Grid.Row="1">
+                    <!--The ComboBox shows all Persons and can select an individual person for appoint Task -->
+                    <ComboBox x:Name="PersonsList" 
+                              Visibility="Collapsed" 
+                              PlaceholderForeground="DarkRed" 
+                              PlaceholderText="Add the new Task by Person" 
+                              Height="40" 
+                              Width="296" 
+                              DisplayMemberPath="FullName" 
+                              SelectionChanged="Persons_SelectionChanged">
                     </ComboBox>
-                    <TextBox x:Name="TaskName" Visibility="Collapsed"  MaxLength="30" Height="40" Width="296" PlaceholderText="Enter the task name" />
-                    <TextBox x:Name="TaskDescription" Visibility="Collapsed" TextWrapping="Wrap" MaxLength="200" Height="60" Width="296" PlaceholderText="Enter the task descripton..." />
-                    <Button x:Name="SaveTask" Visibility="Collapsed" Content="Save" Click="SaveButton_Click" Height="36" Width="70" />
+                    <!--The task name box-->
+                    <TextBox x:Name="TaskName" 
+                             Visibility="Collapsed"  
+                             MaxLength="30" 
+                             Height="40" 
+                             Width="296" 
+                             PlaceholderText="Enter the task name" />
+                    <!--The description box of the task-->
+                    <TextBox x:Name="TaskDescription" 
+                             Visibility="Collapsed" 
+                             TextWrapping="Wrap" 
+                             MaxLength="200" 
+                             Height="60" 
+                             Width="296" 
+                             PlaceholderText="Enter the task descripton..." />
+                    <!--The save task button it parses data from TextBoxes and sends it to A TaskViewModel-->
+                    <Button x:Name="SaveTask" 
+                            Visibility="Collapsed" 
+                            Content="Save" 
+                            Click="SaveButton_Click" 
+                            Height="36" 
+                            Width="70" />
                 </StackPanel>
             </Grid>
+            <!--The end of the "Add new Task" menu point-->
+            <!--The Persons Menu it can add the new Person in DB-->
             <Grid>
-                <StackPanel x:Name="AddNewPerson" HorizontalAlignment="Right" Orientation="Vertical" Grid.Row="2">
-                    <TextBlock x:Name="AddPeronBlock" Text="Insert the new Person" Foreground="DarkRed" FontWeight="Bold" Visibility="Collapsed"/>
-                    <TextBox x:Name="InsertFirstPersonName" Visibility="Collapsed"  MaxLength="30" Height="40" Width="296" PlaceholderText="Enter first Person name..." />
-                    <TextBox x:Name="InsertLastPersonName" Visibility="Collapsed"  MaxLength="30" Height="40" Width="296" PlaceholderText="Enter last Person name..." />
-                    <Button x:Name="SavePerson" Content="Save" Visibility="Collapsed" Click="SavePerson_CLick" Height="36" Width="70" />
+                <StackPanel x:Name="AddNewPerson" 
+                            HorizontalAlignment="Right" 
+                            Orientation="Vertical" 
+                            Grid.Row="2">
+                    <!--The header-->
+                    <TextBlock x:Name="AddPeronBlock" 
+                               Text="Insert the new Person" 
+                               Foreground="DarkRed" 
+                               FontWeight="Bold" 
+                               Visibility="Collapsed"/>
+                    <!--Two boxes for add the Persons names (First/Last)-->
+                    <TextBox x:Name="InsertFirstPersonName" 
+                             Visibility="Collapsed"  
+                             MaxLength="30" 
+                             Height="40" 
+                             Width="296" 
+                             PlaceholderText="Enter first Person name..." />
+                    <TextBox x:Name="InsertLastPersonName" 
+                             Visibility="Collapsed"  
+                             MaxLength="30" 
+                             Height="40" 
+                             Width="296" 
+                             PlaceholderText="Enter last Person name..." />
+                    <!--The end of the naming boxes-->
+                    <!--The Save person button it parses data from TextBoxes and sends it to A TaskViewModel-->
+                    <Button x:Name="SavePerson" 
+                            Content="Save" Visibility="Collapsed" 
+                            Click="SavePerson_CLick" 
+                            Height="36" Width="70" />
                 </StackPanel>
             </Grid>
+            <!--The end of the Persons menu-->
+            <!--The MSSQL login form, if the user connects to unlocal db or web server, he can use this connection form with the connection modules in a Model app-->
             <Grid>
-                <StackPanel x:Name="AddSQLConnection" HorizontalAlignment="Right" Orientation="Vertical">
-                    <TextBox x:Name="DataSource" Visibility="Collapsed"  Height="40" Width="296" PlaceholderText="Enter Data Source..." />
-                    <TextBox x:Name="UserID" Visibility="Collapsed" Height="40" Width="296" PlaceholderText="Enter User ID..." />
-                    <TextBox x:Name="Password" Visibility="Collapsed" Height="40" Width="296" PlaceholderText="Enter User Password..." />
-                    <Button x:Name="SaveMSSQLConnection" Content="Save" Visibility="Collapsed" Click="SaveMSSQLConnect_Click" Height="36" Width="70" />
+                <StackPanel x:Name="AddSQLConnection" 
+                            HorizontalAlignment="Right" 
+                            Orientation="Vertical">
+                    <!--The Data Source for connection-->
+                    <TextBox x:Name="DataSource" 
+                             Visibility="Collapsed"  
+                             Height="40" 
+                             Width="296" 
+                             PlaceholderText="Enter Data Source..." />
+                    <!--The User Id-->
+                    <TextBox x:Name="UserID" 
+                             Visibility="Collapsed" 
+                             Height="40" 
+                             Width="296" 
+                             PlaceholderText="Enter User ID..." />
+                    <!--The Password-->
+                    <TextBox x:Name="Password" 
+                             Visibility="Collapsed" 
+                             Height="40" 
+                             Width="296" 
+                             PlaceholderText="Enter User Password..." />
+                    <!--The Save MSSQL connection button it parses data from TextBoxes and sends it to A TaskViewModel-->
+                    <Button x:Name="SaveMSSQLConnection" 
+                            Content="Save" 
+                            Visibility="Collapsed" 
+                            Click="SaveMSSQLConnect_Click"
+                            Height="36" 
+                            Width="70" />
                 </StackPanel>
             </Grid>
+            <!--The end of the MSSQL connection menu-->
         </Grid>
-        <Grid HorizontalAlignment="Center" VerticalAlignment="Top">
-
-        </Grid>
+        <!--The end of the Main menu ComboBox-->
     </Grid>
 </Page>
