@@ -14,7 +14,6 @@ namespace ToDoTasks.ViewModel
         private ObservableCollection<ToDoTaskModel> _toDoTasks;
         private ObservableCollection<Person> _persons;
         private Person _person;
-        private MSSQLStringModel _mssqlStringModel;
         public ToDoTaskModel ToDoTask
         {
             get => _toDoTask;
@@ -82,27 +81,6 @@ namespace ToDoTasks.ViewModel
         {
             return (Persons.Count > 0 && ToDoTasks.Count > 0) ? true : false;
         }
-        //Checking connection information and and get answer for shows the relevant script on the homepage.
-        public bool IsConnectionDataExists()
-        {
-            return _modelDAL.ConnectionStringExists;
-        }
-        public void InsertConnectionData(MSSQLStringModel model)
-        {
-            _modelDAL.InsertConnectionString(model);           
-            RecieveDataFromDB();
-        }
-        //Rebuild collections after connection to DB
-        private void RecieveDataFromDB()
-        {
-            var listTasks = _modelDAL.GetToDoTasksList();
-            foreach (var task in listTasks)
-                ToDoTasks.Add(task);
-            var lisstPersons = _modelDAL.GetPersons();
-            foreach (var person in lisstPersons)
-                Persons.Add(person);
-            
-        }
 
         public void AddNewTask(Person person, string taskName, string description)
         {
@@ -130,8 +108,8 @@ namespace ToDoTasks.ViewModel
         {
             _modelDAL = new ModelsDAL();
             this.DeleteCommand = new DelegateCommand(ExecuteDeleteCommand);
-            Persons = new ObservableCollection<Person>();
-            ToDoTasks = new ObservableCollection<ToDoTaskModel>();
+            Persons = _modelDAL.GetPersons();
+            ToDoTasks = _modelDAL.GetToDoTasksList();
         }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")

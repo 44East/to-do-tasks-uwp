@@ -1,5 +1,7 @@
 ToDoList/db_data/ToDoList_log.ldf
 ToDoList/db_data/ToDoList.mdf
+ToDoTasks/bin/x86/Debug/AppX/ToDoList.mdf
+ToDoTasks/bin/x86/Debug/AppX/ToDoListLog.ldf
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudio
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudio
 ToDoList/db_data/ToDoList.mdf

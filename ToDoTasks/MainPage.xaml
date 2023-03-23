@@ -7,9 +7,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource AppBarBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid Height="720" VerticalAlignment="Top">
     <!--To do Task view area-->
         <StackPanel Orientation="Vertical" 
                     HorizontalAlignment="Left" 
@@ -274,39 +274,6 @@
                 </StackPanel>
             </Grid>
             <!--The end of the Persons menu-->
-            <!--The MSSQL login form, if the user connects to unlocal db or web server, he can use this connection form with the connection modules in a Model app-->
-            <Grid>
-                <StackPanel x:Name="AddSQLConnection" 
-                            HorizontalAlignment="Right" 
-                            Orientation="Vertical">
-                    <!--The Data Source for connection-->
-                    <TextBox x:Name="DataSource" 
-                             Visibility="Collapsed"  
-                             Height="40" 
-                             Width="296" 
-                             PlaceholderText="Enter Data Source..." />
-                    <!--The User Id-->
-                    <TextBox x:Name="UserID" 
-                             Visibility="Collapsed" 
-                             Height="40" 
-                             Width="296" 
-                             PlaceholderText="Enter User ID..." />
-                    <!--The Password-->
-                    <TextBox x:Name="Password" 
-                             Visibility="Collapsed" 
-                             Height="40" 
-                             Width="296" 
-                             PlaceholderText="Enter User Password..." />
-                    <!--The Save MSSQL connection button it parses data from TextBoxes and sends it to A TaskViewModel-->
-                    <Button x:Name="SaveMSSQLConnection" 
-                            Content="Save" 
-                            Visibility="Collapsed" 
-                            Click="SaveMSSQLConnect_Click"
-                            Height="36" 
-                            Width="70" />
-                </StackPanel>
-            </Grid>
-            <!--The end of the MSSQL connection menu-->
         </Grid>
         <!--The end of the Main menu ComboBox-->
     </Grid>

@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using System.Data.SqlClient;
 
 namespace ToDoTasks.Model.Connection
@@ -12,14 +12,14 @@ namespace ToDoTasks.Model.Connection
         }
         public string GetLocalConnectionString()
         {
-            _sqlConnectionStringBuilder.DataSource = $@"(localdb)\MSSQLLocalDB";
+            _sqlConnectionStringBuilder.DataSource = $@"localhost";
             _sqlConnectionStringBuilder.IntegratedSecurity = true;
-            _sqlConnectionStringBuilder.InitialCatalog = "master";
-            _sqlConnectionStringBuilder.ConnectTimeout = 30;
-            _sqlConnectionStringBuilder.Encrypt = false;
+            //_sqlConnectionStringBuilder.InitialCatalog = "master";
+            //_sqlConnectionStringBuilder.ConnectTimeout = 30;
+            //_sqlConnectionStringBuilder.Encrypt = false;
             _sqlConnectionStringBuilder.TrustServerCertificate = true;
-            _sqlConnectionStringBuilder.ApplicationIntent = ApplicationIntent.ReadWrite;
-            _sqlConnectionStringBuilder.MultiSubnetFailover = false;
+            //_sqlConnectionStringBuilder.ApplicationIntent = ApplicationIntent.ReadWrite;
+            //_sqlConnectionStringBuilder.MultiSubnetFailover = false;
             return _sqlConnectionStringBuilder.ConnectionString;
         }
        

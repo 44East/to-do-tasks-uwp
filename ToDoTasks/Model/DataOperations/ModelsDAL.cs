@@ -11,32 +11,19 @@ namespace ToDoTasks.Model.DataOperations
     public class ModelsDAL : IDisposable
     {
         private LocalDbConnector _localConnector;
-        private MSSQLConnector _connector;
         private string _connectionString;
         private bool _disposed;
         private SqlConnection _sqlConnection = null;
         private bool _dbDataExists;
-        public bool ConnectionStringExists { get; set; }//Property to control connection string presence
         public ModelsDAL()
         {
             _localConnector = new LocalDbConnector();
-            ConnectionStringExists = true;
             _connectionString = _localConnector.GetLocalConnectionString();
             _dbDataExists = IsTheLocalDBExists();
             if (!_dbDataExists)
                 FillingDBTestContent();
 
         }
-        public void InsertConnectionString(MSSQLStringModel model) //Rebuild connection when app receives the model of a connection string
-        {
-            _connector = new MSSQLConnector(model);
-            ConnectionStringExists = _connector.IsStringExists();
-            if (ConnectionStringExists)
-                _connectionString = _connector.GetFulConnectionString();
-            else
-                _connectionString = null;
-        }
-
         private void OpenConnection()
         {
             if (_connectionString == null)
@@ -71,8 +58,7 @@ namespace ToDoTasks.Model.DataOperations
         {
             OpenConnection();
             var isDBExists = false;
-            var sql = $@"USE master
-                         SELECT OBJECT_ID (N'dbo.Persons', N'U') AS 'ID'";
+            var sql = $@"SELECT OBJECT_ID (N'ToDoList.dbo.Persons', N'U') AS 'ID'";
             using (SqlCommand command = new SqlCommand(sql, _sqlConnection))
             {
                 command.CommandType = CommandType.Text;
@@ -84,10 +70,7 @@ namespace ToDoTasks.Model.DataOperations
                     }
                 }
             }
-            CloseConnection();
-
-            if (!isDBExists)
-                DirectoryCreator.CreateDBDirectory();
+            CloseConnection();           
 
             return isDBExists;
         }
@@ -124,7 +107,8 @@ namespace ToDoTasks.Model.DataOperations
             if (_sqlConnection == null)
                 return new ObservableCollection<ToDoTaskModel>();
             var toDoList = new ObservableCollection<ToDoTaskModel>();
-            var sql = $@"SELECT 
+            var sql = $@"USE ToDoList
+                        SELECT 
                         i.ID, 
                         i.Description, 
                         i.Assigned_Person,
@@ -189,7 +173,8 @@ namespace ToDoTasks.Model.DataOperations
             OpenConnection();
             if (_sqlConnection == null)
                 return;
-            var sql = $@"DECLARE @PersonID INT
+            var sql = $@"USE ToDoList
+                         DECLARE @PersonID INT
                          SELECT @PersonID = i.ID FROM Persons i WHERE i.First_Name = N'{firstName}' and i.Last_Name = N'{lastName}'
                          INSERT Tasks(Description, Assigned_Person, Name) VALUES
                          (N'{description}', @PersonID, N'{taskName}')";
@@ -217,7 +202,7 @@ namespace ToDoTasks.Model.DataOperations
             OpenConnection();
             if (_sqlConnection == null)
                 return;
-            var sql = $@"DELETE FROM Tasks WHERE ID = {id}";
+            var sql = $@"USE ToDoList DELETE FROM Tasks WHERE ID = {id}";
             using (SqlCommand command = new SqlCommand(sql, _sqlConnection))
             {
                 try
@@ -238,7 +223,7 @@ namespace ToDoTasks.Model.DataOperations
             OpenConnection();
             if (_sqlConnection == null)
                 return;
-            var sql = $@"INSERT Persons(First_Name, Last_Name) VALUES
+            var sql = $@"USE ToDoList INSERT Persons(First_Name, Last_Name) VALUES
                          (N'{person.FirstName}', N'{person.LastName}')";
             using (SqlCommand command = new SqlCommand(sql, _sqlConnection))
             {
@@ -264,7 +249,7 @@ namespace ToDoTasks.Model.DataOperations
             OpenConnection();
             if (_sqlConnection == null)
                 return;
-            var sql = $@"DECLARE @PersonID INT
+            var sql = $@"USE ToDoList DECLARE @PersonID INT
                          SELECT @PersonID = i.ID FROM Persons i WHERE i.First_Name = N'{firstName}' and i.Last_Name = N'{lastName}'
                          UPDATE Tasks SET Description = N'{description}', Assigned_Person = @PersonID, Name = N'{taskName}'  WHERE ID = {id}";
             using (SqlCommand command = new SqlCommand(sql, _sqlConnection))

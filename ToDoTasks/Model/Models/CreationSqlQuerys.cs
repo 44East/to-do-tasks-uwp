@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ToDoTasks.Model.Models
 {
@@ -10,10 +6,10 @@ namespace ToDoTasks.Model.Models
     {
         public static string DBCreationQuery { get; } = $@"CREATE DATABASE ToDoList ON PRIMARY
                                                            (NAME = ToDoList_Data,
-                                                           FILENAME = 'D:\Application Data\ToDoTasks\db_data\ToDoList.mdf',
+                                                           FILENAME = '{AppContext.BaseDirectory}ToDoList.mdf',
                                                            SIZE = 2MB, MAXSIZE = 20MB, FILEGROWTH = 10%)
                                                            LOG ON (NAME = ToDoList_Log,
-                                                           FILENAME = 'D:\Application Data\ToDoTasks\db_data\ToDoListLog.ldf',
+                                                           FILENAME = '{AppContext.BaseDirectory}ToDoListLog.ldf',
                                                            SIZE = 1MB,
                                                            MAXSIZE = 5MB,
                                                            FILEGROWTH = 10%)";

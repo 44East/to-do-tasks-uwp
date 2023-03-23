@@ -124,10 +124,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Connection\LocalDbConnector.cs" />
-    <Compile Include="Model\Connection\MSSQLConnector.cs" />
-    <Compile Include="Model\DataOperations\DirectoryCreator.cs" />
     <Compile Include="Model\Models\CreationSqlQuerys.cs" />
-    <Compile Include="Model\Models\MSSQLStringModel.cs" />
     <Compile Include="Model\DataOperations\ModelsDAL.cs" />
     <Compile Include="Model\Models\Person.cs" />
     <Compile Include="Model\Models\ToDoTaskModel.cs" />
