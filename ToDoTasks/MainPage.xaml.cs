@@ -13,12 +13,12 @@ namespace ToDoTasks
     public sealed partial class MainPage : Page
     {
         //Enum for showing points in the Menu
-        public enum MenuStats
-        {
-            Add_new_Task,
-            Add_new_Person
-        }
-        public List<MenuStats> MenuStatsPoints { get; private set; } = new List<MenuStats>() { MenuStats.Add_new_Task, MenuStats.Add_new_Person};
+        
+        public List<MainMenuPointsModel> MenuStatsPoints { get; private set; } = new List<MainMenuPointsModel>()
+        { 
+            new MainMenuPointsModel(MenuStats.Add_new_Task, "Add new Task"), 
+            new MainMenuPointsModel(MenuStats.Add_new_Person, "Add new Person")
+        };
         private TasksViewModel _taskViewModel;
         public ObservableCollection<ToDoTaskModel> ToDoTasks { get; set; }
         public ObservableCollection<Person> Persons { get; set; }
@@ -51,9 +51,10 @@ namespace ToDoTasks
         //Check Data and Connection status and get relevant script
         private void Menu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            var currentMenuPoint = (MainMenuPointsModel)MenuBox.SelectedItem;
             if (_taskViewModel.IsDataExist())
             {
-                switch (MenuBox.SelectedItem)
+                switch (currentMenuPoint.MenuStats)
                 {
                     case MenuStats.Add_new_Task:
                         MenuBoxAddTask_SelectionChanged(sender, e);
@@ -65,7 +66,7 @@ namespace ToDoTasks
             }
             else
             {
-                switch (MenuBox.SelectedItem)
+                switch (currentMenuPoint.MenuStats)
                 {
                     case MenuStats.Add_new_Person:
                         MenuBoxAddPerson_SelectionChanged(sender, e);
@@ -77,6 +78,7 @@ namespace ToDoTasks
         {
             AddNewTask.Visibility = Visibility.Visible;
             PersonsList.Visibility = Visibility.Visible;
+            CloseAllMenus.Visibility = Visibility.Visible;
             MenuBox.Visibility = Visibility.Collapsed;
         }
         private void MenuBoxAddPerson_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -86,6 +88,7 @@ namespace ToDoTasks
             InsertLastPersonName.Visibility = Visibility.Visible;
             SavePerson.Visibility = Visibility.Visible;
             AddPeronBlock.Visibility = Visibility.Visible;
+            CloseAllMenus.Visibility = Visibility.Visible;
             MenuBox.Visibility = Visibility.Collapsed;
         }
         //Select actual person for create task
@@ -112,6 +115,7 @@ namespace ToDoTasks
             TaskDescription.Visibility = Visibility.Collapsed;
             TaskName.Visibility = Visibility.Collapsed;
             SaveTask.Visibility = Visibility.Collapsed;
+            CloseAllMenus.Visibility = Visibility.Collapsed;
             MenuBox.Visibility = Visibility.Visible;
 
         }
@@ -131,6 +135,7 @@ namespace ToDoTasks
             InsertLastPersonName.Visibility = Visibility.Collapsed;
             SavePerson.Visibility = Visibility.Collapsed;
             AddPeronBlock.Visibility = Visibility.Collapsed;
+            CloseAllMenus.Visibility = Visibility.Collapsed;
             MenuBox.Visibility = Visibility.Visible;
 
         }
@@ -144,6 +149,21 @@ namespace ToDoTasks
             {
                 _taskViewModel.UpdateTaskInDB(toDoTask, description);
             }
+        }
+        private void CLoseMainMenu_CLick(object sender, RoutedEventArgs e)
+        {
+            AddNewTask.Visibility = Visibility.Collapsed;
+            PersonsList.Visibility = Visibility.Collapsed;
+            TaskDescription.Visibility = Visibility.Collapsed;
+            TaskName.Visibility = Visibility.Collapsed;
+            SaveTask.Visibility = Visibility.Collapsed;
+            AddNewPerson.Visibility = Visibility.Collapsed;
+            InsertFirstPersonName.Visibility = Visibility.Collapsed;
+            InsertLastPersonName.Visibility = Visibility.Collapsed;
+            SavePerson.Visibility = Visibility.Collapsed;
+            AddPeronBlock.Visibility = Visibility.Collapsed;
+            CloseAllMenus.Visibility = Visibility.Collapsed;
+            MenuBox.Visibility = Visibility.Visible;
         }
        
 
