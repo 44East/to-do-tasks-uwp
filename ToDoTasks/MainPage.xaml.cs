@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text.RegularExpressions;
 using ToDoTasks.ViewModel;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -204,7 +207,17 @@ namespace ToDoTasks
             CloseAllMenus.Visibility = Visibility.Collapsed;
             MenuBox.Visibility = Visibility.Visible;
         }
-       
+        /// <summary>
+        /// Method for the controlling of the user ipnut it prohibits a special symbols
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        private void TextBox_OnTextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
+        {
+            char[] chars = { '-', '.', ' '};
+            sender.Text = new String(sender.Text.Where(c => (char.IsLetterOrDigit(c) || chars.Contains(c))).ToArray());
+        }
+
 
 
 

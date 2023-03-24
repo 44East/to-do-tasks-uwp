@@ -103,7 +103,7 @@
                 </Border>
                 <!--This is a TextBox not a TextBlock because it can edit the task description-->
                 <Border Background="LightSkyBlue"  CornerRadius="1">
-                    <TextBox x:Name="TextBlock_Description" TextWrapping="Wrap" Width="296" PlaceholderText="Enter the task description..."  Margin="3" Background="White"/>
+                    <TextBox x:Name="TextBlock_Description" TextChanging="TextBox_OnTextChanging" TextWrapping="Wrap" Width="296" PlaceholderText="Enter the task description..."  Margin="3" Background="White"/>
                 </Border>
                 <!--The end of data-->
                 
@@ -155,10 +155,10 @@
                     <ComboBox x:Name="PersonsList" PlaceholderForeground="Blue" PlaceholderText="Select Person for create Task" Height="40" Width="296" DisplayMemberPath="FullName" SelectionChanged="Persons_SelectionChanged" Visibility="Collapsed" Background="White" />
 
                     <!--The task name box-->
-                    <TextBox x:Name="TaskName" TextWrapping="Wrap" MaxLength="30" Height="40" Width="296" PlaceholderText="Enter the task name" Background="White" Visibility="Collapsed"/>
+                    <TextBox x:Name="TaskName" TextChanging="TextBox_OnTextChanging" TextWrapping="Wrap" MaxLength="30" Height="40" Width="296" PlaceholderText="Enter the task name" Background="White" Visibility="Collapsed"/>
                     
                     <!--The description box of the task-->
-                    <TextBox x:Name="TaskDescription" TextWrapping="Wrap" MaxLength="200" Height="60" Width="296" PlaceholderText="Enter the task descripton..."  Background="White"  Visibility="Collapsed"/>
+                    <TextBox x:Name="TaskDescription" TextChanging="TextBox_OnTextChanging" TextWrapping="Wrap" MaxLength="200" Height="60" Width="296" PlaceholderText="Enter the task descripton..."  Background="White"  Visibility="Collapsed"/>
                     
                     <!--The save task button it parses data from TextBoxes and sends it to A TaskViewModel-->
                     <Button x:Name="SaveTask" Visibility="Collapsed" Content="Save" Click="SaveButton_Click" Background="LightGreen" Height="36" Width="70" />
@@ -174,8 +174,8 @@
                     <TextBlock x:Name="AddPeronBlock" Text="Insert the new Person" Foreground="Blue" FontWeight="Bold" Visibility="Collapsed"/>
                     
                     <!--Two boxes for add the Persons names (First/Last)-->
-                    <TextBox x:Name="InsertFirstPersonName" MaxLength="30" Height="40" Width="296" PlaceholderText="Enter first Person name..." Visibility="Collapsed" Background="White"/>
-                    <TextBox x:Name="InsertLastPersonName" MaxLength="30" Height="40" Width="296" PlaceholderText="Enter last Person name..." Visibility="Collapsed" Background="White"/>
+                    <TextBox x:Name="InsertFirstPersonName" TextChanging="TextBox_OnTextChanging" MaxLength="30" Height="40" Width="296" PlaceholderText="Enter first Person name..." Visibility="Collapsed" Background="White"/>
+                    <TextBox x:Name="InsertLastPersonName" TextChanging="TextBox_OnTextChanging" MaxLength="30" Height="40" Width="296" PlaceholderText="Enter last Person name..." Visibility="Collapsed" Background="White"/>
                     <!--The end of the naming boxes-->
                     
                     <!--The Save person button it parses data from TextBoxes and sends it to A TaskViewModel-->

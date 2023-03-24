@@ -103,7 +103,7 @@
                 </Border>
                 <!--This is a TextBox not a TextBlock because it can edit the task description-->
                 <Border Background="LightSkyBlue"  CornerRadius="1">
-                    <TextBox x:ConnectionId='18' x:Name="TextBlock_Description" TextWrapping="Wrap" Width="296" PlaceholderText="Enter the task description..."  Margin="3" Background="White"/>
+                    <TextBox x:ConnectionId='18' x:Name="TextBlock_Description"                                       TextWrapping="Wrap" Width="296" PlaceholderText="Enter the task description..."  Margin="3" Background="White"/>
                 </Border>
                 <!--The end of data-->
                 
