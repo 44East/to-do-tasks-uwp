@@ -6,7 +6,7 @@ It uses a Sytem.Data.SqlClient NuGet package v.4.6.1 (NOT Microsoft.Data.SqlClie
 
    A. For the first step you need to install SQL Server 2022 (Developer edition) from here:    
    https://www.microsoft.com/en-us/sql-server/sql-server-downloads   
-   B. For the second step you nedd to instal SQL Server Management Studio (SSMS) from here:   
+   B. For the second step you neуd to instal SQL Server Management Studio (SSMS) from here:   
    https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?redirectedfrom=MSDN&view=sql-server-ver16
 
 For the first connection to the MSSQL Server you should do some steps for the preapre this process.
