@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ToDoTasks
 {
+    /// <summary>
+    /// The model class for the application [View] it contains the model of [MainMenuBox] in the [View] part app
+    /// </summary>
     public enum MenuStats
     {
         Add_new_Task,

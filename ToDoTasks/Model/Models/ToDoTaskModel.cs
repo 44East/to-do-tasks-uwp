@@ -2,6 +2,10 @@
 
 namespace ToDoTasks
 {
+    /// <summary>
+    /// The base Task model class it biniding the data from the DB
+    /// Also it contains the Person data info for the application [View]
+    /// </summary>
     public class ToDoTaskModel
     {
         public int ID { get; set; }

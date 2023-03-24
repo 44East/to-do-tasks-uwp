@@ -2,6 +2,9 @@
 
 namespace ToDoTasks.Model.Models
 {
+    /// <summary>
+    /// The Data class which contains the queries for creation a new DataBase if the DB doesn't exist.
+    /// </summary>
     internal static class CreationLocalDBSqlQuerys
     {
         public static string DBCreationQuery { get; } = $@"CREATE DATABASE ToDoList ON PRIMARY

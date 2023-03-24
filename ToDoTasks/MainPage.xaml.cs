@@ -12,7 +12,6 @@ namespace ToDoTasks
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        //Enum for showing points in the Menu
         
         public List<MainMenuPointsModel> MenuStatsPoints { get; private set; } = new List<MainMenuPointsModel>()
         { 
@@ -36,7 +35,11 @@ namespace ToDoTasks
             
         }
         
-        //Get info from selected task
+        /// <summary>
+        /// Shows info about the selected task from ListView collection
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ToDoTasks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ToDoTaskModel taskModel = (ToDoTaskModel)TasksList.SelectedItem;
@@ -48,7 +51,12 @@ namespace ToDoTasks
                 TextBlock_Description.Text = taskModel.Description;
             }
         }
-        //Check Data and Connection status and get relevant script
+        /// <summary>
+        /// Checking the receiving data from the [ViewModel] and get the relevant script for showing MainMenuBox
+        /// If the data doesn't contain the saved ToDoTask and the Persons it shows only the [Add new Person] menu point.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var currentMenuPoint = (MainMenuPointsModel)MenuBox.SelectedItem;
@@ -74,6 +82,11 @@ namespace ToDoTasks
                 }
             }
         }
+        /// <summary>
+        /// Shows only the [Add new Task] form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MenuBoxAddTask_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             AddNewTask.Visibility = Visibility.Visible;
@@ -81,6 +94,11 @@ namespace ToDoTasks
             CloseAllMenus.Visibility = Visibility.Visible;
             MenuBox.Visibility = Visibility.Collapsed;
         }
+        /// <summary>
+        /// Shows only the [Add new Person] form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MenuBoxAddPerson_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             AddNewPerson.Visibility = Visibility.Visible;
@@ -91,14 +109,22 @@ namespace ToDoTasks
             CloseAllMenus.Visibility = Visibility.Visible;
             MenuBox.Visibility = Visibility.Collapsed;
         }
-        //Select actual person for create task
+        /// <summary>
+        /// Select the actual person for create a new ToDoTask
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Persons_SelectionChanged(object sender, SelectionChangedEventArgs e) 
         {            
             TaskDescription.Visibility = Visibility.Visible;
             TaskName.Visibility = Visibility.Visible;
             SaveTask.Visibility = Visibility.Visible;
         }
-        //Save created task
+        /// <summary>
+        /// The save button for create a new ToDoTask and  sends the new Task data into [ViewModel]
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SaveButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             var person = (Person)PersonsList.SelectedItem;
@@ -119,7 +145,11 @@ namespace ToDoTasks
             MenuBox.Visibility = Visibility.Visible;
 
         }
-        //Save created person
+        /// <summary>
+        /// The save button for create a new Person and sends the new Task data into [ViewModel]
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SavePerson_CLick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             var firstName = InsertFirstPersonName.Text;
@@ -139,8 +169,12 @@ namespace ToDoTasks
             MenuBox.Visibility = Visibility.Visible;
 
         }
-        
-        //Update task description in DB
+
+        /// <summary>
+        /// The update button for create a new text description and sends it into [ViewModel]
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             var toDoTask = (ToDoTaskModel)TasksList.SelectedItem;
@@ -150,6 +184,11 @@ namespace ToDoTasks
                 _taskViewModel.UpdateTaskInDB(toDoTask, description);
             }
         }
+        /// <summary>
+        /// The close button for close all forms and shows the MainMenu ComboBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CLoseMainMenu_CLick(object sender, RoutedEventArgs e)
         {
             AddNewTask.Visibility = Visibility.Collapsed;

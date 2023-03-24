@@ -3,6 +3,9 @@ using System.Windows.Input;
 
 namespace ToDoTasks
 {
+    /// <summary>
+    /// The class helper for the application [View] and [ViewModel] it implements ICommand interface for the buttons control.
+    /// </summary>
     internal class DelegateCommand : ICommand
     {
         private Action<object> execute;

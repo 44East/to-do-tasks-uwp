@@ -2,6 +2,10 @@
 
 namespace ToDoTasks
 {
+    /// <summary>
+    /// The base Person model for binding data from the DB
+    /// 
+    /// </summary>
     public class Person
     {
         public int ID { get; set; }

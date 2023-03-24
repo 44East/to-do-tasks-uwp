@@ -7,6 +7,9 @@ using System.Windows.Input;
 
 namespace ToDoTasks.ViewModel
 {
+    /// <summary>
+    /// The general [ViewModel] part into the app. It contains the Persons and Tasks data which recieved from [Model]
+    /// </summary>
     public class TasksViewModel : INotifyPropertyChanged
     {
         private ModelsDAL _modelDAL;
@@ -52,13 +55,25 @@ namespace ToDoTasks.ViewModel
             }
         }
 
-        //Check for a task before deleting from DB
+        /// <summary>
+        /// Check for a task before deleting from DB
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool IsTaskExists(int id)
         {
             return ToDoTasks.Where(t => t.ID == id).Any() ? true : false;
         }
+        /// <summary>
+        /// Property for a deleting button from [View] part
+        /// Use class helper DelegateCommand
+        /// </summary>
         public ICommand DeleteCommand { get; set; }
-        //Parsing an erasing data by helper class DelegateCommand
+        /// <summary>
+        /// Parsing an erasing data from the [View] part. 
+        /// Uses helper class DelegateCommand
+        /// </summary>
+        /// <param name="param"></param>
         private void ExecuteDeleteCommand(object param)
         {
             if (param != null)
@@ -76,19 +91,31 @@ namespace ToDoTasks.ViewModel
             else
                 return;
         }
-        //Check data before listing it for MainPage
+        /// <summary>
+        /// Check the data from the DB before listing it for a MainPage 
+        /// </summary>
+        /// <returns></returns>
         public bool IsDataExist()
         {
             return (Persons.Count > 0 && ToDoTasks.Count > 0) ? true : false;
         }
-
+        /// <summary>
+        /// Send a new ToDoTask data into a [Model] part for adding it into the DB 
+        /// </summary>
+        /// <param name="person"></param>
+        /// <param name="taskName"></param>
+        /// <param name="description"></param>
         public void AddNewTask(Person person, string taskName, string description)
         {
             _modelDAL.InsertToDoTask(description,taskName, person.FirstName, person.LastName);
             ToDoTask = new ToDoTaskModel(ToDoTasks.Last().ID + 1,description, person.ID, taskName, person.FirstName, person.LastName);
             ToDoTasks.Add(ToDoTask);
         }
-
+        /// <summary>
+        /// Send a new ToDoTask description into a [Model] part for updating the ToDaTask data into the DB
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="description"></param>
         public void UpdateTaskInDB(ToDoTaskModel model, string description)
         {
             _modelDAL.UpdateTask(model.ID, description, model.Name, model.PersonFirstName, model.PersonLastName);
@@ -97,6 +124,11 @@ namespace ToDoTasks.ViewModel
             ToDoTask = model;
             ToDoTasks.Add(ToDoTask);
         }
+        /// <summary>
+        /// Send a new Person data into a [Model] part for adding it into the DB
+        /// </summary>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
         public void AddNewPerson(string firstName, string lastName)
         {
             Person = new Person(Persons.Last().ID + 1, firstName, lastName);
@@ -111,6 +143,9 @@ namespace ToDoTasks.ViewModel
             Persons = _modelDAL.GetPersons();
             ToDoTasks = _modelDAL.GetToDoTasksList();
         }
+        /// <summary>
+        /// Notification property for the [View] part the app
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
