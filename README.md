@@ -4,6 +4,9 @@ This App use MS SQL Server v16.0 for deployment a local database.
 Type of the connection [localhost]. 
 It uses a Sytem.Data.SqlClient NuGet package v.4.6.1 (NOT Microsoft.Data.SqlClient!)
 
+For the first step you need to install SQL Server 2022 (Developer edition) from here:    
+   https://www.microsoft.com/en-us/sql-server/sql-server-downloads
+
 For the first connection to the MSSQL Server you should do some steps for the preapre this process.
 
 1. To prepare the network configuration:
