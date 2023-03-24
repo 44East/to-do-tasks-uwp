@@ -103,7 +103,7 @@
                 </Border>
                 <!--This is a TextBox not a TextBlock because it can edit the task description-->
                 <Border Background="LightSkyBlue"  CornerRadius="1">
-                    <TextBox x:ConnectionId='18' x:Name="TextBlock_Description"                                       TextWrapping="Wrap" Width="296" PlaceholderText="Enter the task description..."  Margin="3" Background="White"/>
+                    <TextBox x:ConnectionId='18' x:Name="TextBlock_Description"                                       TextWrapping="Wrap" Width="296" PlaceholderText="Enter the task description..."  Margin="3"/>
                 </Border>
                 <!--The end of data-->
                 
@@ -146,19 +146,19 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <!--The ComboBox binds a data from the Enum collection in a MainPage.xaml.cs-->
-            <ComboBox x:ConnectionId='2' x:Name="MenuBox" PlaceholderForeground="Blue" Foreground="Blue" PlaceholderText="Select action" DisplayMemberPath="MenuPointName" Height="40" Width="296"                                          Background="White"/>
+            <ComboBox x:ConnectionId='2' x:Name="MenuBox" PlaceholderForeground="Blue" Foreground="Blue" PlaceholderText="Select action" DisplayMemberPath="MenuPointName" Height="40" Width="296"                                          />
 
             <!--First point in the Main Menu "Add new Task"-->
             <Grid>
                 <StackPanel x:ConnectionId='9' x:Name="AddNewTask" HorizontalAlignment="Right" Orientation="Vertical" Grid.Row="1">
                     <!--The ComboBox shows all Persons and can select an individual person for appoint Task -->
-                    <ComboBox x:ConnectionId='10' x:Name="PersonsList" PlaceholderForeground="Blue" PlaceholderText="Select Person for create Task" Height="40" Width="296" DisplayMemberPath="FullName"                                             Visibility="Collapsed" Background="White" />
+                    <ComboBox x:ConnectionId='10' x:Name="PersonsList" PlaceholderForeground="Blue" PlaceholderText="Select Person for create Task" Height="40" Width="296" DisplayMemberPath="FullName"                                             Visibility="Collapsed" />
 
                     <!--The task name box-->
-                    <TextBox x:ConnectionId='11' x:Name="TaskName"                                       TextWrapping="Wrap" MaxLength="30" Height="40" Width="296" PlaceholderText="Enter the task name" Background="White" Visibility="Collapsed"/>
+                    <TextBox x:ConnectionId='11' x:Name="TaskName"                                       TextWrapping="Wrap" MaxLength="30" Height="40" Width="296" PlaceholderText="Enter the task name"  Visibility="Collapsed"/>
                     
                     <!--The description box of the task-->
-                    <TextBox x:ConnectionId='12' x:Name="TaskDescription"                                       TextWrapping="Wrap" MaxLength="200" Height="60" Width="296" PlaceholderText="Enter the task descripton..."  Background="White"  Visibility="Collapsed"/>
+                    <TextBox x:ConnectionId='12' x:Name="TaskDescription"                                       TextWrapping="Wrap" MaxLength="200" Height="60" Width="296" PlaceholderText="Enter the task descripton..."   Visibility="Collapsed"/>
                     
                     <!--The save task button it parses data from TextBoxes and sends it to A TaskViewModel-->
                     <Button x:ConnectionId='13' x:Name="SaveTask" Visibility="Collapsed" Content="Save"                          Background="LightGreen" Height="36" Width="70" />
@@ -174,8 +174,8 @@
                     <TextBlock x:ConnectionId='5' x:Name="AddPeronBlock" Text="Insert the new Person" Foreground="Blue" FontWeight="Bold" Visibility="Collapsed"/>
                     
                     <!--Two boxes for add the Persons names (First/Last)-->
-                    <TextBox x:ConnectionId='6' x:Name="InsertFirstPersonName"                                       MaxLength="30" Height="40" Width="296" PlaceholderText="Enter first Person name..." Visibility="Collapsed" Background="White"/>
-                    <TextBox x:ConnectionId='7' x:Name="InsertLastPersonName"                                       MaxLength="30" Height="40" Width="296" PlaceholderText="Enter last Person name..." Visibility="Collapsed" Background="White"/>
+                    <TextBox x:ConnectionId='6' x:Name="InsertFirstPersonName"                                       MaxLength="30" Height="40" Width="296" PlaceholderText="Enter first Person name..." Visibility="Collapsed" />
+                    <TextBox x:ConnectionId='7' x:Name="InsertLastPersonName"                                       MaxLength="30" Height="40" Width="296" PlaceholderText="Enter last Person name..." Visibility="Collapsed" />
                     <!--The end of the naming boxes-->
                     
                     <!--The Save person button it parses data from TextBoxes and sends it to A TaskViewModel-->

@@ -71,7 +71,6 @@
       <RootProperty Name="DisplayMemberPath" />
       <RootProperty Name="Height" />
       <RootProperty Name="Width" />
-      <RootProperty Name="Background" />
       <RootProperty Name="Visibility" />
       <RootEvent Name="SelectionChanged" />
     </RootType>
@@ -106,7 +105,6 @@
       <RootProperty Name="Width" />
       <RootProperty Name="PlaceholderText" />
       <RootProperty Name="Visibility" />
-      <RootProperty Name="Background" />
       <RootProperty Name="TextWrapping" />
       <RootProperty Name="Margin" />
       <RootEvent Name="TextChanging" />

@@ -206,6 +206,7 @@ namespace ToDoTasks
             AddPeronBlock.Visibility = Visibility.Collapsed;
             CloseAllMenus.Visibility = Visibility.Collapsed;
             MenuBox.Visibility = Visibility.Visible;
+            MenuBox.SelectionChangedTrigger = ComboBoxSelectionChangedTrigger.Committed;
         }
         /// <summary>
         /// Method for the controlling of the user ipnut it prohibits a special symbols
