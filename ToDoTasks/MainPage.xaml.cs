@@ -214,7 +214,7 @@ namespace ToDoTasks
         /// <param name="args"></param>
         private void TextBox_OnTextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
         {
-            char[] chars = { '-', '.', ' '};
+            char[] chars = { '-', '.', ' ', '!', '?', ':', ';'};
             sender.Text = new String(sender.Text.Where(c => (char.IsLetterOrDigit(c) || chars.Contains(c))).ToArray());
         }
 
