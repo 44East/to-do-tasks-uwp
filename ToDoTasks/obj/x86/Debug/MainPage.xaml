@@ -34,7 +34,7 @@
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="LightSteelBlue" Offset="0"/>
-                <GradientStop Color="PapayaWhip" Offset="1"/>
+                <GradientStop Color="LightGoldenrodYellow" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
         <!--To do Task view area-->
@@ -155,10 +155,10 @@
                     <ComboBox x:ConnectionId='10' x:Name="PersonsList" PlaceholderForeground="Blue" PlaceholderText="Select Person for create Task" Height="40" Width="296" DisplayMemberPath="FullName"                                             Visibility="Collapsed" Background="White" />
 
                     <!--The task name box-->
-                    <TextBox x:ConnectionId='11' x:Name="TaskName" TextWrapping="Wrap" MaxLength="30" Height="40" Width="296" PlaceholderText="Enter the task name" Background="White" Visibility="Collapsed"/>
+                    <TextBox x:ConnectionId='11' x:Name="TaskName"                                       TextWrapping="Wrap" MaxLength="30" Height="40" Width="296" PlaceholderText="Enter the task name" Background="White" Visibility="Collapsed"/>
                     
                     <!--The description box of the task-->
-                    <TextBox x:ConnectionId='12' x:Name="TaskDescription" TextWrapping="Wrap" MaxLength="200" Height="60" Width="296" PlaceholderText="Enter the task descripton..."  Background="White"  Visibility="Collapsed"/>
+                    <TextBox x:ConnectionId='12' x:Name="TaskDescription"                                       TextWrapping="Wrap" MaxLength="200" Height="60" Width="296" PlaceholderText="Enter the task descripton..."  Background="White"  Visibility="Collapsed"/>
                     
                     <!--The save task button it parses data from TextBoxes and sends it to A TaskViewModel-->
                     <Button x:ConnectionId='13' x:Name="SaveTask" Visibility="Collapsed" Content="Save"                          Background="LightGreen" Height="36" Width="70" />
@@ -174,8 +174,8 @@
                     <TextBlock x:ConnectionId='5' x:Name="AddPeronBlock" Text="Insert the new Person" Foreground="Blue" FontWeight="Bold" Visibility="Collapsed"/>
                     
                     <!--Two boxes for add the Persons names (First/Last)-->
-                    <TextBox x:ConnectionId='6' x:Name="InsertFirstPersonName" MaxLength="30" Height="40" Width="296" PlaceholderText="Enter first Person name..." Visibility="Collapsed" Background="White"/>
-                    <TextBox x:ConnectionId='7' x:Name="InsertLastPersonName" MaxLength="30" Height="40" Width="296" PlaceholderText="Enter last Person name..." Visibility="Collapsed" Background="White"/>
+                    <TextBox x:ConnectionId='6' x:Name="InsertFirstPersonName"                                       MaxLength="30" Height="40" Width="296" PlaceholderText="Enter first Person name..." Visibility="Collapsed" Background="White"/>
+                    <TextBox x:ConnectionId='7' x:Name="InsertLastPersonName"                                       MaxLength="30" Height="40" Width="296" PlaceholderText="Enter last Person name..." Visibility="Collapsed" Background="White"/>
                     <!--The end of the naming boxes-->
                     
                     <!--The Save person button it parses data from TextBoxes and sends it to A TaskViewModel-->

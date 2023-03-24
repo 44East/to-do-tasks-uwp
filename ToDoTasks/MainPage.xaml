@@ -34,7 +34,7 @@
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="LightSteelBlue" Offset="0"/>
-                <GradientStop Color="PapayaWhip" Offset="1"/>
+                <GradientStop Color="LightGoldenrodYellow" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
         <!--To do Task view area-->
