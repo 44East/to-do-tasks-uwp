@@ -2,6 +2,9 @@ ToDoList/db_data/ToDoList_log.ldf
 ToDoList/db_data/ToDoList.mdf
 ToDoTasks/bin/x86/Debug/AppX/ToDoList.mdf
 ToDoTasks/bin/x86/Debug/AppX/ToDoListLog.ldf
+.vs
+ToDoTasks/bin/
+ToDoTasks/obj/
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudio
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudio
 ToDoList/db_data/ToDoList.mdf
@@ -26,20 +29,20 @@ ToDoList/db_data/ToDoList.mdf
 mono_crash.*
 
 # Build results
-[Dd]ebug/
-[Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
+Debug/
+DebugPublic/
+Release/
+Releases/
 x64/
 x86/
-[Ww][Ii][Nn]32/
-[Aa][Rr][Mm]/
-[Aa][Rr][Mm]64/
+WIN32/
+ARM/
+ARM/64/
 bld/
-[Bb]in/
-[Oo]bj/
-[Ll]og/
-[Ll]ogs/
+bin/
+obj/
+log/
+logs/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
