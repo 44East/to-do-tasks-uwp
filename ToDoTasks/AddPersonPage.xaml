@@ -1,0 +1,53 @@
+﻿<Page
+    x:Class="ToDoTasks.AddPersonPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ToDoTasks"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+
+                <ResourceDictionary x:Key="Default">
+                    <StaticResource x:Key="MyCustomControlBackground" ResourceKey="ButtonBackground" />
+                    <StaticResource x:Key="MyCustomControlBorderBrush" ResourceKey="ButtonBorderBrush" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Light">
+                    <StaticResource x:Key="MyCustomControlBackground" ResourceKey="ButtonBackground" />
+                    <StaticResource x:Key="MyCustomControlBorderBrush" ResourceKey="ButtonBorderBrush" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="HighContrast">
+                    <StaticResource x:Key="MyCustomControlBackground" ResourceKey="ButtonBackground" />
+                    <StaticResource x:Key="MyCustomControlBorderBrush" ResourceKey="ButtonBorderBrush" />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+
+    </Page.Resources>
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="LightSteelBlue" Offset="0"/>
+                <GradientStop Color="LightGoldenrodYellow" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid>
+            <StackPanel x:Name="AddNewPerson" HorizontalAlignment="Right" Orientation="Vertical" Grid.Row="2">
+
+                <!--The header-->
+                <TextBlock x:Name="AddPeronBlock" Text="Insert the new Person" Foreground="Blue" FontWeight="Bold" />
+
+                <!--Two boxes for add the Persons names (First/Last)-->
+                <TextBox x:Name="InsertFirstPersonName" TextChanging="TextBox_OnTextChanging" MaxLength="30" Height="40" Width="296" PlaceholderText="Enter first Person name..."  />
+                <TextBox x:Name="InsertLastPersonName" TextChanging="TextBox_OnTextChanging" MaxLength="30" Height="40" Width="296" PlaceholderText="Enter last Person name..."  />
+                <!--The end of the naming boxes-->
+
+                <!--The Save person button it parses data from TextBoxes and sends it to A TaskViewModel-->
+                <Button x:Name="SavePerson" Click="SavePerson_CLick" Content="Save" Background="LightGreen" Height="36" Width="70" Grid.Column="0" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

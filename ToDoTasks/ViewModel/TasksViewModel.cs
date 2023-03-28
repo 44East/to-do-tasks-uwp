@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Linq;
 using System.Windows.Input;
+using System;
 
 namespace ToDoTasks.ViewModel
 {
@@ -60,33 +61,18 @@ namespace ToDoTasks.ViewModel
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        private bool IsTaskExists(int id)
+        private bool IsTaskExists(Int64 id)
         {
             return ToDoTasks.Where(t => t.ID == id).Any() ? true : false;
         }
-        /// <summary>
-        /// Property for a deleting button from [View] part
-        /// Use class helper DelegateCommand
-        /// </summary>
-        public ICommand DeleteCommand { get; set; }
-        /// <summary>
-        /// Parsing an erasing data from the [View] part. 
-        /// Uses helper class DelegateCommand
-        /// </summary>
-        /// <param name="param"></param>
-        private void ExecuteDeleteCommand(object param)
+        
+        public void DeleteTask(Int64 id)
         {
-            if (param != null)
+            if (IsTaskExists(id))
             {
-                int id = (int)param;
-                if (IsTaskExists(id))
-                {
-                    _modelDAL.DeleteToDoTask(id);
-                    ToDoTask = ToDoTasks.Where(t => t.ID == id).Select(t => t).Single();
-                    ToDoTasks.Remove(ToDoTask);
-                }
-                else
-                    return;
+                _modelDAL.DeleteToDoTask(id);
+                ToDoTask = ToDoTasks.Where(t => t.ID == id).Select(t => t).Single();
+                ToDoTasks.Remove(ToDoTask);
             }
             else
                 return;
@@ -139,7 +125,6 @@ namespace ToDoTasks.ViewModel
         public TasksViewModel()
         {
             _modelDAL = new ModelsDAL();
-            this.DeleteCommand = new DelegateCommand(ExecuteDeleteCommand);
             Persons = _modelDAL.GetPersons();
             ToDoTasks = _modelDAL.GetToDoTasksList();
         }

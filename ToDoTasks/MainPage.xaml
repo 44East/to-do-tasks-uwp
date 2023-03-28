@@ -37,10 +37,47 @@
                 <GradientStop Color="LightGoldenrodYellow" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
+        <RelativePanel>
+            <Button x:Name="HamburgerButton" RelativePanel.AlignLeftWithPanel="True"
+                    FontFamily="Segoe MDL2 Assets" FontSize="36"
+                    Background="{Binding ElementName=menu, Path=Background}"
+                    Content="&#xE700;" Click="HamburgerButton_Click"/>
+            <TextBlock Name="TitleTextBlock" RelativePanel.RightOf="HamburgerButton"
+                       FontSize="28" FontWeight="Bold" Margin="30 5 0 0" />
+        </RelativePanel>
+
+        <SplitView Name="mySplitView" Grid.Row="1" OpenPaneLength="200"
+                   DisplayMode="CompactOverlay" CompactPaneLength="56">
+            <SplitView.Foreground>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="LightGoldenrodYellow" Offset="0"/>
+                    <GradientStop Color="LightSteelBlue" Offset="1"/>
+                </LinearGradientBrush>
+            </SplitView.Foreground>
+            <SplitView.Pane>
+                <ListBox x:Name="menu" SelectionMode="Single" SelectionChanged="ListBox_SelectionChanged">
+                    <ListBoxItem Name="AddTask">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontSize="36" FontFamily="Segoe MDL2 Assets" Text="&#xE932;" />
+                            <TextBlock FontSize="24" Text="Главная" Margin="10 0 0 0" />
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem Name="AddPerson">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontSize="36" FontFamily="Segoe MDL2 Assets" Text="&#xE8FA;" />
+                            <TextBlock FontSize="24" Text="Поделиться" Margin="10 0 0 0" />
+                        </StackPanel>
+                    </ListBoxItem>
+                </ListBox>
+            </SplitView.Pane>
+            <SplitView.Content>
+                <Frame Name="myFrame" />
+            </SplitView.Content>
+        </SplitView>
         <!--To do Task view area-->
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" MaxHeight="400">
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top" MaxHeight="400">
             <!--The ListView parse a data from the collections and users could click on the task to view all the info-->
-            <ListView x:Name="TasksList" ItemsSource="{x:Bind ToDoTasks}" SelectionChanged="ToDoTasks_SelectionChanged" IsItemClickEnabled="True" MaxHeight="300">
+            <ListView x:Name="TasksList" ItemsSource="{x:Bind ToDoTasks}" SelectionChanged="ToDoTasks_SelectionChanged" IsItemClickEnabled="True" MaxHeight="300" SelectionMode="Single">
                 <!--The ListView header-->
                 <ListView.HeaderTemplate>
                     <DataTemplate>
@@ -72,67 +109,7 @@
             </ListView>
         </StackPanel>
         <!--The end of view task window-->
-
-        <!--View all info about selected task-->
-        <!--Create a Table where shows the tasks and appointed persons-->
-        <Grid Grid.RowSpan="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-
-            <!--The table header-->
-            <StackPanel x:Name="HeaderTaskInfo" Orientation="Vertical" Grid.Row="0" Visibility="Collapsed">
-                <Border Background="LightGray" CornerRadius="1" Height="40">
-                    <TextBlock Text="Selected task by person:" VerticalAlignment="Center" Foreground="Blue" Width="296" Margin="5"/>
-                </Border >
-            </StackPanel>
-            <!--The table header end-->
-
-            <!--The parsed data from task with controls button (Delete/Update)-->
-            <StackPanel x:Name="TaskInfoData" Orientation="Vertical" Grid.Row="1" Visibility="Collapsed">
-                <!--The General data from task-->
-                <Border Background="LightSkyBlue" CornerRadius="1">
-                    <TextBlock x:Name="TextBlock_FName" Margin="5"  Width="296" TextWrapping="Wrap"/>
-                </Border>
-                <!--This is a TextBox not a TextBlock because it can edit the task description-->
-                <Border Background="LightSkyBlue"  CornerRadius="1">
-                    <TextBox x:Name="TextBlock_Description" TextChanging="TextBox_OnTextChanging" TextWrapping="Wrap" Width="296" PlaceholderText="Enter the task description..."  Margin="3"/>
-                </Border>
-                <!--The end of data-->
-                
-                <StackPanel Orientation="Horizontal" Grid.Row="2" >
-                    <!--The updating task button it parses data from the task description TextBox-->
-                    <Button x:Name="UpdateButton" 
-                            Click="UpdateButton_Click" 
-                            Content="Update" 
-                            Background="LightGreen"
-                            HorizontalAlignment="Left"
-                            Margin="5" 
-                            Height="36" 
-                            Width="70"/>
-                    
-                    <!--The remove button uses ICommand interface and class helper DelegateCommand-->
-                    <Button x:Name="Button_RemoveTask"
-                            Command="{Binding DataContext.DeleteCommand, ElementName=TasksList}" 
-                            CommandParameter="{Binding ID}"
-                            Content="Remove" 
-                            Background="LightCoral"
-                            HorizontalAlignment="Right"
-                            Margin="5"
-                            Height="36" 
-                            Width="70"/>
-                </StackPanel>
-
-            </StackPanel>
-        </Grid>
-        <!--The end of the view tasks data-->
+        
 
         <!--The Main menu ComboBox-->
         <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Grid.RowSpan="3" Grid.ColumnSpan="2">

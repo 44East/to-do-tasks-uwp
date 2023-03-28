@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using ToDoTasks.ViewModel;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Animation;
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace ToDoTasks
@@ -37,7 +38,23 @@ namespace ToDoTasks
 
             
         }
-        
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (AddTask.IsSelected)
+            {
+                Frame.Navigate(typeof(AddTaskPage), _taskViewModel);
+            }
+            else if (AddPerson.IsSelected)
+            {
+                Frame.Navigate(typeof(AddPersonPage));
+            }
+        }
+
+        private void HamburgerButton_Click(object sender, RoutedEventArgs e)
+        {
+            mySplitView.IsPaneOpen = !mySplitView.IsPaneOpen;
+        }
+
         /// <summary>
         /// Shows info about the selected task from ListView collection
         /// </summary>
@@ -46,13 +63,10 @@ namespace ToDoTasks
         private void ToDoTasks_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ToDoTaskModel taskModel = (ToDoTaskModel)TasksList.SelectedItem;
-            if (taskModel != null)
-            {
-                HeaderTaskInfo.Visibility = Visibility.Visible;
-                TaskInfoData.Visibility = Visibility.Visible;
-                TextBlock_FName.Text = taskModel.PersonFirstName + " " + taskModel.PersonLastName;
-                TextBlock_Description.Text = taskModel.Description;
-            }
+            _taskViewModel.ToDoTask = taskModel;
+            if (!Frame.CanGoBack) //After the task collection is refreshed, the ListView collection is also refreshed,
+                                  //and because the task instance is selected, a cyclic transition to the task editing page is made.                 
+                Frame.Navigate(typeof(TaskWindow), _taskViewModel, new SlideNavigationTransitionInfo());
         }
         /// <summary>
         /// Checking the receiving data from the [ViewModel] and get the relevant script for showing MainMenuBox
@@ -173,20 +187,7 @@ namespace ToDoTasks
 
         }
 
-        /// <summary>
-        /// The update button for create a new text description and sends it into [ViewModel]
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void UpdateButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            var toDoTask = (ToDoTaskModel)TasksList.SelectedItem;
-            var description = TextBlock_Description.Text;
-            if (!string.IsNullOrEmpty(description))
-            {
-                _taskViewModel.UpdateTaskInDB(toDoTask, description);
-            }
-        }
+        
         /// <summary>
         /// The close button for close all forms and shows the MainMenu ComboBox
         /// </summary>

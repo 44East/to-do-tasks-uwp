@@ -176,7 +176,7 @@ namespace ToDoTasks.Model.DataOperations
         /// Delete the ToDoTask in the DB by [ID] params
         /// </summary>
         /// <param name="id"></param>
-        public void DeleteToDoTask(int id)
+        public void DeleteToDoTask(Int64 id)
         {
             OpenConnection();
             if (_sqliteConnection == null)
