@@ -45,22 +45,16 @@ namespace ToDoTasks.Model.Models
                                                               ALTER TABLE [dbo].[Tasks]  WITH CHECK ADD  CONSTRAINT [FK_Tasks_Assigned_Persons] FOREIGN KEY([Assigned_Person])
                                                               REFERENCES [dbo].[Persons] ([ID])
                                                               ALTER TABLE [dbo].[Tasks] CHECK CONSTRAINT [FK_Tasks_Assigned_Persons]";
-        public static string AddTestPersonsInDBQuery { get; } = $@"USE [ToDoLIst]
-                                                                   SET IDENTITY_INSERT Persons ON
-                                                                   INSERT Persons(ID, First_Name, Last_Name) VALUES
-                                                                   (1,N'John',N'McLean'),
-                                                                   (2,N'Woody',N'Woodpecker'),
-                                                                   (3,N'Clark',N'Kent'),
-                                                                   (4,N'Peter',N'Parker')
-                                                                   SET IDENTITY_INSERT Persons OFF";
-        public static string AddTestTasksInDBQuery { get; } = $@"USE [ToDoLIst]
-                                                                 SET IDENTITY_INSERT Tasks ON
-                                                                 INSERT Tasks(ID, Description,Assigned_Person, Name) VALUES
-                                                                 (1, N'Tap into the tree', 2, N'Woody deals'),
-                                                                 (2, N'Delivery pizza', 4, N'Spider-Man deals'),
-                                                                 (3, N'Write an article and send it to the editor.', 3, N'Super-Man deals'),
-                                                                 (4, N'Walking on a broken glass', 1,N'Die-Hard deals')
-                                                                 SET IDENTITY_INSERT Tasks OFF";
+        public static string AddTestPersonsInDBQuery { get; } = $@"INSERT INTO Persons(First_Name, Last_Name) VALUES
+                                                                   ('John','McLean'),
+                                                                   ('Woody','Woodpecker'),
+                                                                   ('Clark','Kent'),
+                                                                   ('Peter','Parker')";
+        public static string AddTestTasksInDBQuery { get; } = $@"INSERT INTO Tasks (Description, Assigned_Person, Name) VALUES 
+                                                                 ('Tap into the tree', 2, 'Woody deals'),
+                                                                 ('Delivery pizza', 4, 'Spider-Man deals'),
+                                                                 ('Write an article and send it to the editor.', 3, 'Super-Man deals'),
+                                                                 ('Walking on a broken glass', 1,'Die-Hard deals')";
 
     }
 }

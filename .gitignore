@@ -2,7 +2,7 @@ ToDoList/db_data/ToDoList_log.ldf
 ToDoList/db_data/ToDoList.mdf
 ToDoTasks/bin/x86/Debug/AppX/ToDoList.mdf
 ToDoTasks/bin/x86/Debug/AppX/ToDoListLog.ldf
-.vs
+.vs/
 ToDoTasks/bin/
 ToDoTasks/obj/
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudio
