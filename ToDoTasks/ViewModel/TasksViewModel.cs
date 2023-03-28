@@ -107,7 +107,7 @@ namespace ToDoTasks.ViewModel
         /// <param name="description"></param>
         public void AddNewTask(Person person, string taskName, string description)
         {
-            _modelDAL.InsertToDoTask(description,taskName, person.FirstName, person.LastName);
+            _modelDAL.InsertToDoTask(description,taskName, person);
             ToDoTask = new ToDoTaskModel(ToDoTasks.Last().ID + 1,description, person.ID, taskName, person.FirstName, person.LastName);
             ToDoTasks.Add(ToDoTask);
         }
@@ -118,7 +118,7 @@ namespace ToDoTasks.ViewModel
         /// <param name="description"></param>
         public void UpdateTaskInDB(ToDoTaskModel model, string description)
         {
-            _modelDAL.UpdateTask(model.ID, description, model.Name, model.PersonFirstName, model.PersonLastName);
+            _modelDAL.UpdateTask(model, description);
             ToDoTasks.Remove(model);
             model.Description = description;
             ToDoTask = model;

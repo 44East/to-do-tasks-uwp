@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using ToDoTasks.Model.Connection;
 using ToDoTasks.Model.Models;
 using System.Collections.Generic;
+using Microsoft.Data.Sqlite;
 
 namespace ToDoTasks.Model.DataOperations
 {
@@ -14,19 +15,17 @@ namespace ToDoTasks.Model.DataOperations
     /// </summary>
     public class ModelsDAL : IDisposable
     {
-        private LocalDbConnector _localConnector;
+        private DataBaseInitialization _initialization;
         private string _connectionString;
         private bool _disposed;
-        private SqlConnection _sqlConnection = null;
+        private SqliteConnection _sqliteConnection = null;
         private bool _dbDataExists;
         public ModelsDAL()
         {
-            _localConnector = new LocalDbConnector();
-            _connectionString = _localConnector.GetLocalConnectionString();
-            _dbDataExists = IsTheLocalDBExists();
-            if (!_dbDataExists)//If the DB doesn't exist, will be create a new test DB with the test data.
-                FillingDBTestContent();
-
+            _initialization = new DataBaseInitialization();
+            _dbDataExists = _initialization.IsDataBaseInitialise();
+            if(_dbDataExists)
+                _connectionString = _initialization.DatabasePath;
         }
         /// <summary>
         /// Connect to the MSSQL DB
@@ -35,20 +34,17 @@ namespace ToDoTasks.Model.DataOperations
         {
             if (_connectionString == null)
                 return;
-            _sqlConnection = new SqlConnection()
-            {
-                ConnectionString = _connectionString
-            };
-            _sqlConnection.Open();
+            _sqliteConnection = new SqliteConnection($"Filename={_connectionString}");
+            _sqliteConnection.Open();
         }
         /// <summary>
         /// Closing connection to the MSSQL DB 
         /// </summary>
         private void CloseConnection()
         {
-            if (_sqlConnection.State != ConnectionState.Closed)
+            if (_sqliteConnection.State != ConnectionState.Closed)
             {
-                _sqlConnection.Close();
+                _sqliteConnection.Close();
             }
         }
         /// <summary>
@@ -57,7 +53,7 @@ namespace ToDoTasks.Model.DataOperations
         protected virtual void Dispose(bool disposing)
         {
             if (_disposed) return;
-            if (disposing) _sqlConnection.Dispose();
+            if (disposing) _sqliteConnection.Dispose();
             _disposed = true;
         }
         /// <summary>
@@ -71,74 +67,19 @@ namespace ToDoTasks.Model.DataOperations
         //All methods (below) for CRUD processes use the ADO.NET technology
         #region CRUD Operations
 
-        /// <summary>
-        /// Checks the localhost MSSQL Server DB for an availability saved database [ToDoList]
-        /// It sends query to the DB for receiving an Id number of one the tables from the DB.
-        /// If the DB returns null, will be create a new test DB with the test data.
-        /// </summary>
-        private bool IsTheLocalDBExists()
-        {
-            OpenConnection();
-            var isDBExists = false;
-            var sql = $@"SELECT OBJECT_ID (N'ToDoList.dbo.Persons', N'U') AS 'ID'";           
-            using (SqlCommand command = new SqlCommand(sql, _sqlConnection))
-            {
-                command.CommandType = CommandType.Text;
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    while(reader.Read())
-                    {
-                        isDBExists = reader["ID"] is System.Int32;                        
-                    }
-                }
-            }
-            CloseConnection();           
-
-            return isDBExists;
-        }
-        /// <summary>
-        /// Method for filling the DB of the testing data. 
-        /// It uses the saved qureies from the special class [CreationLocalDBSqlQuerys].
-        /// Requests are sent to the database in turn using Stack.Pop()
-        /// </summary>
-        private void FillingDBTestContent()
-        {
-            var queriesStack = new Stack<string>();
-            queriesStack.Push(CreationLocalDBSqlQuerys.AddTestTasksInDBQuery);
-            queriesStack.Push(CreationLocalDBSqlQuerys.AddTestPersonsInDBQuery);
-            queriesStack.Push(CreationLocalDBSqlQuerys.CreationTasksTableQuery);
-            queriesStack.Push(CreationLocalDBSqlQuerys.CreationPersonsTableQuery);
-            queriesStack.Push(CreationLocalDBSqlQuerys.DBCreationQuery);
-            OpenConnection();
-            do
-            {
-                using (SqlCommand command = new SqlCommand(queriesStack.Pop(), _sqlConnection))
-                {
-                    try
-                    {
-                        command.CommandType = CommandType.Text;
-                        command.ExecuteNonQuery();
-                    }
-                    catch (SqlException ex)
-                    {
-                        Exception error = new Exception("LocalBD cann't fill!", ex);
-                        throw error;
-                    }
-                }
-            }while (queriesStack.Count > 0);
-            CloseConnection();
-        }
+       
+        
+        
         /// <summary>
         /// Returns the ToDoTasks collection from the DB and it includes a Persons names for the ToDoTask model.
         /// </summary>
         public ObservableCollection<ToDoTaskModel> GetToDoTasksList()
         {
             OpenConnection();
-            if (_sqlConnection == null)
+            if (_sqliteConnection == null)
                 return new ObservableCollection<ToDoTaskModel>();
             var toDoList = new ObservableCollection<ToDoTaskModel>();
-            var sql = $@"USE ToDoList
-                        SELECT 
+            var sql = $@"SELECT 
                         i.ID, 
                         i.Description, 
                         i.Assigned_Person,
@@ -147,17 +88,17 @@ namespace ToDoTasks.Model.DataOperations
                         m.Last_Name 
                         FROM Tasks i inner JOIN Persons m on m.ID = i.Assigned_Person";
 
-            using (SqlCommand command = new SqlCommand(sql, _sqlConnection))
+            using (SqliteCommand command = new SqliteCommand(sql, _sqliteConnection))
             {
                 command.CommandType = CommandType.Text;
-                using (SqlDataReader reader = command.ExecuteReader())
+                using (SqliteDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
                         toDoList.Add(new ToDoTaskModel(
-                            (int)reader["ID"],
+                            (Int64)reader["ID"],
                             (string)reader["Description"],
-                            (int)reader["Assigned_Person"],
+                            (Int64)reader["Assigned_Person"],
                             (string)reader["Name"],
                             (string)reader["First_Name"],
                             (string)reader["Last_Name"]
@@ -175,22 +116,19 @@ namespace ToDoTasks.Model.DataOperations
         public ObservableCollection<Person> GetPersons()
         {
             OpenConnection();
-            if (_sqlConnection == null)
+            if (_sqliteConnection == null)
                 return new ObservableCollection<Person>();
             var personList = new ObservableCollection<Person>();
-            var sql = $@"SELECT TOP (1000) [ID],
-                         [First_Name],
-                         [Last_Name]
-                         FROM [ToDoList].[dbo].[Persons]";
-            using (SqlCommand command = new SqlCommand(sql, _sqlConnection))
+            var sql = $@"SELECT * FROM [Persons] LIMIT 1000";
+            using (SqliteCommand command = new SqliteCommand(sql, _sqliteConnection))
             {
-                command.CommandType = CommandType.Text;
-                using (SqlDataReader reader = command.ExecuteReader())
+                //command.CommandType = CommandType.Text;
+                using (SqliteDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
                         personList.Add(new Person(
-                            (int)reader["ID"],
+                            (Int64)reader["ID"],
                             (string)reader["First_Name"],
                             (string)reader["Last_Name"]
                         ));
@@ -207,24 +145,20 @@ namespace ToDoTasks.Model.DataOperations
         /// </summary>
         /// <param name="description"></param>
         /// <param name="taskName"></param>
-        /// <param name="firstName"></param>
-        /// <param name="lastName"></param>
-        public void InsertToDoTask(string description, string taskName, string firstName, string lastName)
+        /// <param name="person"></param>
+        public void InsertToDoTask(string description, string taskName, Person person)
         {
             OpenConnection();
-            if (_sqlConnection == null)
+            if (_sqliteConnection == null)
                 return;
-            var sql = $@"USE ToDoList
-                         DECLARE @PersonID INT
-                         SELECT @PersonID = i.ID FROM Persons i WHERE i.First_Name = N'{firstName}' and i.Last_Name = N'{lastName}'
-                         INSERT Tasks(Description, Assigned_Person, Name) VALUES
-                         (N'{description}', @PersonID, N'{taskName}')";
-            using (SqlCommand command = new SqlCommand(sql, _sqlConnection))
+            var sql = $@"INSERT INTO Tasks(Description, Assigned_Person, Name) VALUES
+                         ('{description}', {person.ID}, '{taskName}')";
+            using (SqliteCommand command = new SqliteCommand(sql, _sqliteConnection))
             {
-                SqlTransaction transaction = null;
+                SqliteTransaction transaction = null;
                 try
                 {
-                    transaction = _sqlConnection.BeginTransaction();
+                    transaction = _sqliteConnection.BeginTransaction();
                     command.Transaction = transaction;
                     command.CommandType = CommandType.Text;
                     command.ExecuteNonQuery();
@@ -245,17 +179,17 @@ namespace ToDoTasks.Model.DataOperations
         public void DeleteToDoTask(int id)
         {
             OpenConnection();
-            if (_sqlConnection == null)
+            if (_sqliteConnection == null)
                 return;
-            var sql = $@"USE ToDoList DELETE FROM Tasks WHERE ID = {id}";
-            using (SqlCommand command = new SqlCommand(sql, _sqlConnection))
+            var sql = $@"DELETE FROM Tasks WHERE ID = {id}";
+            using (SqliteCommand command = new SqliteCommand(sql, _sqliteConnection))
             {
                 try
                 {
                     command.CommandType = CommandType.Text;
                     command.ExecuteNonQuery();
                 }
-                catch (SqlException ex)
+                catch (SqliteException ex)
                 {
                     Exception error = new Exception("Task couldn’t be remove from DataBase!", ex);
                     throw error;
@@ -270,16 +204,16 @@ namespace ToDoTasks.Model.DataOperations
         public void InsertPerson(Person person)
         {
             OpenConnection();
-            if (_sqlConnection == null)
+            if (_sqliteConnection == null)
                 return;
-            var sql = $@"USE ToDoList INSERT Persons(First_Name, Last_Name) VALUES
-                         (N'{person.FirstName}', N'{person.LastName}')";
-            using (SqlCommand command = new SqlCommand(sql, _sqlConnection))
+            var sql = $@"INSERT INTO Persons (First_Name, Last_Name) VALUES
+                         ('{person.FirstName}', '{person.LastName}')";
+            using (SqliteCommand command = new SqliteCommand(sql, _sqliteConnection))
             {
-                SqlTransaction transaction = null;
+                SqliteTransaction transaction = null;
                 try
                 {
-                    transaction = _sqlConnection.BeginTransaction();
+                    transaction = _sqliteConnection.BeginTransaction();
                     command.Transaction = transaction;
                     command.CommandType = CommandType.Text;
                     command.ExecuteNonQuery();
@@ -301,22 +235,20 @@ namespace ToDoTasks.Model.DataOperations
         /// <param name="taskName"></param>
         /// <param name="firstName"></param>
         /// <param name="lastName"></param>
-        public void UpdateTask(int id, string description, string taskName, string firstName, string lastName)
+        public void UpdateTask(ToDoTaskModel task, string description)
         {
             OpenConnection();
-            if (_sqlConnection == null)
+            if (_sqliteConnection == null)
                 return;
-            var sql = $@"USE ToDoList DECLARE @PersonID INT
-                         SELECT @PersonID = i.ID FROM Persons i WHERE i.First_Name = N'{firstName}' and i.Last_Name = N'{lastName}'
-                         UPDATE Tasks SET Description = N'{description}', Assigned_Person = @PersonID, Name = N'{taskName}'  WHERE ID = {id}";
-            using (SqlCommand command = new SqlCommand(sql, _sqlConnection))
+            var sql = $@"UPDATE Tasks SET Description = '{description}', Assigned_Person = {task.AssignedPersonID}, Name = '{task.Name}'  WHERE ID = {task.ID}";
+            using (SqliteCommand command = new SqliteCommand(sql, _sqliteConnection))
             {
                 try
                 {
                     command.CommandType = CommandType.Text;
                     command.ExecuteNonQuery();
                 }
-                catch (SqlException ex)
+                catch (SqliteException ex)
                 {
                     Exception error = new Exception("The operation couldn’t be completed!", ex);
                     throw error;

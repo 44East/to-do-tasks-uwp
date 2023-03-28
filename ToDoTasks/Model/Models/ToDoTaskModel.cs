@@ -1,5 +1,7 @@
 ﻿
 
+using System;
+
 namespace ToDoTasks
 {
     /// <summary>
@@ -8,9 +10,9 @@ namespace ToDoTasks
     /// </summary>
     public class ToDoTaskModel
     {
-        public int ID { get; set; }
+        public Int64 ID { get; set; } //In SQlite is used the type of a data - INTEGER, in a C# it equals - [Int64] or [long] type.
         public string Description { get; set; }
-        public int AssignedPersonID { get; set; }
+        public Int64 AssignedPersonID { get; set; } //In SQlite is used the type of a data - INTEGER, in a C# it equals - [Int64] or [long] type.
         public string Name { get; set; }
         public string PersonFirstName { get; set; }
         public string PersonLastName { get; set; }
@@ -19,7 +21,7 @@ namespace ToDoTasks
         {
             
         }
-        public ToDoTaskModel(int id, string description, int personId, string name, string personFirstName, string personLastName)
+        public ToDoTaskModel(Int64 id, string description, Int64 personId, string name, string personFirstName, string personLastName)
         {
             ID = id;
             Description = description;

@@ -1,5 +1,7 @@
 ﻿
 
+using System;
+
 namespace ToDoTasks
 {
     /// <summary>
@@ -8,7 +10,7 @@ namespace ToDoTasks
     /// </summary>
     public class Person
     {
-        public int ID { get; set; }
+        public Int64 ID { get; set; } //In SQlite is used the type of a data - INTEGER, in a C# it equals - [Int64] or [long] type.
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string FullName { get; set; }
@@ -16,7 +18,7 @@ namespace ToDoTasks
         {
             
         }
-        public Person(int id, string firstName, string lastName)
+        public Person(Int64 id, string firstName, string lastName)
         {
             FirstName = firstName;
             LastName = lastName;

@@ -119,13 +119,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\Connection\DataAccess.cs" />
+    <Compile Include="Model\Connection\DataBaseInitialization.cs" />
     <Compile Include="ViewModel\MainMenuPointsModel.cs" />
     <Compile Include="ViewModel\DelegateCommand.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\Connection\LocalDbConnector.cs" />
     <Compile Include="Model\Models\CreationSqlQuerys.cs" />
     <Compile Include="Model\DataOperations\ModelsDAL.cs" />
     <Compile Include="Model\Models\Person.cs" />
@@ -159,20 +158,14 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Data.Sqlite.Core">
-      <Version>6.0.9</Version>
+    <PackageReference Include="Microsoft.Data.Sqlite">
+      <Version>7.0.4</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.14</Version>
     </PackageReference>
     <PackageReference Include="System.Data.SqlClient">
       <Version>4.6.1</Version>
-    </PackageReference>
-    <PackageReference Include="System.Data.SQLite">
-      <Version>1.0.117</Version>
-    </PackageReference>
-    <PackageReference Include="System.Data.SQLite.Core">
-      <Version>1.0.117</Version>
     </PackageReference>
     <PackageReference Include="System.Text.Json">
       <Version>4.7.2</Version>
