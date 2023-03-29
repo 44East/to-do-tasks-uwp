@@ -183,12 +183,6 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.14</Version>
     </PackageReference>
-    <PackageReference Include="System.Data.SqlClient">
-      <Version>4.6.1</Version>
-    </PackageReference>
-    <PackageReference Include="System.Text.Json">
-      <Version>4.7.2</Version>
-    </PackageReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

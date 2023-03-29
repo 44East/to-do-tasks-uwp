@@ -34,6 +34,8 @@ namespace ToDoTasks
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            ApplicationView.PreferredLaunchViewSize = new Size(650, 800);
+            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
         }
 
         /// <summary>

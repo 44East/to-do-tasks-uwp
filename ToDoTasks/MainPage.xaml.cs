@@ -29,9 +29,6 @@ namespace ToDoTasks
             this.DataContext = this._taskViewModel;
             ToDoTasks = this._taskViewModel.ToDoTasks;
             TasksList.ItemsSource = this.ToDoTasks;
-            ApplicationView.PreferredLaunchViewSize = new Size(650, 800);
-            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
-            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(650, 800));
             ApplicationView.GetForCurrentView().Title = "Main Menu";
 
 
