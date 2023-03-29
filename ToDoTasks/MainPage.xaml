@@ -8,28 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource AppBarBackgroundThemeBrush}">
-    <Page.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.ThemeDictionaries>
-
-                <ResourceDictionary x:Key="Default">
-                    <StaticResource x:Key="MyCustomControlBackground" ResourceKey="ButtonBackground" />
-                    <StaticResource x:Key="MyCustomControlBorderBrush" ResourceKey="ButtonBorderBrush" />
-                </ResourceDictionary>
-                <ResourceDictionary x:Key="Light">
-                    <StaticResource x:Key="MyCustomControlBackground" ResourceKey="ButtonBackground" />
-                    <StaticResource x:Key="MyCustomControlBorderBrush" ResourceKey="ButtonBorderBrush" />
-                </ResourceDictionary>
-                <ResourceDictionary x:Key="HighContrast">
-                    <StaticResource x:Key="MyCustomControlBackground" ResourceKey="ButtonBackground" />
-                    <StaticResource x:Key="MyCustomControlBorderBrush" ResourceKey="ButtonBorderBrush" />
-                </ResourceDictionary>
-            </ResourceDictionary.ThemeDictionaries>
-        </ResourceDictionary>
-
-    </Page.Resources>
-
-
+    
     <Grid ColumnSpan="2">
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
