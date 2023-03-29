@@ -36,12 +36,12 @@
         </Grid.Background>
         
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="47"/>
             <ColumnDefinition Width="600"/>
         </Grid.ColumnDefinitions>
 
         <!--Side panel-->
-        <Grid Grid.Column="0" Background="{ThemeResource SystemChromeGrayColor}"/>
+        <Grid Grid.Column="0" Background="{ThemeResource SystemAccentColor}"/>
 
         <Grid Grid.Column="1" RowSpan="3">
             <Grid.RowDefinitions>

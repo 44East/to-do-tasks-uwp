@@ -41,7 +41,7 @@
             <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="300"/> 
         </Grid.ColumnDefinitions>
-        <RelativePanel Grid.Column="0" Background="{ThemeResource SystemChromeGrayColor}">
+        <RelativePanel Grid.Column="0" Background="{ThemeResource SystemAccentColor}">
             <Button x:Name="HamburgerButton" RelativePanel.AlignLeftWithPanel="True"
                     FontFamily="Segoe MDL2 Assets" FontSize="36"
                     Background="{Binding ElementName=menu, Path=Background}"
@@ -52,7 +52,8 @@
 
         <!--The side main menu panel it navigates to manage a new task and manage a new person-->
         <SplitView Name="mySplitView" Grid.Row="1" OpenPaneLength="200"
-                   DisplayMode="CompactOverlay" CompactPaneLength="56">
+                   DisplayMode="CompactOverlay" CompactPaneLength="56"
+                   Background="{ThemeResource SystemAccentColor}">
             <SplitView.Pane>
                 <ListBox x:Name="menu" SelectionMode="Single" SelectionChanged="ListBox_SelectionChanged">
                     <ListBoxItem Name="AddTask">
