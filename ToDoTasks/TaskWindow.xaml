@@ -27,69 +27,68 @@
         </ResourceDictionary>
 
     </Page.Resources>
-    <Grid>
+    <Grid RowSpan="3" ColumnSpan="1">
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="LightSteelBlue" Offset="0"/>
                 <GradientStop Color="LightGoldenrodYellow" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <Grid Grid.RowSpan="3" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="600"/>
+        </Grid.ColumnDefinitions>
 
-            <!--The table header-->
-            <StackPanel x:Name="HeaderTaskInfo" Orientation="Vertical" Grid.Row="0" >
-                <Border Background="LightGray" CornerRadius="1" Height="40">
-                    <TextBlock Text="Selected task by person:" VerticalAlignment="Center" Foreground="Blue" Width="Auto" Margin="5"/>
-                </Border >
-            </StackPanel>
-            <!--The table header end-->
+        <!--The table header-->
+        <StackPanel x:Name="HeaderTaskInfo" Orientation="Vertical" Grid.Row="0" >
+            <Border Background="LightGray" CornerRadius="1" Height="40" BorderBrush="Gray" BorderThickness="1">
+                <TextBlock Text="Selected task by person:" VerticalAlignment="Center" Foreground="Blue" Width="Auto" Margin="5"/>
+            </Border >
+        </StackPanel>
+        <!--The table header end-->
 
-            <!--The parsed data from task with controls button (Delete/Update)-->
-            <StackPanel x:Name="TaskInfoData" Orientation="Vertical" Grid.Row="1">
-                <!--The General data from task-->
-                <Border Background="LightSkyBlue" CornerRadius="1">
-                    <TextBlock x:Name="TextBlock_FName" Margin="5"  Width="Auto" TextWrapping="Wrap"/>
-                </Border>
-                <!--This is a TextBox not a TextBlock because it can edit the task description-->
-                <Border Background="LightSkyBlue"  CornerRadius="1">
-                    <TextBox x:Name="TextBox_Description" TextChanging="TextBox_OnTextChanging" TextWrapping="Wrap" Width="Auto" PlaceholderText="Enter the task description..."  Margin="3"/>
-                </Border>
-                <!--The end of data-->
+        <!--The appointed Person name and the Task description-->
+        <StackPanel x:Name="TaskInfoData" Orientation="Vertical" Grid.Row="1">
+            <Border Background="LightSkyBlue" CornerRadius="1">
+                <TextBlock x:Name="TextBlock_FName" Margin="5"  Width="Auto" TextWrapping="Wrap"/>
+            </Border>
+            <!--This is a TextBox not a TextBlock because it can edit the task description-->
+            <Border Background="LightSkyBlue"  CornerRadius="1">
+                <TextBox x:Name="TextBox_Description" TextChanging="TextBox_OnTextChanging" TextWrapping="Wrap" Width="Auto" Height="80"  PlaceholderText="Enter the task description..."  Margin="3"/>
+            </Border>
+            <!--The end of data-->
+        </StackPanel>
 
-                <StackPanel Orientation="Horizontal" Grid.Row="2" >
-                    <!--The updating task button it parses data from the task description TextBox-->
-                    <Button x:Name="UpdateButton" 
+        <!--Buttons-->
+        <Grid Grid.Row="2" >
+            <!--The updating task button it parses data from the task description TextBox-->
+            <Button x:Name="UpdateButton" 
                             Click="UpdateButton_Click" 
                             Content="Update" 
                             Background="LightGreen"
                             HorizontalAlignment="Left"
+                            BorderBrush="Green"
+                            BorderThickness="1"
                             Margin="5" 
                             Height="36" 
-                            Width="70"/>
+                            Width="100"/>
 
-                    <!--The remove button uses ICommand interface and class helper DelegateCommand-->
-                   
-                    <Button x:Name="Button_RemoveTask"
+            <!--The remove button uses ICommand interface and class helper DelegateCommand-->
+
+            <Button x:Name="Button_RemoveTask"
                             Click="DeleteButton_Click"
                             Content="Remove" 
                             Background="LightCoral"
                             HorizontalAlignment="Right"
+                            BorderBrush="Red"
+                            BorderThickness="1"
                             Margin="5"
                             Height="36" 
-                            Width="70"/>
-                </StackPanel>
-
-            </StackPanel>
+                            Width="100"/>
         </Grid>
     </Grid>
 </Page>

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using ToDoTasks.ViewModel;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -32,7 +33,7 @@ namespace ToDoTasks
         {
             _tasksViewModel = (TasksViewModel)e.Parameter;
             this.DataContext = _tasksViewModel;
-            this.PersonsList.ItemsSource = _tasksViewModel.Persons;
+            this.ListViewPersons.ItemsSource = _tasksViewModel.Persons;
         }
         /// <summary>
         /// The save button for create a new ToDoTask and  sends the new Task data into [ViewModel]
@@ -41,10 +42,10 @@ namespace ToDoTasks
         /// <param name="e"></param>
         private void SaveButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            var person = (Person)PersonsList.SelectedItem;
+            var person = (Person)ListViewPersons.SelectedItem;
             var taskName = TaskName.Text;
             var description = TaskDescription.Text;
-            if (!(string.IsNullOrEmpty(taskName) && string.IsNullOrEmpty(description)))
+            if (!string.IsNullOrEmpty(taskName.Trim()) && !string.IsNullOrEmpty(description.Trim()))
             {
                 _tasksViewModel.AddNewTask(person, taskName, description);
             }
@@ -62,8 +63,6 @@ namespace ToDoTasks
         /// <param name="e"></param>
         private void Persons_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TaskDescription.Visibility = Visibility.Visible;
-            TaskName.Visibility = Visibility.Visible;
             SaveTask.Visibility = Visibility.Visible;
         }
         /// <summary>

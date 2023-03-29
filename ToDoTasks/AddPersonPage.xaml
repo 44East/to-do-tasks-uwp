@@ -27,27 +27,34 @@
         </ResourceDictionary>
 
     </Page.Resources>
-    <Grid>
+    <Grid RowSpan="4" ColumnSpan="1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="600"/>
+        </Grid.ColumnDefinitions>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="LightSteelBlue" Offset="0"/>
                 <GradientStop Color="LightGoldenrodYellow" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <Grid>
-            <StackPanel x:Name="AddNewPerson" HorizontalAlignment="Right" Orientation="Vertical" Grid.Row="2">
 
-                <!--The header-->
-                <TextBlock x:Name="AddPeronBlock" Text="Insert the new Person" Foreground="Blue" FontWeight="Bold" />
 
-                <!--Two boxes for add the Persons names (First/Last)-->
-                <TextBox x:Name="InsertFirstPersonName" TextChanging="TextBox_OnTextChanging" MaxLength="30" Height="40" Width="296" PlaceholderText="Enter first Person name..."  />
-                <TextBox x:Name="InsertLastPersonName" TextChanging="TextBox_OnTextChanging" MaxLength="30" Height="40" Width="296" PlaceholderText="Enter last Person name..."  />
-                <!--The end of the naming boxes-->
-
-                <!--The Save person button it parses data from TextBoxes and sends it to A TaskViewModel-->
-                <Button x:Name="SavePerson" Click="SavePerson_CLick" Content="Save" Background="LightGreen" Height="36" Width="70" Grid.Column="0" />
-            </StackPanel>
+        <!--The header-->
+        <Grid Background="LightGray" BorderBrush="Gray" BorderThickness="1">
+            <TextBlock x:Name="AddPeronBlock" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Insert the new Person" Margin="15,0,0,0"  Foreground="Blue"  Grid.Row="0"/>
         </Grid>
+        <!--Two boxes for add the Persons names (First/Last)-->
+        <TextBox x:Name="InsertFirstPersonName" TextChanging="TextBox_OnTextChanging" MaxLength="30" Height="50" Width="600" PlaceholderText="Enter first Person name..."  Grid.Row="1"/>
+        <TextBox x:Name="InsertLastPersonName" TextChanging="TextBox_OnTextChanging" MaxLength="30" Height="50" Width="600" PlaceholderText="Enter last Person name..."  Grid.Row="2"/>
+        <!--The end of the naming boxes-->
+
+        <!--The Save person button it parses data from TextBoxes and sends it to A TaskViewModel-->
+        <Button x:Name="SavePerson" Click="SavePerson_CLick" Content="Save" Background="LightGreen" Margin="5" Height="36" Width="100" Grid.Row="3" />
     </Grid>
 </Page>
