@@ -39,9 +39,9 @@
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50"/>
-            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="300"/> 
         </Grid.ColumnDefinitions>
-        <RelativePanel Grid.Column="0">
+        <RelativePanel Grid.Column="0" Background="{ThemeResource SystemChromeGrayColor}">
             <Button x:Name="HamburgerButton" RelativePanel.AlignLeftWithPanel="True"
                     FontFamily="Segoe MDL2 Assets" FontSize="36"
                     Background="{Binding ElementName=menu, Path=Background}"

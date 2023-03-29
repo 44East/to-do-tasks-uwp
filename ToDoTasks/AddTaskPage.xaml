@@ -40,7 +40,7 @@
             </LinearGradientBrush>
         </Grid.Background>
 
-        <Grid Grid.Column="0" Background="White" />
+        <Grid Grid.Column="0" Background="{ThemeResource SystemChromeGrayColor}" />
 
         <!--Views all persons from the collection it can select person and appoints him to the new task-->
         <Grid Grid.Column="1">

@@ -41,7 +41,7 @@
         </Grid.ColumnDefinitions>
 
         <!--Side panel-->
-        <Grid Grid.Column="0" Background="White"/>
+        <Grid Grid.Column="0" Background="{ThemeResource SystemChromeGrayColor}"/>
 
         <Grid Grid.Column="1" RowSpan="3">
             <Grid.RowDefinitions>
