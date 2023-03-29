@@ -29,7 +29,7 @@
                 <ListView.HeaderTemplate>
                     <DataTemplate>
                         <Grid Background="LightGray" >
-                            <TextBlock Text="Persons name:" Foreground="Blue" Margin="11" />
+                            <TextBlock Text="Persons name:" Foreground="Blue" FontSize="15" Margin="11" />
                         </Grid>
                     </DataTemplate>
                 </ListView.HeaderTemplate>
@@ -48,21 +48,27 @@
         </Grid>
         <Grid Grid.Column="2" Grid.RowSpan="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="45" />
+                <RowDefinition Height="43" />
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Border Background="LightGray" BorderBrush="Gray" BorderThickness="1">
-                <TextBlock  Text="Enter your data" Width="300" Height="50" Foreground="Blue" Margin="10" Grid.Row="0"/>
+            <Border Background="LightGray" >
+                <TextBlock  Text="Enter your task data" Width="300" Height="43" Foreground="Blue" FontSize="15" Margin="10" Grid.Row="0"/>
             </Border>
-            <StackPanel x:Name="TexBoxes" Grid.Row="1">
+            <StackPanel x:Name="TexBoxes" Grid.Row="1" >
+                <StackPanel.Background>
+                    <LinearGradientBrush>
+                        <GradientStop Color="LightSteelBlue" Offset="0"/>
+                        <GradientStop Color="LightGreen" Offset="1"/>
+                    </LinearGradientBrush>
+                </StackPanel.Background>
                 <!--The task name box-->
-                <TextBox x:Name="TaskName" TextChanging="TextBox_OnTextChanging" TextWrapping="Wrap" MaxLength="30" Height="60" Width="300" PlaceholderText="Enter the task name"/>
+                <TextBox x:Name="TaskName" CornerRadius="15" TextChanging="TextBox_OnTextChanging" TextWrapping="Wrap" MaxLength="30" Height="60" Width="300" FontSize="15" Margin="0,3,0,0" PlaceholderText="Enter the task name"/>
 
                 <!--The description box of the task-->
-                <TextBox x:Name="TaskDescription" TextChanging="TextBox_OnTextChanging" TextWrapping="Wrap" MaxLength="200" Height="100" Width="300" PlaceholderText="Enter the task descripton..."/>
+                <TextBox x:Name="TaskDescription" CornerRadius="15" TextChanging="TextBox_OnTextChanging" TextWrapping="Wrap" MaxLength="200" Height="100" Width="300" FontSize="15" Margin="0,3,0,0" PlaceholderText="Enter the task descripton..."/>
 
                 <!--The save task button it parses data from TextBoxes and sends it to A TaskViewModel-->
-                <Button x:Name="SaveTask" Visibility="Collapsed" Content="Save" Click="SaveButton_Click" Margin="5" Background="LightGreen" BorderBrush="Green" BorderThickness="1" Height="36" Width="100" />
+                <Button x:Name="SaveTask" CornerRadius="15" Visibility="Collapsed" Content="Save" Click="SaveButton_Click" Margin="5" Background="LightGreen" BorderBrush="Green" BorderThickness="1" Height="36" Width="100" />
             </StackPanel>
         </Grid>
     </Grid>

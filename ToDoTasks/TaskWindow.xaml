@@ -34,7 +34,7 @@
             <!--The table header-->
             <StackPanel x:Name="HeaderTaskInfo" Orientation="Vertical" Grid.Row="0" >
                 <Border Background="LightGray" CornerRadius="1" Height="40" BorderBrush="Gray" BorderThickness="1">
-                    <TextBlock Text="Selected task by person:" VerticalAlignment="Center" Foreground="Blue" Width="Auto" Margin="5"/>
+                    <TextBlock Text="Selected task by person:" VerticalAlignment="Center" FontSize="15" Foreground="Blue" Width="Auto" Margin="5"/>
                 </Border >
             </StackPanel>
             <!--The table header end-->
@@ -42,11 +42,11 @@
             <!--The appointed Person name and the Task description-->
             <StackPanel x:Name="TaskInfoData" Orientation="Vertical" Grid.Row="1" >
                 <Border Background="LightSkyBlue" CornerRadius="1">
-                    <TextBlock x:Name="TextBlock_FName" Margin="5"  Width="Auto" TextWrapping="Wrap"/>
+                    <TextBlock x:Name="TextBlock_FName" Margin="5" FontSize="15" Width="Auto" TextWrapping="Wrap"/>
                 </Border>
                 <!--This is a TextBox not a TextBlock because it can edit the task description-->
                 <Border Background="LightSkyBlue"  CornerRadius="1">
-                    <TextBox x:Name="TextBox_Description" TextChanging="TextBox_OnTextChanging" TextWrapping="Wrap" Width="Auto" Height="80"  PlaceholderText="Enter the task description..."  Margin="3"/>
+                    <TextBox x:Name="TextBox_Description" CornerRadius="15" TextChanging="TextBox_OnTextChanging" HorizontalAlignment="Stretch" TextWrapping="Wrap" Width="Auto" Height="80" FontSize="15" PlaceholderText="Enter the task description..."  Margin="5"/>
                 </Border>
                 <!--The end of data-->
             </StackPanel>
@@ -54,7 +54,8 @@
             <!--Buttons-->
             <Grid Grid.Row="2" >
                 <!--The updating task button it parses data from the task description TextBox-->
-                <Button x:Name="UpdateButton" 
+                <Button x:Name="UpdateButton"
+                            CornerRadius="15"
                             Click="UpdateButton_Click" 
                             Content="Update" 
                             Background="LightGreen"
@@ -68,6 +69,7 @@
                 <!--The remove button uses ICommand interface and class helper DelegateCommand-->
 
                 <Button x:Name="Button_RemoveTask"
+                            CornerRadius="15"
                             Click="DeleteButton_Click"
                             Content="Remove" 
                             Background="LightCoral"
