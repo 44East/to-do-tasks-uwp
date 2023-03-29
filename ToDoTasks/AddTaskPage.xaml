@@ -27,8 +27,9 @@
         </ResourceDictionary>
 
     </Page.Resources>
-    <Grid ColumnSpan="2">
+    <Grid ColumnSpan="3">
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="300"/>
         </Grid.ColumnDefinitions>
@@ -38,9 +39,12 @@
                 <GradientStop Color="LightGoldenrodYellow" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
+
+        <Grid Grid.Column="0" Background="White" />
+
         <!--Views all persons from the collection it can select person and appoints him to the new task-->
-        <Grid Grid.Column="0">
-            <ListView x:Name="ListViewPersons" IsItemClickEnabled="True" VerticalAlignment="Top" SelectionChanged="Persons_SelectionChanged" MaxHeight="800" SelectionMode="Single" Grid.Column="0"  Grid.Row="2">
+        <Grid Grid.Column="1">
+            <ListView x:Name="ListViewPersons" IsItemClickEnabled="True" VerticalAlignment="Top" SelectionChanged="Persons_SelectionChanged" MaxHeight="800" SelectionMode="Single" Grid.Column="1"  Grid.Row="2">
                 <ListView.HeaderTemplate>
                     <DataTemplate>
                         <Grid Background="LightGray" >
@@ -61,7 +65,7 @@
                 </ListView.ItemTemplate>
             </ListView>
         </Grid>
-        <Grid Grid.Column="1" Grid.RowSpan="2">
+        <Grid Grid.Column="2" Grid.RowSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="45" />
                 <RowDefinition Height="*"/>
