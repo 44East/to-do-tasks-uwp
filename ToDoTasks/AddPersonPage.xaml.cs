@@ -6,6 +6,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using ToDoTasks.ViewModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -27,7 +28,12 @@ namespace ToDoTasks
         public AddPersonPage()
         {
             this.InitializeComponent();
+            ApplicationView.GetForCurrentView().Title = "Add new Person";
         }
+        /// <summary>
+        /// Redirection method, it bibndings all fields and property from an incoming parameters
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             _tasksViewModel = (TasksViewModel)e.Parameter;

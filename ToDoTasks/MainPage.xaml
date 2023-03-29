@@ -50,6 +50,7 @@
                        FontSize="28" FontWeight="Bold" Margin="30 5 0 0" />
         </RelativePanel>
 
+        <!--The side main menu panel it navigates to manage a new task and manage a new person-->
         <SplitView Name="mySplitView" Grid.Row="1" OpenPaneLength="200"
                    DisplayMode="CompactOverlay" CompactPaneLength="56">
             <SplitView.Pane>
@@ -87,8 +88,7 @@
                         </Grid>
                     </DataTemplate>
                 </ListView.HeaderTemplate>
-                <!--The header end-->
-                
+                <!--The header end-->                
                 <!--Show all tasks-->
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="local:ToDoTaskModel">

@@ -20,26 +20,24 @@ namespace ToDoTasks
     /// </summary>
     public sealed partial class MainPage : Page
     {
-
-        public List<MainMenuPointsModel> MenuStatsPoints { get; private set; } = new List<MainMenuPointsModel>()
-        {
-            new MainMenuPointsModel(MenuStats.Add_new_Task, "Add new Task"),
-            new MainMenuPointsModel(MenuStats.Add_new_Person, "Add new Person")
-        };
         private TasksViewModel _taskViewModel;
         public ObservableCollection<ToDoTaskModel> ToDoTasks { get; set; }
-        public ObservableCollection<Person> Persons { get; set; }
         public MainPage()
         {
             this.InitializeComponent();
             this._taskViewModel = new TasksViewModel();
             this.DataContext = this._taskViewModel;
             ToDoTasks = this._taskViewModel.ToDoTasks;
-            Persons = this._taskViewModel.Persons;
             TasksList.ItemsSource = this.ToDoTasks;
+            ApplicationView.GetForCurrentView().Title = "Main Menu";
 
 
         }
+        /// <summary>
+        /// The side panell menu selector
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (AddTask.IsSelected)
@@ -70,24 +68,6 @@ namespace ToDoTasks
                                   //and because the task instance is selected, a cyclic transition to the task editing page is made.                 
                 Frame.Navigate(typeof(TaskWindow), _taskViewModel, new SlideNavigationTransitionInfo());
         }
-
-
-
-
-
-
-
-        /// <summary>
-        /// Method for the controlling of the user ipnut it prohibits a special symbols
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="args"></param>
-        private void TextBox_OnTextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
-        {
-            char[] chars = { '-', '.', ' ', '!', '?', ':', ';' };
-            sender.Text = new String(sender.Text.Where(c => (char.IsLetterOrDigit(c) || chars.Contains(c))).ToArray());
-        }
-
 
 
 

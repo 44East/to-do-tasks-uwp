@@ -38,7 +38,7 @@
                 <GradientStop Color="LightGoldenrodYellow" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <!--First point in the Main Menu "Add new Task"-->
+        <!--Views all persons from the collection it can select person and appoints him to the new task-->
         <Grid Grid.Column="0">
             <ListView x:Name="ListViewPersons" IsItemClickEnabled="True" VerticalAlignment="Top" SelectionChanged="Persons_SelectionChanged" MaxHeight="800" SelectionMode="Single" Grid.Column="0"  Grid.Row="2">
                 <ListView.HeaderTemplate>
@@ -48,9 +48,8 @@
                         </Grid>
                     </DataTemplate>
                 </ListView.HeaderTemplate>
-                <!--The header end-->
 
-                <!--Show all tasks-->
+                <!--Show all persons-->
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="local:Person">
                         <Grid Height="50">
@@ -81,6 +80,5 @@
                 <Button x:Name="SaveTask" Visibility="Collapsed" Content="Save" Click="SaveButton_Click" Margin="5" Background="LightGreen" BorderBrush="Green" BorderThickness="1" Height="36" Width="100" />
             </StackPanel>
         </Grid>
-        <!--The end of the "Add new Task" menu point-->
     </Grid>
 </Page>

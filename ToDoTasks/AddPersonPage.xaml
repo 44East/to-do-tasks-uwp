@@ -55,6 +55,6 @@
         <!--The end of the naming boxes-->
 
         <!--The Save person button it parses data from TextBoxes and sends it to A TaskViewModel-->
-        <Button x:Name="SavePerson" Click="SavePerson_CLick" Content="Save" Background="LightGreen" Margin="5" Height="36" Width="100" Grid.Row="3" />
+        <Button x:Name="SavePerson" Click="SavePerson_CLick" Content="Save" BorderBrush="Green" BorderThickness="1" Background="LightGreen" Margin="5" Height="36" Width="100" Grid.Row="3" />
     </Grid>
 </Page>
