@@ -28,7 +28,7 @@ namespace ToDoTasks.Model.DataOperations
                 _connectionString = _initialization.DatabasePath;
         }
         /// <summary>
-        /// Connect to the MSSQL DB
+        /// Connect to the SQLite DB
         /// </summary>
         private void OpenConnection()
         {
@@ -38,7 +38,7 @@ namespace ToDoTasks.Model.DataOperations
             _sqliteConnection.Open();
         }
         /// <summary>
-        /// Closing connection to the MSSQL DB 
+        /// Closing connection to the SQLite DB
         /// </summary>
         private void CloseConnection()
         {
